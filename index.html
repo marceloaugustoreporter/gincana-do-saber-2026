@@ -45,6 +45,25 @@ body.publicScreen .institutionalBrands .escolaLogo{max-height:65px}
 body.publicScreen .footer{color:#e9f8ec}
 @media(max-width:960px){body.publicScreen .grid{grid-template-columns:minmax(0,1.7fr) minmax(220px,1fr)}}
 body:not(.publicScreen) #openDisplay{display:inline-block}
+
+/* Acompanhamento por escola: resposta e auxílio são independentes. */
+.roundBoard{margin:15px 0;border:1px solid #cbded1;border-radius:13px;padding:12px;background:#f8fcf7}
+.roundBoard h3{font-size:15px;margin:0 0 10px;color:#075537}
+.roundEntry{display:flex;justify-content:space-between;align-items:start;gap:10px;border-top:1px solid #e2ece4;padding:9px 0}
+.roundEntry:first-child{border-top:0}
+.roundEntryName{font-size:13px;line-height:1.35;flex:1;min-width:0}
+.roundFlags{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px;max-width:55%}
+.roundFlag{font-size:11px;font-weight:750;padding:3px 6px;border-radius:6px;white-space:nowrap}
+.roundFlag.done{background:#daefe0;color:#125633}
+.roundFlag.used{background:#fdebc9;color:#845400}
+.roundFlag.wait{background:#e9eeed;color:#53665c}
+.roundFlag.now{background:#dbeaff;color:#14558a}
+body.publicScreen .roundBoard{background:#fafff8}
+body.publicScreen .roundEntryName{font-size:clamp(11px,1vw,15px)}
+body.publicScreen .roundFlag{font-size:10px}
+@media(max-width:850px){.roundEntry{flex-wrap:wrap}.roundFlags{max-width:100%;justify-content:start}}
+body:not(.publicScreen) #publicRoundBoard{display:none}
+body.publicScreen #publicRoundBoard{display:block}
 </style>
 </head>
 <body>
@@ -52,8 +71,8 @@ body:not(.publicScreen) #openDisplay{display:inline-block}
 <main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas, sem login ou sincronização entre dispositivos. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
 <div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div class="step">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="startHelpTimer()">🤝 Auxílio: 15s</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
-<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">Revelar resposta escolhida</button><button class="primary" id="confirmBtn" onclick="recordSelected()">✓ Confirmar pontuação</button><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
-</section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div id="screenAccess"><strong>🦉 Torcida no celular</strong><div><img src="data:image/png;base64,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" alt="QR Code para página pública da torcida"></div><div class="fine">Aponte a câmera para conhecer a página da torcida.</div><div class="fine">A classificação ao vivo nos celulares ainda está em desenvolvimento.</div></div><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
+<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">Revelar resposta escolhida</button><button class="primary" id="confirmBtn" onclick="recordSelected()">✓ Confirmar pontuação</button><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
+</section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div id="screenAccess"><strong>🦉 Torcida no celular</strong><div><img src="data:image/png;base64,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" alt="QR Code para página pública da torcida"></div><div class="fine">Aponte a câmera para conhecer a página da torcida.</div><div class="fine">A classificação ao vivo nos celulares ainda está em desenvolvimento.</div></div><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
@@ -120,14 +139,58 @@ function completed(phase,round,school){return state.events[phase].some(e=>e.roun
 function helpedAlready(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.helper===school&&e.kind==='answer');}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function optionsFor(select,list,empty){select.replaceChildren();const first=el('option','',empty);first.value='';select.append(first);for(const x of list){const op=el('option','',x);op.value=x;select.append(op)}}
+function drawSchool(){
+ if(state.question!==null&&!state.recorded)return alert('Registre a resposta da escola atual antes de sortear outra.');
+ if(state.round===6)return alert('Desempates dependem da organização nesta versão.');
+ const candidates=schools().filter(n=>!completed(state.phase,state.round,n));
+ if(!candidates.length)return alert('Todas as escolas já responderam nesta rodada.');
+ const name=candidates[Math.floor(Math.random()*candidates.length)];
+ state.school=name;state.question=null;state.selected=null;state.revealed=false;state.recorded=false;state.expired=false;
+ resetTimer();refresh();
+ alert('Escola sorteada para responder:\n\n'+name);
+}
+function paintRoundBoard(target,ph,list){
+ const container=$(target);container.replaceChildren();
+ const title=el('h3','',`Situação da rodada ${state.round}`);
+ container.append(title);
+ if(state.round===6){container.append(el('p','fine','Desempates sob controle manual da organização.'));return;}
+ for(const name of list){
+  const answered=completed(ph,state.round,name),helped=helpedAlready(ph,state.round,name);
+  const row=el('div','roundEntry');
+  row.append(el('div','roundEntryName',name));
+  const flags=el('div','roundFlags');
+  const reply=el('span','roundFlag '+(answered?'done':state.school===name&&!state.recorded&&state.question!==null?'now':'wait'),
+    answered?'✓ Já respondeu':state.school===name&&!state.recorded&&state.question!==null?'● Respondendo':'○ Pode responder');
+  flags.append(reply);
+  if(ph!=='F'&&state.round<=4){
+   flags.append(el('span','roundFlag '+(helped?'used':'wait'),helped?'🤝 Já ajudou':'🤝 Pode ajudar'));
+  }
+  row.append(flags);container.append(row);
+ }
+}
 function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph;$('round').value=String(state.round);
  $('phaseLabel').textContent=ph==='F'?'FINAL MUNICIPAL • 23/10':`CLASSIFICATÓRIA • CHAVE ${ph} • ${ph==='A'?'20':'21'}/10`;
  $('questionValue').textContent=state.round===6?'DESEMPATE • APURAÇÃO MANUAL':`RODADA ${state.round} • ${points[state.round]} PONTOS`;
  $('currentSchool').textContent=state.school||'Aguardando seleção da escola';
- optionsFor($('schoolSelect'),list,'Selecione a escola');$('schoolSelect').value=list.includes(state.school)?state.school:'';
+ const schoolSelect=$('schoolSelect');
+ schoolSelect.replaceChildren();
+ const firstSchool=el('option','','Selecione a escola');firstSchool.value='';schoolSelect.append(firstSchool);
+ for(const name of list){
+  const done=state.round!==6&&completed(ph,state.round,name);
+  const op=el('option','',name+(done?' — ✓ JÁ RESPONDEU':''));
+  op.value=name;op.disabled=done&&name!==state.school;
+  schoolSelect.append(op);
+ }
+ schoolSelect.value=list.includes(state.school)?state.school:'';
  const previousHelper=$('helper').value;
- optionsFor($('helper'),list.filter(x=>x!==state.school&&!helpedAlready(ph,state.round,x)),'Sem auxílio');
- if([...$('helper').options].some(x=>x.value===previousHelper))$('helper').value=previousHelper;
+ const helperSelect=$('helper');helperSelect.replaceChildren();
+ const none=el('option','','Sem auxílio');none.value='';helperSelect.append(none);
+ for(const name of list.filter(x=>x!==state.school)){
+  const used=helpedAlready(ph,state.round,name);
+  const op=el('option','',name+(used?' — 🤝 JÁ AJUDOU':''));
+  op.value=name;op.disabled=used;helperSelect.append(op);
+ }
+ if([...$('helper').options].some(x=>x.value===previousHelper&&!x.disabled))$('helper').value=previousHelper;
  $('helper').disabled=ph==='F'||state.round>=5||state.recorded;
  const q=currentQuestion();$('questionTitle').textContent=q?q.q:'Aguardando sorteio da pergunta...';$('options').replaceChildren();
  if(q){q.a.forEach((v,i)=>{
@@ -145,6 +208,8 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  $('ranking').replaceChildren();sorted.forEach((name,i)=>{const r=el('div','rankRow'+(ph!=='F'&&i<2?' top':''));r.append(el('span','rankNo',`${i+1}º`),el('span','rankName',name),el('span','score',`${score(ph,name)} pts`));$('ranking').append(r)});
  $('rankingNote').textContent=ph==='F'?'A classificação final exige desempate quando houver igualdade de pontos.':`Projeção: duas melhores da Chave ${ph} avançam. Empate pela segunda vaga: realização obrigatória de desempate.`;
  $('roundProgress').textContent=state.round===6?'Desempates devem ser conduzidos e homologados manualmente pela organização.':`${list.filter(n=>completed(ph,state.round,n)).length} de ${list.length} escolas com resposta registrada nesta rodada.`;
+ paintRoundBoard('roundBoard',ph,list);
+ paintRoundBoard('publicRoundBoard',ph,list);
  if(ph==='F'&&(hasCutTie('A',A)||hasCutTie('B',B)))$('rankingNote').textContent+=' ATENÇÃO: há empate provisório na vaga de classificação em uma chave. A final não está homologada.';
  persist();}
 function changePhase(){if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
