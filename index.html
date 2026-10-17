@@ -1,1 +1,670 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gincana do Saber 2026</title>
+<style>
+:root {
+  --verde:#006b42;
+  --escuro:#073d2d;
+  --lima:#c5ec00;
+  --laranja:#ff871c;
+  --branco:#fff;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#edf3ed;
+  color:#183b2e;
+}
+header {
+  background:linear-gradient(115deg,#06442f,#00994e);
+  padding:20px 25px;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.marca { display:flex;align-items:center;gap:12px; }
+.coruja { font-size:46px; }
+h1 { margin:0;font-size:30px;color:var(--lima); }
+header p { margin:4px 0 0;font-size:13px; }
+button,select {
+  font:inherit;
+  padding:11px 14px;
+  border-radius:9px;
+  border:1px solid #cad7ce;
+}
+button { cursor:pointer;font-weight:bold; }
+button:hover { filter:brightness(.94); }
+button:disabled { opacity:.4;cursor:not-allowed; }
+.primario { background:var(--verde);color:white;border:0; }
+.laranja { background:var(--laranja);color:#202820;border:0; }
+.claro { background:white;color:var(--verde); }
+main { max-width:1450px;margin:auto;padding:20px; }
+.controles {
+  background:white;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:17px;
+  display:flex;
+  gap:12px;
+  align-items:end;
+  flex-wrap:wrap;
+}
+.campo { display:flex;flex-direction:column;gap:6px; }
+.campo label { font-size:12px;font-weight:bold; }
+.layout {
+  display:grid;
+  grid-template-columns:minmax(0,2fr) minmax(280px,1fr);
+  gap:17px;
+}
+.painel,.ranking {
+  border-radius:15px;
+  padding:22px;
+  background:white;
+  min-width:0;
+}
+.etiqueta {
+  font-weight:bold;
+  font-size:13px;
+  color:var(--verde);
+}
+.escola {
+  background:#e1f4d5;
+  border-left:6px solid #76bb1d;
+  border-radius:8px;
+  padding:15px;
+  margin:15px 0;
+  font-size:22px;
+  font-weight:bold;
+}
+h2 { margin:9px 0 15px;font-size:25px; }
+.alternativa {
+  display:block;
+  width:100%;
+  text-align:left;
+  margin:9px 0;
+  background:#f4f7f3;
+  border:2px solid #e1e9df;
+  padding:15px;
+  border-radius:10px;
+  font-weight:normal;
+}
+.correta {
+  background:#c8f1c8!important;
+  border-color:#159447!important;
+  color:#064421;
+  font-weight:bold;
+}
+.acoes { display:flex;gap:10px;flex-wrap:wrap;margin-top:20px; }
+.info {
+  margin-top:14px;
+  padding:12px;
+  background:#f2f6f0;
+  border-radius:9px;
+  font-size:14px;
+}
+.ranking h2 { font-size:23px; }
+.linha {
+  display:flex;
+  justify-content:space-between;
+  gap:8px;
+  align-items:center;
+  padding:12px 9px;
+  border-bottom:1px solid #e3e9e3;
+}
+.linha:nth-child(2),.linha:nth-child(3) {
+  background:#e6f7d7;
+}
+.nome { font-size:13px; }
+.pontos {
+  font-size:19px;
+  font-weight:bold;
+  color:var(--verde);
+  white-space:nowrap;
+}
+.rodape {
+  text-align:center;
+  color:#587364;
+  font-size:12px;
+  margin:24px 0;
+}
+#operador { margin-top:18px; }
+#operador .controles { border:2px solid #b6d9c2; }
+.aviso {
+  color:#805000;
+  background:#fff3d6;
+  padding:12px;
+  border-radius:9px;
+  font-size:13px;
+  margin-bottom:15px;
+}
+body.telao { background:var(--escuro); }
+body.telao .controles,
+body.telao #operador,
+body.telao .aviso { display:none; }
+body.telao main { max-width:none; }
+body.telao .painel { background:#f8fff5; }
+body.telao h2 { font-size:clamp(26px,3vw,48px); }
+body.telao .alternativa { font-size:clamp(16px,2vw,29px); }
+body.telao .escola { font-size:clamp(20px,2.4vw,34px); }
+body.telao .linha { padding:15px 7px; }
+body.telao .nome { font-size:clamp(12px,1.3vw,19px); }
+body.telao .pontos { font-size:25px; }
+body.telao .rodape { color:white; }
+@media(max-width:760px){
+  .layout { grid-template-columns:1fr; }
+  h1 { font-size:24px; }
+  .painel,.ranking { padding:15px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="marca">
+    <span class="coruja">🦉</span>
+    <div>
+      <h1>Gincana do Saber</h1>
+      <p>Câmara Municipal de Passos • Escola do Legislativo • 2026</p>
+    </div>
+  </div>
+  <button class="claro" onclick="alternarTelao()" id="botaoTelao">
+    Modo telão
+  </button>
+</header>
+
+<main>
+  <div class="aviso">
+    VERSÃO DE TESTES — Perguntas fictícias. As respostas e
+    pontuações são armazenadas somente neste navegador.
+  </div>
+
+  <div class="controles">
+    <div class="campo">
+      <label>ETAPA DA COMPETIÇÃO</label>
+      <select id="fase" onchange="trocarFase()">
+        <option value="A">20/10 — Chave A</option>
+        <option value="B">21/10 — Chave B</option>
+        <option value="F">23/10 — Final municipal</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label>RODADA</label>
+      <select id="rodada" onchange="atualizar()">
+        <option value="1">Rodada 1 — 2 pontos</option>
+        <option value="2">Rodada 2 — 2 pontos</option>
+        <option value="3">Rodada 3 — 4 pontos</option>
+        <option value="4">Rodada 4 — 4 pontos</option>
+        <option value="5">Rodada 5 — 6 pontos</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="layout">
+    <section class="painel">
+      <div class="etiqueta" id="etapaTitulo"></div>
+      <div class="escola" id="escolaAtual">
+        Aguardando seleção da escola
+      </div>
+      <div class="etiqueta" id="valorQuestao"></div>
+      <h2 id="pergunta">Aguardando sorteio da pergunta...</h2>
+      <div id="alternativas"></div>
+      <div id="resultado" class="info">
+        Selecione uma escola e sorteie uma pergunta.
+      </div>
+
+      <div id="operador">
+        <h3>Controle da competição</h3>
+        <div class="controles">
+          <div class="campo" style="flex:1">
+            <label>ESCOLA QUE VAI RESPONDER</label>
+            <select id="selecionarEscola"
+              onchange="selecionarEscola()" style="width:100%">
+            </select>
+          </div>
+          <button class="laranja" onclick="sortear()">
+            🎲 Sortear pergunta
+          </button>
+        </div>
+        <div class="acoes">
+          <button onclick="revelar()" id="btnRevelar">
+            Revelar resposta
+          </button>
+          <button class="primario" onclick="registrar(true)"
+            id="btnAcerto">✓ Registrar acerto</button>
+          <button onclick="registrar(false)"
+            id="btnErro">✕ Registrar erro</button>
+        </div>
+        <div class="acoes">
+          <button onclick="desfazer()">↶ Desfazer lançamento</button>
+          <button onclick="zerar()">Zerar etapa atual</button>
+        </div>
+        <p class="info">
+          O sorteio usa perguntas demonstrativas. Cada pergunta
+          pode ser usada uma vez por etapa. O auxílio entre
+          duplas será implementado após análise do regulamento.
+        </p>
+      </div>
+    </section>
+
+    <aside class="ranking">
+      <h2>🏆 Classificação</h2>
+      <div class="etiqueta" id="tituloRanking"></div>
+      <div id="listaRanking"></div>
+      <p class="info" id="observacaoRanking"></p>
+    </aside>
+  </div>
+  <div class="rodape">
+    Gincana do Saber 2026 • Câmara Municipal de Passos
+    • Escola do Legislativo
+  </div>
+</main>
+
+<script>
+const escolasA = [
+  "Escola Estadual Neca Quirino",
+  "Escola Municipal Doutor Manoel Patti",
+  "Colégio COC São Francisco",
+  "Escola Municipal Geralda Cândida de Oliveira",
+  "Escola Estadual Prof. Julia Kubitschek",
+  "Escola Municipal Prof. Jalile Barbosa Calixto",
+  "Colégio Del Rey",
+  "Escola Municipal Oilda Valéria Silveira Coelho"
+];
+
+const escolasB = [
+  "Escola Estadual Lourenço Andrade",
+  "Colégio Tiradentes",
+  "Escola Municipal Coronel Azarias de Melo",
+  "Escola Estadual Geraldo Starling Soares",
+  "Escola Estadual Nazle Jabur",
+  "Escola Estadual Abraão Lincoln",
+  "Escola Municipal Professor Hilarino Moraes",
+  "Colégio Status Poliedro"
+];
+
+// QUESTÕES EXCLUSIVAMENTE DEMONSTRATIVAS
+const perguntas = [
+  {
+    texto:"Qual é uma das funções da Câmara Municipal?",
+    alternativas:[
+      "Administrar escolas estaduais",
+      "Elaborar leis municipais e fiscalizar o Executivo",
+      "Julgar crimes federais",
+      "Comandar as Forças Armadas"
+    ],
+    correta:1
+  },
+  {
+    texto:"Quem exerce o Poder Executivo municipal?",
+    alternativas:[
+      "O governador",
+      "Os vereadores",
+      "O prefeito",
+      "Os deputados federais"
+    ],
+    correta:2
+  },
+  {
+    texto:"Qual documento é a lei fundamental do Brasil?",
+    alternativas:[
+      "Constituição Federal",
+      "Código de Trânsito",
+      "Regimento Escolar",
+      "Lei Orgânica de outro município"
+    ],
+    correta:0
+  },
+  {
+    texto:"Qual é um exemplo de participação cidadã?",
+    alternativas:[
+      "Impedir debates públicos",
+      "Desrespeitar as leis",
+      "Proibir opiniões diferentes",
+      "Acompanhar as atividades da Câmara Municipal"
+    ],
+    correta:3
+  },
+  {
+    texto:"Qual instituição exerce o Poder Legislativo municipal?",
+    alternativas:[
+      "Prefeitura",
+      "Câmara Municipal",
+      "Governo estadual",
+      "Ministério da Educação"
+    ],
+    correta:1
+  },
+  {
+    texto:"Quem escolhe os vereadores nas eleições municipais?",
+    alternativas:[
+      "O eleitorado",
+      "O prefeito sozinho",
+      "Os ministros",
+      "Os diretores das escolas"
+    ],
+    correta:0
+  },
+  {
+    texto:"O que é uma lei municipal?",
+    alternativas:[
+      "Uma regra aplicável a todos os países",
+      "Um regulamento exclusivo das escolas",
+      "Uma norma jurídica sobre assunto de competência municipal",
+      "Uma decisão de qualquer cidadão sem processo legal"
+    ],
+    correta:2
+  },
+  {
+    texto:"Qual atitude contribui para a democracia?",
+    alternativas:[
+      "Impedir o voto",
+      "Ocultar informações públicas",
+      "Proibir a participação popular",
+      "Respeitar os direitos e deveres dos cidadãos"
+    ],
+    correta:3
+  }
+];
+
+const valores = [0,2,2,4,4,6];
+const chaveStorage = "gincana_saber_v1";
+
+function estadoInicial(){
+  return {
+    fase:"A",
+    rodada:1,
+    pontos:{A:{},B:{},F:{}},
+    usados:{A:[],B:[],F:[]},
+    historico:{A:[],B:[],F:[]},
+    finais:[],
+    escola:"",
+    pergunta:null,
+    revelada:false,
+    registrada:false
+  };
+}
+
+let estado;
+try {
+  estado = JSON.parse(localStorage.getItem(chaveStorage))
+    || estadoInicial();
+} catch(e){
+  estado = estadoInicial();
+}
+
+function salvar(){
+  localStorage.setItem(chaveStorage,JSON.stringify(estado));
+}
+
+function escolasDaFase(){
+  if(estado.fase==="A") return escolasA;
+  if(estado.fase==="B") return escolasB;
+  return estado.finais;
+}
+
+function pontosDaEscola(nome){
+  return estado.pontos[estado.fase][nome] || 0;
+}
+
+function atualizar(){
+  estado.rodada = Number(document.getElementById("rodada").value);
+  const fase = estado.fase;
+  const lista = escolasDaFase();
+
+  document.getElementById("etapaTitulo").textContent =
+    fase==="F" ? "FINAL MUNICIPAL" : "CLASSIFICATÓRIA — CHAVE "+fase;
+
+  document.getElementById("tituloRanking").textContent =
+    fase==="F" ? "FINAL • 23 DE OUTUBRO" :
+    "CHAVE "+fase+" • "+(fase==="A"?"20":"21")+" DE OUTUBRO";
+
+  document.getElementById("valorQuestao").textContent =
+    "RODADA "+estado.rodada+" • "+valores[estado.rodada]+
+    " PONTOS POR ACERTO";
+
+  const seletor = document.getElementById("selecionarEscola");
+  seletor.innerHTML = '<option value="">Selecione a escola</option>';
+  lista.forEach(nome=>{
+    const op = document.createElement("option");
+    op.value=nome;
+    op.textContent=nome;
+    seletor.appendChild(op);
+  });
+  seletor.value=lista.includes(estado.escola)?estado.escola:"";
+
+  document.getElementById("escolaAtual").textContent =
+    estado.escola || "Aguardando seleção da escola";
+
+  const q = estado.pergunta===null ?
+    null : perguntas[estado.pergunta];
+
+  document.getElementById("pergunta").textContent =
+    q ? q.texto : "Aguardando sorteio da pergunta...";
+
+  const alternativas = document.getElementById("alternativas");
+  alternativas.innerHTML="";
+  if(q){
+    q.alternativas.forEach((texto,i)=>{
+      const div=document.createElement("div");
+      div.className="alternativa";
+      if(estado.revelada && i===q.correta){
+        div.classList.add("correta");
+      }
+      div.textContent="ABCD"[i]+") "+texto;
+      alternativas.appendChild(div);
+    });
+  }
+
+  const resultado=document.getElementById("resultado");
+  if(!q){
+    resultado.textContent="Selecione uma escola e sorteie uma pergunta.";
+  }else if(estado.registrada){
+    resultado.textContent="Resposta registrada. Próxima escola ou pergunta.";
+  }else if(estado.revelada){
+    resultado.textContent="Resposta correta: "+
+      "ABCD"[q.correta]+") "+q.alternativas[q.correta];
+  }else{
+    resultado.textContent="Aguardando resposta da dupla...";
+  }
+
+  document.getElementById("btnRevelar").disabled =
+    !q || estado.revelada || estado.registrada;
+  document.getElementById("btnAcerto").disabled =
+    !q || !estado.escola || estado.registrada;
+  document.getElementById("btnErro").disabled =
+    !q || !estado.escola || estado.registrada;
+
+  const ranking = [...lista].sort((a,b)=>
+    pontosDaEscola(b)-pontosDaEscola(a) ||
+    a.localeCompare(b,"pt-BR")
+  );
+
+  const caixa=document.getElementById("listaRanking");
+  caixa.innerHTML="";
+
+  ranking.forEach((nome,i)=>{
+    const linha=document.createElement("div");
+    linha.className="linha";
+    const n=document.createElement("span");
+    n.className="nome";
+    n.textContent=(i+1)+"º — "+nome;
+    const p=document.createElement("strong");
+    p.className="pontos";
+    p.textContent=pontosDaEscola(nome)+" pts";
+    linha.append(n,p);
+    caixa.appendChild(linha);
+  });
+
+  document.getElementById("observacaoRanking").textContent =
+    fase==="F"
+      ? "A classificação final depende dos critérios oficiais de desempate."
+      : "As duas primeiras duplas da chave avançam à final, conforme o regulamento. Empates exigem desempate.";
+
+  salvar();
+}
+
+function selecionarEscola(){
+  const nome=document.getElementById("selecionarEscola").value;
+  if(estado.pergunta!==null && !estado.registrada){
+    if(!confirm("Há uma pergunta sem lançamento. Trocar de escola?"))
+      return atualizar();
+  }
+  estado.escola=nome;
+  estado.pergunta=null;
+  estado.revelada=false;
+  estado.registrada=false;
+  atualizar();
+}
+
+function trocarFase(){
+  estado.fase=document.getElementById("fase").value;
+  estado.rodada=1;
+  estado.escola="";
+  estado.pergunta=null;
+  estado.revelada=false;
+  estado.registrada=false;
+  document.getElementById("rodada").value="1";
+  atualizar();
+}
+
+function sortear(){
+  if(!estado.escola){
+    alert("Selecione primeiro a escola que vai responder.");
+    return;
+  }
+  if(estado.pergunta!==null && !estado.registrada){
+    alert("Registre a resposta antes de sortear outra pergunta.");
+    return;
+  }
+
+  const disponiveis=perguntas
+    .map((_,i)=>i)
+    .filter(i=>!estado.usados[estado.fase].includes(i));
+
+  if(disponiveis.length===0){
+    alert("Todas as perguntas demonstrativas desta etapa foram usadas.");
+    return;
+  }
+
+  const indice=disponiveis[
+    Math.floor(Math.random()*disponiveis.length)
+  ];
+
+  estado.pergunta=indice;
+  estado.usados[estado.fase].push(indice);
+  estado.revelada=false;
+  estado.registrada=false;
+  atualizar();
+}
+
+function revelar(){
+  if(estado.pergunta===null)return;
+  estado.revelada=true;
+  atualizar();
+}
+
+function registrar(acertou){
+  if(estado.pergunta===null || !estado.escola ||
+     estado.registrada)return;
+
+  const nome=estado.escola;
+  const pontos=acertou?valores[estado.rodada]:0;
+
+  if(!confirm("Confirmar "+(acertou?"ACERTO":"ERRO")+
+    " para "+nome+"? Pontuação: +"+pontos))return;
+
+  estado.historico[estado.fase].push({
+    escola:nome,
+    pontos:pontos,
+    rodada:estado.rodada,
+    pergunta:estado.pergunta
+  });
+
+  estado.pontos[estado.fase][nome]=
+    pontosDaEscola(nome)+pontos;
+
+  estado.registrada=true;
+  estado.revelada=true;
+  atualizar();
+}
+
+function desfazer(){
+  const h=estado.historico[estado.fase];
+  if(!h.length){
+    alert("Não há lançamentos para desfazer.");
+    return;
+  }
+  if(!confirm("Desfazer o último lançamento desta etapa?"))return;
+
+  const ultimo=h.pop();
+  estado.pontos[estado.fase][ultimo.escola]=Math.max(
+    0,(estado.pontos[estado.fase][ultimo.escola]||0)
+      -ultimo.pontos
+  );
+  estado.escola=ultimo.escola;
+  estado.pergunta=ultimo.pergunta;
+  estado.rodada=ultimo.rodada;
+  estado.revelada=true;
+  estado.registrada=false;
+  document.getElementById("rodada").value=estado.rodada;
+  atualizar();
+}
+
+function zerar(){
+  if(!confirm("ATENÇÃO: apagar pontuação e sorteios da etapa atual?"))
+    return;
+  if(!confirm("Confirma definitivamente a exclusão?"))return;
+
+  estado.pontos[estado.fase]={};
+  estado.usados[estado.fase]=[];
+  estado.historico[estado.fase]=[];
+  estado.pergunta=null;
+  estado.revelada=false;
+  estado.registrada=false;
+  atualizar();
+}
+
+function alternarTelao(){
+  document.body.classList.toggle("telao");
+  const ativo=document.body.classList.contains("telao");
+  document.getElementById("botaoTelao").textContent=
+    ativo?"Voltar ao operador":"Modo telão";
+  if(ativo && document.documentElement.requestFullscreen){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }else if(!ativo && document.fullscreenElement){
+    document.exitFullscreen().catch(()=>{});
+  }
+}
+
+function prepararFinal(){
+  // Seleção provisória pelas duas maiores pontuações de cada chave.
+  // Empates devem ser resolvidos pelo regulamento.
+  const top2=(fase,lista)=>[...lista].sort((a,b)=>
+    (estado.pontos[fase][b]||0)-
+    (estado.pontos[fase][a]||0) ||
+    a.localeCompare(b,"pt-BR")
+  ).slice(0,2);
+
+  estado.finais=[
+    ...top2("A",escolasA),
+    ...top2("B",escolasB)
+  ];
+  salvar();
+}
+
+prepararFinal();
+document.getElementById("fase").value=estado.fase;
+document.getElementById("rodada").value=estado.rodada;
+atualizar();
+</script>
+</body>
+</html>
+
