@@ -73,13 +73,21 @@ body.publicScreen #screenHelperBanner.active{display:block}
 body.publicScreen #screenTimer.isHelping{background:#fff8e7;border-color:#f1ba50}
 body.publicScreen #screenTimer.isHelping #screenTimerNum{color:#9a5400}
 body.publicScreen #screenTimer.isHelping #screenTimerNum.low{color:#d12c27}
+
+/* Convocação sem contagem e início manual do auxílio */
+#startHelpClock{background:#f0a323;color:#332305;border-color:#de9419}
+#startHelpClock:not(:disabled){box-shadow:0 0 0 2px #ffe5aa}
+#timerNum.isWaiting{font-size:clamp(23px,3vw,37px);color:#9d6400}
+body.publicScreen #screenTimerNum.isWaiting{font-size:clamp(28px,3.2vw,48px);color:#9d6400}
+body.publicScreen #screenTimer.isWaiting{background:#fff8e7;border-color:#f1ba50}
+body.publicScreen #screenHelperBanner.isWaiting{background:#ffe7a6}
 </style>
 </head>
 <body>
 <header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
 <main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas, sem login ou sincronização entre dispositivos. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
 <div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
-<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="startHelpTimer()">🤝 Auxílio: 15s</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
+<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
 <div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">Revelar resposta escolhida</button><button class="primary" id="confirmBtn" onclick="recordSelected()">✓ Confirmar pontuação</button><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div id="screenAccess"><strong>🦉 Torcida no celular</strong><div><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAIAAABqcO2fAAAF40lEQVR4nO3dS44ktQJAURohsZy3ibdsNsFyGCVzogWW5U/k1TlDVBWRVF9ZSsufH5/P5xfo+vX2B4C9JE6cxImTOHESJ07ixEmcOIkTJ3HiJE6cxIn7beSHfv///3Z/jn/x1x9//uO/PD/PyM/Mvevp5NtHnrPqM8/91tvaeDKKEydx4iROnMSJkzhxQzMqTyPfZOfMfUNf9b1+ZA5hboZn1dtX2feut7VhFCdO4sRJnDiJEydx4iZnVJ72rQmZs2o1xcm5mn1vH7FvjuVuG0Zx4iROnMSJkzhxEidu2YzKSSf3nqzac7TvZ0bMvevkmpl9jOLESZw4iRMnceIkTtxXzqicPKVk35zGiJM7cd52RsoqRnHiJE6cxImTOHESJ27ZjMrJ1Qv75hlOnsW67+2r1rq8/2SVEUZx4iROnMSJkzhxEiduckbl7uqFt+27uXsnztv2HL1tZYtRnDiJEydx4iROnMSJ+/H5fG5/hgVW3TK86u2rZh7eNsvhHBV4HYkTJ3HiJE6cxIkbWqPyjWsVVu2XWWXVeSxzf/lVZ7+sKmHVGp6RtxvFiZM4cRInTuLESZy4oRmVfXfQjLxrzsl7ahorSe7OOI2Ye7tRnDiJEydx4iROnMSJW7brpzqHMPeufTt6Tn7mfTc1z/3W3JON4sRJnDiJEydx4iRO3Ovu+jn5LX7u7SdXvzytms9ZdXP0qnet+q0nozhxEidO4sRJnDiJEzd5jsqIk9++R7ztbuJVTv7rzLm7K8ooTpzEiZM4cRInTuLEbbzrZ98ukqdvPCl3zqo5nznfeEKLUZw4iRMnceIkTpzEiZvc9bNqH8fdVSL7dhjtW41z8hSXkSefnCl6co4KSJw6iRMnceIkTtzGk2lHvO224lXno96dLRl58sl9N3dvsjaKEydx4iROnMSJkzhxy85RedtahX3f4vc9ed/5uifXFO37G84xihMnceIkTpzEiZM4ccvu+rl7puvbVsg8nTz3deRnnp9n39zIyb/zk1GcOIkTJ3HiJE6cxInbeDLtiH0nfuzbibNvZ9C+M1JG7NvN9HTyL2YUJ07ixEmcOIkTJ3Hijt71M+Lumoe7+5tOzoR846kpZlTgJyROnMSJkzhxEidu2V0/q+7W2Tc/sMq+k172OXluyd39TU9GceIkTpzEiZM4cRInbmiNytv2p4w4ub5i1XP2rVFZ9Zy7NyjNMYoTJ3HiJE6cxImTOHEbb0/et6/k6e5NQ3P2nQ9zckXKiJMzM09GceIkTpzEiZM4cRInbnJG5eTprHdXONyd5bh7S86cu6fXPhnFiZM4cRInTuLESZy4oXNU3nY27NPd9TAjT141x7JvDmrEN+5mMooTJ3HiJE6cxImTOHGTJ9OOmPv+u2+eYdX3+hGr/t9HfuZtcyxPJ/+GT0Zx4iROnMSJkzhxEidu410/q/bLjDg5PzDi5M3Rq+ag5qz6hPtWvxjFiZM4cRInTuLESZy4L7jr5+7aibunqu57zsiTn/bd7DPCrh/4CYkTJ3HiJE6cxIlbtuvn7l0/I1bNRZw8Q+Zte2rm3nX3piGjOHESJ07ixEmcOIkTNzSjMne+x6onP+37hn53duJt576eXFez79/UKE6cxImTOHESJ07ixE3e9XPS3RuET570cnJ31b69Qvvm1tyeDD8hceIkTpzEiZM4cZO7ft5/e/K+01lPntBy8vPMedseqCejOHESJ07ixEmcOIkTt/EclRF3T1Xdd8rr286QWfV57q5WskYFfkLixEmcOIkTJ3Hils2ovM3J+ZNV8wxvu0Hp/ee6jDCKEydx4iROnMSJkzhxXzmjcvJc0/ffpHP3yavOP9m3e8goTpzEiZM4cRInTuLELZtRedv5sXNWrdy4e1rsyLtO3uMz95xVjOLESZw4iRMnceIkTtyPz+fznz/0trt+vvHMlm+0737nVbcaOUcFJE6dxImTOHESJ25oRgW+l1GcOIkTJ3HiJE6cxImTOHESJ07ixEmcOIkTJ3Hi/gZsuLJK8gRs2wAAAABJRU5ErkJggg==" alt="QR Code para página pública da torcida"></div><div class="fine">Aponte a câmera para conhecer a página da torcida.</div><div class="fine">A classificação ao vivo nos celulares ainda está em desenvolvimento.</div></div><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
@@ -110,26 +118,38 @@ let timerId=null, deadline=0, timeLeft=30, timerTotal=30, timerMode='normal', ti
 let activeHelperName='';
 function displayTimer(){
  if(!IS_DISPLAY)pushDisplayTimer();
- const n=$('timerNum');n.textContent='00:'+String(Math.ceil(Math.max(0,timeLeft))).padStart(2,'0');
+ const n=$('timerNum');
+ n.textContent=timerMode==='help-wait'?'AGUARDANDO':('00:'+String(Math.ceil(Math.max(0,timeLeft))).padStart(2,'0'));
+ n.classList.toggle('isWaiting',timerMode==='help-wait');
  n.classList.toggle('low',timeLeft<=5);
  $('timerFill').style.width=(100*Math.max(0,timeLeft)/timerTotal)+'%';
  $('timerFill').classList.toggle('low',timeLeft<=5);
- $('timerStart').disabled=!currentQuestion()||state.recorded||state.revealed||timerRunning||state.expired;
- $('helpTimer').disabled=!currentQuestion()||state.recorded||state.revealed||state.expired||state.phase==='F'||state.round>=5||timerMode==='help';
+ $('timerStart').disabled=!currentQuestion()||state.recorded||state.revealed||timerRunning||state.expired||timerMode!=='normal';
+ $('helpTimer').disabled=!currentQuestion()||state.recorded||state.revealed||state.expired||state.phase==='F'||state.round>=5||timerMode!=='normal';
+ $('startHelpClock').disabled=timerMode!=='help-wait'||state.recorded||state.revealed;
+ $('timerReset').disabled=timerMode==='help-wait'||timerMode==='help';
 }
 function stopTicker(){if(timerId!==null){clearInterval(timerId);timerId=null}timerRunning=false;}
 function pauseTimer(){if(!timerRunning)return;timeLeft=Math.max(0,(deadline-Date.now())/1000);stopTicker();$('timerInfo').textContent='Cronômetro pausado pela organização.';displayTimer();}
 function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
 function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);displayTimer();if(timeLeft<=0){stopTicker();state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
-function startTimer(){if(!currentQuestion()||state.recorded||state.revealed||state.expired)return;timerRunning=true;deadline=Date.now()+timeLeft*1000;timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada.';displayTimer();}
-function startHelpTimer(){
- if(!currentQuestion()||state.recorded||state.phase==='F'||state.round>=5||state.expired)return;
+function startTimer(){if(timerMode==='help-wait'||!currentQuestion()||state.recorded||state.revealed||state.expired)return;timerRunning=true;deadline=Date.now()+timeLeft*1000;timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada.';displayTimer();}
+function callHelper(){
+ if(!currentQuestion()||state.recorded||state.revealed||state.phase==='F'||state.round>=5||state.expired||timerMode!=='normal')return;
  const helper=$('helper').value;
  if(!helper)return alert('Selecione primeiro a escola que prestará auxílio.');
+ if(helper===state.school)return alert('A escola não pode prestar auxílio a si mesma.');
  if(helpedAlready(state.phase,state.round,helper))return alert('Esta escola já prestou auxílio na rodada.');
- stopTicker();timerMode='help';activeHelperName=helper;timerTotal=15;timeLeft=15;
- $('timerInfo').textContent='Auxílio selecionado: 15 segundos para a escola auxiliadora.';
- displayTimer();startTimer();
+ pauseTimer();stopTicker();
+ timerMode='help-wait';activeHelperName=helper;timerTotal=15;timeLeft=15;
+ $('timerInfo').textContent='Auxílio chamado: '+helper+'. Aguardar deslocamento e posicionamento. Clique em Iniciar 15s de auxílio somente quando a dupla estiver pronta.';
+ displayTimer();refresh();
+}
+function startHelpCountdown(){
+ if(timerMode!=='help-wait'||!activeHelperName||state.recorded||state.revealed)return;
+ timerMode='help';timeLeft=15;timerTotal=15;
+ $('timerInfo').textContent='Tempo de auxílio em andamento para '+activeHelperName+'.';
+ startTimer();refresh();
 }
 function selectAnswer(i){if(!currentQuestion()||state.revealed||state.recorded||state.expired)return;state.selected=i;refresh();}
 function recordSelected(){
@@ -201,7 +221,7 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
   op.value=name;op.disabled=used;helperSelect.append(op);
  }
  if([...$('helper').options].some(x=>x.value===previousHelper&&!x.disabled))$('helper').value=previousHelper;
- $('helper').disabled=ph==='F'||state.round>=5||state.recorded;
+ $('helper').disabled=ph==='F'||state.round>=5||state.recorded||timerMode!=='normal';
  const q=currentQuestion();$('questionTitle').textContent=q?q.q:'Aguardando sorteio da pergunta...';$('options').replaceChildren();
  if(q){q.a.forEach((v,i)=>{
    const o=el('button','option'+(state.revealed&&q.c===i?' correct':'')+(state.revealed&&state.selected===i&&q.c!==i?' incorrect':'')+(!state.revealed&&state.selected===i?' picked':''),`${'ABC'[i]}) ${v}${state.revealed&&q.c===i?' ✓':state.revealed&&state.selected===i?' ✕':''}`);
@@ -226,8 +246,8 @@ function changePhase(){if(state.question!==null&&!state.recorded&&!confirm('Há 
 function changeRound(){if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function changeSchool(){const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function drawQuestion(){if(!state.school)return alert('Selecione a escola.');if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');if(state.round!==6&&completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');const available=questions.map((_,i)=>i).filter(i=>!state.used[state.phase].includes(i));if(!available.length)return alert('As perguntas de teste acabaram nesta etapa.');const idx=available[Math.floor(Math.random()*available.length)];state.question=idx;state.used[state.phase].push(idx);state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function reveal(){if(!currentQuestion()||state.selected===null||state.recorded)return;pauseTimer();state.revealed=true;refresh();}
-function record(correct,timeout=false){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':$('helper').disabled?'':$('helper').value;if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!confirm('Confirmar registro?\n\n'+text))return;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();}
+function reveal(){if(timerMode==='help-wait')return alert('Aguarde o posicionamento e inicie os 15 segundos de auxílio antes de revelar.');if(!currentQuestion()||state.selected===null||state.recorded)return;pauseTimer();state.revealed=true;refresh();}
+function record(correct,timeout=false){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(timerMode==='help'?activeHelperName:(timerMode==='normal'?'':''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!confirm('Confirmar registro?\n\n'+text))return;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();}
 function undo(){const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
 function clearPhase(){if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
@@ -244,8 +264,8 @@ function pushDisplayTimer(){
  const seconds=timerRunning?Math.max(0,(deadline-Date.now())/1000):timeLeft;
  localStorage.setItem(DISPLAY_TIMER_KEY,JSON.stringify({
   deadline:timerRunning?deadline:0,seconds,total:timerTotal,running:timerRunning,
-  label:timerMode==='help'?'Auxílio — 15 segundos':'Resposta — 30 segundos',
-  mode:timerMode,helper:timerMode==='help'?activeHelperName:''
+  label:timerMode==='help-wait'?'Aguardando posicionamento da dupla auxiliadora':timerMode==='help'?'Auxílio — 15 segundos':'Resposta — 30 segundos',
+  mode:timerMode,helper:timerMode!=='normal'?activeHelperName:''
  }));
 }
 function readDisplayTimer(){
@@ -259,13 +279,18 @@ function renderScreenTimer(){
  let seconds=displayTimerSnapshot.running?
  Math.max(0,(displayTimerSnapshot.deadline-Date.now())/1000):displayTimerSnapshot.seconds;
  const n=document.getElementById('screenTimerNum');
- n.textContent='00:'+String(Math.ceil(seconds)).padStart(2,'0');
+ const waiting=displayTimerSnapshot.mode==='help-wait';
+ n.textContent=waiting?'AGUARDANDO':('00:'+String(Math.ceil(seconds)).padStart(2,'0'));
+ n.classList.toggle('isWaiting',waiting);
+ $('screenTimer').classList.toggle('isWaiting',waiting);
+ $('screenHelperBanner').classList.toggle('isWaiting',waiting);
  n.classList.toggle('low',seconds<=5);
  document.getElementById('screenTimerDesc').textContent=displayTimerSnapshot.label||'Aguardando início da contagem.';
- const helping=displayTimerSnapshot.mode==='help'||displayTimerSnapshot.label?.startsWith('Auxílio');
+ const helping=displayTimerSnapshot.mode==='help'||displayTimerSnapshot.mode==='help-wait';
  $('screenHelperBanner').classList.toggle('active',helping);
+ $('screenHelperBanner').querySelector('strong').textContent=waiting?'🤝 AUXÍLIO SOLICITADO — AGUARDANDO POSICIONAMENTO':'🤝 AUXÍLIO SOLICITADO';
  $('screenTimer').classList.toggle('isHelping',helping);
- $('screenTimerHeading').textContent=helping?'Tempo do auxílio':'Tempo da pergunta';
+ $('screenTimerHeading').textContent=waiting?'Aguardando dupla auxiliadora':helping?'Tempo do auxílio':'Tempo da pergunta';
  $('screenHelperName').textContent=helping?(displayTimerSnapshot.helper||'Escola auxiliadora a confirmar'):'';
 }
 if(IS_DISPLAY){
