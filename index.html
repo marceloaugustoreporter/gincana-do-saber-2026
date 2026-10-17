@@ -1,670 +1,77 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gincana do Saber 2026</title>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gincana do Saber 2026 — Protótipo operacional</title>
 <style>
-:root {
-  --verde:#006b42;
-  --escuro:#073d2d;
-  --lima:#c5ec00;
-  --laranja:#ff871c;
-  --branco:#fff;
-}
-* { box-sizing:border-box; }
-body {
-  margin:0;
-  font-family:Arial,sans-serif;
-  background:#edf3ed;
-  color:#183b2e;
-}
-header {
-  background:linear-gradient(115deg,#06442f,#00994e);
-  padding:20px 25px;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
-  flex-wrap:wrap;
-}
-.marca { display:flex;align-items:center;gap:12px; }
-.coruja { font-size:46px; }
-h1 { margin:0;font-size:30px;color:var(--lima); }
-header p { margin:4px 0 0;font-size:13px; }
-button,select {
-  font:inherit;
-  padding:11px 14px;
-  border-radius:9px;
-  border:1px solid #cad7ce;
-}
-button { cursor:pointer;font-weight:bold; }
-button:hover { filter:brightness(.94); }
-button:disabled { opacity:.4;cursor:not-allowed; }
-.primario { background:var(--verde);color:white;border:0; }
-.laranja { background:var(--laranja);color:#202820;border:0; }
-.claro { background:white;color:var(--verde); }
-main { max-width:1450px;margin:auto;padding:20px; }
-.controles {
-  background:white;
-  padding:16px;
-  border-radius:14px;
-  margin-bottom:17px;
-  display:flex;
-  gap:12px;
-  align-items:end;
-  flex-wrap:wrap;
-}
-.campo { display:flex;flex-direction:column;gap:6px; }
-.campo label { font-size:12px;font-weight:bold; }
-.layout {
-  display:grid;
-  grid-template-columns:minmax(0,2fr) minmax(280px,1fr);
-  gap:17px;
-}
-.painel,.ranking {
-  border-radius:15px;
-  padding:22px;
-  background:white;
-  min-width:0;
-}
-.etiqueta {
-  font-weight:bold;
-  font-size:13px;
-  color:var(--verde);
-}
-.escola {
-  background:#e1f4d5;
-  border-left:6px solid #76bb1d;
-  border-radius:8px;
-  padding:15px;
-  margin:15px 0;
-  font-size:22px;
-  font-weight:bold;
-}
-h2 { margin:9px 0 15px;font-size:25px; }
-.alternativa {
-  display:block;
-  width:100%;
-  text-align:left;
-  margin:9px 0;
-  background:#f4f7f3;
-  border:2px solid #e1e9df;
-  padding:15px;
-  border-radius:10px;
-  font-weight:normal;
-}
-.correta {
-  background:#c8f1c8!important;
-  border-color:#159447!important;
-  color:#064421;
-  font-weight:bold;
-}
-.acoes { display:flex;gap:10px;flex-wrap:wrap;margin-top:20px; }
-.info {
-  margin-top:14px;
-  padding:12px;
-  background:#f2f6f0;
-  border-radius:9px;
-  font-size:14px;
-}
-.ranking h2 { font-size:23px; }
-.linha {
-  display:flex;
-  justify-content:space-between;
-  gap:8px;
-  align-items:center;
-  padding:12px 9px;
-  border-bottom:1px solid #e3e9e3;
-}
-.linha:nth-child(2),.linha:nth-child(3) {
-  background:#e6f7d7;
-}
-.nome { font-size:13px; }
-.pontos {
-  font-size:19px;
-  font-weight:bold;
-  color:var(--verde);
-  white-space:nowrap;
-}
-.rodape {
-  text-align:center;
-  color:#587364;
-  font-size:12px;
-  margin:24px 0;
-}
-#operador { margin-top:18px; }
-#operador .controles { border:2px solid #b6d9c2; }
-.aviso {
-  color:#805000;
-  background:#fff3d6;
-  padding:12px;
-  border-radius:9px;
-  font-size:13px;
-  margin-bottom:15px;
-}
-body.telao { background:var(--escuro); }
-body.telao .controles,
-body.telao #operador,
-body.telao .aviso { display:none; }
-body.telao main { max-width:none; }
-body.telao .painel { background:#f8fff5; }
-body.telao h2 { font-size:clamp(26px,3vw,48px); }
-body.telao .alternativa { font-size:clamp(16px,2vw,29px); }
-body.telao .escola { font-size:clamp(20px,2.4vw,34px); }
-body.telao .linha { padding:15px 7px; }
-body.telao .nome { font-size:clamp(12px,1.3vw,19px); }
-body.telao .pontos { font-size:25px; }
-body.telao .rodape { color:white; }
-@media(max-width:760px){
-  .layout { grid-template-columns:1fr; }
-  h1 { font-size:24px; }
-  .painel,.ranking { padding:15px; }
-}
+:root{--green:#075537;--dark:#063a2b;--lime:#d1ef28;--orange:#f7941d;--paper:#f5f8f2;--ink:#133a2c}*{box-sizing:border-box}body{margin:0;background:#e9f0e9;color:var(--ink);font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:linear-gradient(125deg,#064029,#09844b);color:white;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.branding{display:flex;align-items:center;gap:12px}.owl{font-size:44px}.branding h1{font-size:29px;line-height:1;margin:0;color:var(--lime)}.branding small{display:block;margin-top:8px}button,select{font:inherit;border-radius:9px;padding:10px 12px;border:1px solid #bed3c4;background:white;color:var(--ink)}button{cursor:pointer;font-weight:650}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:white;border-color:var(--green)}.orange{background:var(--orange);border-color:var(--orange);color:#24200c}.headbtn{background:white;color:var(--green)}main{max-width:1600px;margin:auto;padding:16px}.warning{padding:12px;background:#fff0c7;border-left:5px solid var(--orange);border-radius:9px;margin-bottom:15px;font-size:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;background:white;padding:14px;border-radius:12px;margin-bottom:14px}.field{display:flex;flex-direction:column;gap:5px;min-width:120px}.field label{font-weight:750;font-size:12px}.grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(290px,1fr);gap:14px}.panel{border-radius:15px;background:white;padding:20px;min-width:0}.step{color:#08764b;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}.school{font-size:22px;font-weight:800;background:#e3f4d3;border-left:6px solid #8dbd11;padding:13px;border-radius:9px;margin:15px 0}h2{font-size:clamp(23px,2.4vw,36px);margin:12px 0 20px}.option{background:#f2f7f2;padding:13px 15px;margin:9px 0;border-radius:10px;border:2px solid #e0e9df;font-size:20px}.correct{background:#c5efc7;border-color:#168a48;font-weight:800}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.muted{color:#496a58}.status{background:#edf6ec;border-radius:8px;padding:12px;margin-top:15px}.rankRow{display:flex;align-items:center;gap:9px;border-bottom:1px solid #e7ece7;padding:11px 7px}.rankRow.top{background:#e7f7d6}.rankNo{font-weight:800;min-width:28px}.rankName{flex:1;font-size:14px}.score{font-weight:900;font-size:22px;white-space:nowrap}.subhead{font-size:14px;color:#497056;margin:7px 0 15px}.control{margin-top:16px;border:2px solid #cae0d0;border-radius:12px;padding:15px}select{max-width:100%}.control .field{flex:1}.fine{font-size:13px;line-height:1.5}.line{border:0;border-top:1px solid #e6ede4;margin:18px 0}.small{font-size:12px}.footer{text-align:center;padding:18px;color:#597663}.hidden{display:none!important}body.screen{background:#062d23}body.screen .admin,body.screen .warning,body.screen #screenBtn,body.screen #backupBtn{display:none!important}body.screen main{max-width:none}body.screen .panel{background:#fafff5}body.screen .school{font-size:clamp(24px,3vw,42px)}body.screen .option{font-size:clamp(20px,2.3vw,35px)}body.screen .rankName{font-size:clamp(13px,1.3vw,20px)}body.screen .footer{color:white}@media(max-width:850px){.grid{grid-template-columns:1fr}.branding h1{font-size:23px}}@media(min-width:1300px){body.screen .grid{grid-template-columns:minmax(0,2fr) minmax(360px,.9fr)}}
 </style>
 </head>
 <body>
-
-<header>
-  <div class="marca">
-    <span class="coruja">🦉</span>
-    <div>
-      <h1>Gincana do Saber</h1>
-      <p>Câmara Municipal de Passos • Escola do Legislativo • 2026</p>
-    </div>
-  </div>
-  <button class="claro" onclick="alternarTelao()" id="botaoTelao">
-    Modo telão
-  </button>
-</header>
-
-<main>
-  <div class="aviso">
-    VERSÃO DE TESTES — Perguntas fictícias. As respostas e
-    pontuações são armazenadas somente neste navegador.
-  </div>
-
-  <div class="controles">
-    <div class="campo">
-      <label>ETAPA DA COMPETIÇÃO</label>
-      <select id="fase" onchange="trocarFase()">
-        <option value="A">20/10 — Chave A</option>
-        <option value="B">21/10 — Chave B</option>
-        <option value="F">23/10 — Final municipal</option>
-      </select>
-    </div>
-    <div class="campo">
-      <label>RODADA</label>
-      <select id="rodada" onchange="atualizar()">
-        <option value="1">Rodada 1 — 2 pontos</option>
-        <option value="2">Rodada 2 — 2 pontos</option>
-        <option value="3">Rodada 3 — 4 pontos</option>
-        <option value="4">Rodada 4 — 4 pontos</option>
-        <option value="5">Rodada 5 — 6 pontos</option>
-      </select>
-    </div>
-  </div>
-
-  <div class="layout">
-    <section class="painel">
-      <div class="etiqueta" id="etapaTitulo"></div>
-      <div class="escola" id="escolaAtual">
-        Aguardando seleção da escola
-      </div>
-      <div class="etiqueta" id="valorQuestao"></div>
-      <h2 id="pergunta">Aguardando sorteio da pergunta...</h2>
-      <div id="alternativas"></div>
-      <div id="resultado" class="info">
-        Selecione uma escola e sorteie uma pergunta.
-      </div>
-
-      <div id="operador">
-        <h3>Controle da competição</h3>
-        <div class="controles">
-          <div class="campo" style="flex:1">
-            <label>ESCOLA QUE VAI RESPONDER</label>
-            <select id="selecionarEscola"
-              onchange="selecionarEscola()" style="width:100%">
-            </select>
-          </div>
-          <button class="laranja" onclick="sortear()">
-            🎲 Sortear pergunta
-          </button>
-        </div>
-        <div class="acoes">
-          <button onclick="revelar()" id="btnRevelar">
-            Revelar resposta
-          </button>
-          <button class="primario" onclick="registrar(true)"
-            id="btnAcerto">✓ Registrar acerto</button>
-          <button onclick="registrar(false)"
-            id="btnErro">✕ Registrar erro</button>
-        </div>
-        <div class="acoes">
-          <button onclick="desfazer()">↶ Desfazer lançamento</button>
-          <button onclick="zerar()">Zerar etapa atual</button>
-        </div>
-        <p class="info">
-          O sorteio usa perguntas demonstrativas. Cada pergunta
-          pode ser usada uma vez por etapa. O auxílio entre
-          duplas será implementado após análise do regulamento.
-        </p>
-      </div>
-    </section>
-
-    <aside class="ranking">
-      <h2>🏆 Classificação</h2>
-      <div class="etiqueta" id="tituloRanking"></div>
-      <div id="listaRanking"></div>
-      <p class="info" id="observacaoRanking"></p>
-    </aside>
-  </div>
-  <div class="rodape">
-    Gincana do Saber 2026 • Câmara Municipal de Passos
-    • Escola do Legislativo
-  </div>
-</main>
-
+<header><div class="branding"><span class="owl" aria-hidden="true">🦉</span><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Modo telão</button></div></header>
+<main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas, sem login ou sincronização entre dispositivos. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
+<div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
+<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
+<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">Revelar resposta</button><button class="primary" id="correctBtn" onclick="record(true)">✓ Acerto</button><button id="wrongBtn" onclick="record(false)">✕ Erro</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
+</section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div></aside></div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo</div></main>
 <script>
-const escolasA = [
-  "Escola Estadual Neca Quirino",
-  "Escola Municipal Doutor Manoel Patti",
-  "Colégio COC São Francisco",
-  "Escola Municipal Geralda Cândida de Oliveira",
-  "Escola Estadual Prof. Julia Kubitschek",
-  "Escola Municipal Prof. Jalile Barbosa Calixto",
-  "Colégio Del Rey",
-  "Escola Municipal Oilda Valéria Silveira Coelho"
+'use strict';
+const A=["Escola Estadual Neca Quirino","Escola Municipal Doutor Manoel Patti","Colégio COC São Francisco","Escola Municipal Geralda Cândida de Oliveira","Escola Estadual Prof. Julia Kubitschek","Escola Municipal Prof. Jalile Barbosa Calixto","Colégio Del Rey","Escola Municipal Oilda Valéria Silveira Coelho"];
+const B=["Escola Estadual Lourenço Andrade","Colégio Tiradentes","Escola Municipal Coronel Azarias de Melo","Escola Estadual Geraldo Starling Soares","Escola Estadual Nazle Jabur","Escola Estadual Abraão Lincoln","Escola Municipal Professor Hilarino Moraes","Colégio Status Poliedro"];
+// ATENÇÃO: perguntas sintéticas exclusivamente para teste, SEM gabaritos oficiais.
+const questions=[
+ {q:"Qual poder é exercido pela Câmara Municipal?",a:["Poder Executivo","Poder Legislativo","Poder Judiciário"],c:1},
+ {q:"Quem exerce a chefia do Poder Executivo municipal?",a:["Prefeito","Vereadores","Governador"],c:0},
+ {q:"Qual é a lei fundamental do Brasil?",a:["Regimento escolar","Lei Orgânica estadual","Constituição Federal"],c:2},
+ {q:"Qual atividade contribui para o acompanhamento da vida pública?",a:["Acompanhar sessões da Câmara","Impedir audiências públicas","Proibir o acesso a informações"],c:0},
+ {q:"O que caracteriza uma eleição democrática?",a:["Voto sem participação","Participação popular conforme as regras eleitorais","Escolha exclusiva por autoridades"],c:1},
+ {q:"Qual instituição integra o Poder Legislativo federal?",a:["Congresso Nacional","Prefeitura","Secretaria municipal"],c:0},
+ {q:"Qual é uma forma de participação popular?",a:["Audiência pública","Censura à imprensa","Impedimento de debates"],c:0},
+ {q:"Quem fiscaliza a atuação do Poder Executivo municipal entre suas atribuições?",a:["Somente o prefeito","A Câmara Municipal","Somente escolas particulares"],c:1}
 ];
-
-const escolasB = [
-  "Escola Estadual Lourenço Andrade",
-  "Colégio Tiradentes",
-  "Escola Municipal Coronel Azarias de Melo",
-  "Escola Estadual Geraldo Starling Soares",
-  "Escola Estadual Nazle Jabur",
-  "Escola Estadual Abraão Lincoln",
-  "Escola Municipal Professor Hilarino Moraes",
-  "Colégio Status Poliedro"
-];
-
-// QUESTÕES EXCLUSIVAMENTE DEMONSTRATIVAS
-const perguntas = [
-  {
-    texto:"Qual é uma das funções da Câmara Municipal?",
-    alternativas:[
-      "Administrar escolas estaduais",
-      "Elaborar leis municipais e fiscalizar o Executivo",
-      "Julgar crimes federais",
-      "Comandar as Forças Armadas"
-    ],
-    correta:1
-  },
-  {
-    texto:"Quem exerce o Poder Executivo municipal?",
-    alternativas:[
-      "O governador",
-      "Os vereadores",
-      "O prefeito",
-      "Os deputados federais"
-    ],
-    correta:2
-  },
-  {
-    texto:"Qual documento é a lei fundamental do Brasil?",
-    alternativas:[
-      "Constituição Federal",
-      "Código de Trânsito",
-      "Regimento Escolar",
-      "Lei Orgânica de outro município"
-    ],
-    correta:0
-  },
-  {
-    texto:"Qual é um exemplo de participação cidadã?",
-    alternativas:[
-      "Impedir debates públicos",
-      "Desrespeitar as leis",
-      "Proibir opiniões diferentes",
-      "Acompanhar as atividades da Câmara Municipal"
-    ],
-    correta:3
-  },
-  {
-    texto:"Qual instituição exerce o Poder Legislativo municipal?",
-    alternativas:[
-      "Prefeitura",
-      "Câmara Municipal",
-      "Governo estadual",
-      "Ministério da Educação"
-    ],
-    correta:1
-  },
-  {
-    texto:"Quem escolhe os vereadores nas eleições municipais?",
-    alternativas:[
-      "O eleitorado",
-      "O prefeito sozinho",
-      "Os ministros",
-      "Os diretores das escolas"
-    ],
-    correta:0
-  },
-  {
-    texto:"O que é uma lei municipal?",
-    alternativas:[
-      "Uma regra aplicável a todos os países",
-      "Um regulamento exclusivo das escolas",
-      "Uma norma jurídica sobre assunto de competência municipal",
-      "Uma decisão de qualquer cidadão sem processo legal"
-    ],
-    correta:2
-  },
-  {
-    texto:"Qual atitude contribui para a democracia?",
-    alternativas:[
-      "Impedir o voto",
-      "Ocultar informações públicas",
-      "Proibir a participação popular",
-      "Respeitar os direitos e deveres dos cidadãos"
-    ],
-    correta:3
-  }
-];
-
-const valores = [0,2,2,4,4,6];
-const chaveStorage = "gincana_saber_v1";
-
-function estadoInicial(){
-  return {
-    fase:"A",
-    rodada:1,
-    pontos:{A:{},B:{},F:{}},
-    usados:{A:[],B:[],F:[]},
-    historico:{A:[],B:[],F:[]},
-    finais:[],
-    escola:"",
-    pergunta:null,
-    revelada:false,
-    registrada:false
-  };
-}
-
-let estado;
-try {
-  estado = JSON.parse(localStorage.getItem(chaveStorage))
-    || estadoInicial();
-} catch(e){
-  estado = estadoInicial();
-}
-
-function salvar(){
-  localStorage.setItem(chaveStorage,JSON.stringify(estado));
-}
-
-function escolasDaFase(){
-  if(estado.fase==="A") return escolasA;
-  if(estado.fase==="B") return escolasB;
-  return estado.finais;
-}
-
-function pontosDaEscola(nome){
-  return estado.pontos[estado.fase][nome] || 0;
-}
-
-function atualizar(){
-  estado.rodada = Number(document.getElementById("rodada").value);
-  const fase = estado.fase;
-  const lista = escolasDaFase();
-
-  document.getElementById("etapaTitulo").textContent =
-    fase==="F" ? "FINAL MUNICIPAL" : "CLASSIFICATÓRIA — CHAVE "+fase;
-
-  document.getElementById("tituloRanking").textContent =
-    fase==="F" ? "FINAL • 23 DE OUTUBRO" :
-    "CHAVE "+fase+" • "+(fase==="A"?"20":"21")+" DE OUTUBRO";
-
-  document.getElementById("valorQuestao").textContent =
-    "RODADA "+estado.rodada+" • "+valores[estado.rodada]+
-    " PONTOS POR ACERTO";
-
-  const seletor = document.getElementById("selecionarEscola");
-  seletor.innerHTML = '<option value="">Selecione a escola</option>';
-  lista.forEach(nome=>{
-    const op = document.createElement("option");
-    op.value=nome;
-    op.textContent=nome;
-    seletor.appendChild(op);
-  });
-  seletor.value=lista.includes(estado.escola)?estado.escola:"";
-
-  document.getElementById("escolaAtual").textContent =
-    estado.escola || "Aguardando seleção da escola";
-
-  const q = estado.pergunta===null ?
-    null : perguntas[estado.pergunta];
-
-  document.getElementById("pergunta").textContent =
-    q ? q.texto : "Aguardando sorteio da pergunta...";
-
-  const alternativas = document.getElementById("alternativas");
-  alternativas.innerHTML="";
-  if(q){
-    q.alternativas.forEach((texto,i)=>{
-      const div=document.createElement("div");
-      div.className="alternativa";
-      if(estado.revelada && i===q.correta){
-        div.classList.add("correta");
-      }
-      div.textContent="ABCD"[i]+") "+texto;
-      alternativas.appendChild(div);
-    });
-  }
-
-  const resultado=document.getElementById("resultado");
-  if(!q){
-    resultado.textContent="Selecione uma escola e sorteie uma pergunta.";
-  }else if(estado.registrada){
-    resultado.textContent="Resposta registrada. Próxima escola ou pergunta.";
-  }else if(estado.revelada){
-    resultado.textContent="Resposta correta: "+
-      "ABCD"[q.correta]+") "+q.alternativas[q.correta];
-  }else{
-    resultado.textContent="Aguardando resposta da dupla...";
-  }
-
-  document.getElementById("btnRevelar").disabled =
-    !q || estado.revelada || estado.registrada;
-  document.getElementById("btnAcerto").disabled =
-    !q || !estado.escola || estado.registrada;
-  document.getElementById("btnErro").disabled =
-    !q || !estado.escola || estado.registrada;
-
-  const ranking = [...lista].sort((a,b)=>
-    pontosDaEscola(b)-pontosDaEscola(a) ||
-    a.localeCompare(b,"pt-BR")
-  );
-
-  const caixa=document.getElementById("listaRanking");
-  caixa.innerHTML="";
-
-  ranking.forEach((nome,i)=>{
-    const linha=document.createElement("div");
-    linha.className="linha";
-    const n=document.createElement("span");
-    n.className="nome";
-    n.textContent=(i+1)+"º — "+nome;
-    const p=document.createElement("strong");
-    p.className="pontos";
-    p.textContent=pontosDaEscola(nome)+" pts";
-    linha.append(n,p);
-    caixa.appendChild(linha);
-  });
-
-  document.getElementById("observacaoRanking").textContent =
-    fase==="F"
-      ? "A classificação final depende dos critérios oficiais de desempate."
-      : "As duas primeiras duplas da chave avançam à final, conforme o regulamento. Empates exigem desempate.";
-
-  salvar();
-}
-
-function selecionarEscola(){
-  const nome=document.getElementById("selecionarEscola").value;
-  if(estado.pergunta!==null && !estado.registrada){
-    if(!confirm("Há uma pergunta sem lançamento. Trocar de escola?"))
-      return atualizar();
-  }
-  estado.escola=nome;
-  estado.pergunta=null;
-  estado.revelada=false;
-  estado.registrada=false;
-  atualizar();
-}
-
-function trocarFase(){
-  estado.fase=document.getElementById("fase").value;
-  estado.rodada=1;
-  estado.escola="";
-  estado.pergunta=null;
-  estado.revelada=false;
-  estado.registrada=false;
-  document.getElementById("rodada").value="1";
-  atualizar();
-}
-
-function sortear(){
-  if(!estado.escola){
-    alert("Selecione primeiro a escola que vai responder.");
-    return;
-  }
-  if(estado.pergunta!==null && !estado.registrada){
-    alert("Registre a resposta antes de sortear outra pergunta.");
-    return;
-  }
-
-  const disponiveis=perguntas
-    .map((_,i)=>i)
-    .filter(i=>!estado.usados[estado.fase].includes(i));
-
-  if(disponiveis.length===0){
-    alert("Todas as perguntas demonstrativas desta etapa foram usadas.");
-    return;
-  }
-
-  const indice=disponiveis[
-    Math.floor(Math.random()*disponiveis.length)
-  ];
-
-  estado.pergunta=indice;
-  estado.usados[estado.fase].push(indice);
-  estado.revelada=false;
-  estado.registrada=false;
-  atualizar();
-}
-
-function revelar(){
-  if(estado.pergunta===null)return;
-  estado.revelada=true;
-  atualizar();
-}
-
-function registrar(acertou){
-  if(estado.pergunta===null || !estado.escola ||
-     estado.registrada)return;
-
-  const nome=estado.escola;
-  const pontos=acertou?valores[estado.rodada]:0;
-
-  if(!confirm("Confirmar "+(acertou?"ACERTO":"ERRO")+
-    " para "+nome+"? Pontuação: +"+pontos))return;
-
-  estado.historico[estado.fase].push({
-    escola:nome,
-    pontos:pontos,
-    rodada:estado.rodada,
-    pergunta:estado.pergunta
-  });
-
-  estado.pontos[estado.fase][nome]=
-    pontosDaEscola(nome)+pontos;
-
-  estado.registrada=true;
-  estado.revelada=true;
-  atualizar();
-}
-
-function desfazer(){
-  const h=estado.historico[estado.fase];
-  if(!h.length){
-    alert("Não há lançamentos para desfazer.");
-    return;
-  }
-  if(!confirm("Desfazer o último lançamento desta etapa?"))return;
-
-  const ultimo=h.pop();
-  estado.pontos[estado.fase][ultimo.escola]=Math.max(
-    0,(estado.pontos[estado.fase][ultimo.escola]||0)
-      -ultimo.pontos
-  );
-  estado.escola=ultimo.escola;
-  estado.pergunta=ultimo.pergunta;
-  estado.rodada=ultimo.rodada;
-  estado.revelada=true;
-  estado.registrada=false;
-  document.getElementById("rodada").value=estado.rodada;
-  atualizar();
-}
-
-function zerar(){
-  if(!confirm("ATENÇÃO: apagar pontuação e sorteios da etapa atual?"))
-    return;
-  if(!confirm("Confirma definitivamente a exclusão?"))return;
-
-  estado.pontos[estado.fase]={};
-  estado.usados[estado.fase]=[];
-  estado.historico[estado.fase]=[];
-  estado.pergunta=null;
-  estado.revelada=false;
-  estado.registrada=false;
-  atualizar();
-}
-
-function alternarTelao(){
-  document.body.classList.toggle("telao");
-  const ativo=document.body.classList.contains("telao");
-  document.getElementById("botaoTelao").textContent=
-    ativo?"Voltar ao operador":"Modo telão";
-  if(ativo && document.documentElement.requestFullscreen){
-    document.documentElement.requestFullscreen().catch(()=>{});
-  }else if(!ativo && document.fullscreenElement){
-    document.exitFullscreen().catch(()=>{});
-  }
-}
-
-function prepararFinal(){
-  // Seleção provisória pelas duas maiores pontuações de cada chave.
-  // Empates devem ser resolvidos pelo regulamento.
-  const top2=(fase,lista)=>[...lista].sort((a,b)=>
-    (estado.pontos[fase][b]||0)-
-    (estado.pontos[fase][a]||0) ||
-    a.localeCompare(b,"pt-BR")
-  ).slice(0,2);
-
-  estado.finais=[
-    ...top2("A",escolasA),
-    ...top2("B",escolasB)
-  ];
-  salvar();
-}
-
-prepararFinal();
-document.getElementById("fase").value=estado.fase;
-document.getElementById("rodada").value=estado.rodada;
-atualizar();
+const KEY="gincana_saber_demo_v2";const points=[0,2,2,4,4,6,0];
+function blank(){return {phase:"A",round:1,school:"",question:null,revealed:false,recorded:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},finalists:[]};}
+let state;try{state=JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){state=blank()}
+if(!state.scores||!state.events||!state.used)state=blank();
+const $=id=>document.getElementById(id);
+function persist(){localStorage.setItem(KEY,JSON.stringify(state));}
+function score(phase,school){return state.scores[phase][school]||0;}
+function projected(phase,schools){return [...schools].sort((a,b)=>score(phase,b)-score(phase,a)||a.localeCompare(b,'pt-BR')).slice(0,2);}
+function hasCutTie(phase,schools){const scores=schools.map(x=>score(phase,x)).sort((a,b)=>b-a);return scores.length>2&&scores[1]===scores[2];}
+function finalists(){return [...projected('A',A),...projected('B',B)];}
+function schools(){return state.phase==='A'?A:state.phase==='B'?B:finalists();}
+function currentQuestion(){return state.question===null?null:questions[state.question];}
+function completed(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.school===school&&e.kind==='answer');}
+function helpedAlready(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.helper===school&&e.kind==='answer');}
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
+function optionsFor(select,list,empty){select.replaceChildren();const first=el('option','',empty);first.value='';select.append(first);for(const x of list){const op=el('option','',x);op.value=x;select.append(op)}}
+function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph;$('round').value=String(state.round);
+ $('phaseLabel').textContent=ph==='F'?'FINAL MUNICIPAL • 23/10':`CLASSIFICATÓRIA • CHAVE ${ph} • ${ph==='A'?'20':'21'}/10`;
+ $('questionValue').textContent=state.round===6?'DESEMPATE • APURAÇÃO MANUAL':`RODADA ${state.round} • ${points[state.round]} PONTOS`;
+ $('currentSchool').textContent=state.school||'Aguardando seleção da escola';
+ optionsFor($('schoolSelect'),list,'Selecione a escola');$('schoolSelect').value=list.includes(state.school)?state.school:'';
+ optionsFor($('helper'),list.filter(x=>x!==state.school),'Sem auxílio');$('helper').disabled=ph==='F'||state.round>=5;
+ const q=currentQuestion();$('questionTitle').textContent=q?q.q:'Aguardando sorteio da pergunta...';$('options').replaceChildren();
+ if(q){q.a.forEach((v,i)=>$('options').append(el('div','option'+(state.revealed&&q.c===i?' correct':''),`${'ABC'[i]}) ${v}`)));}
+ $('status').textContent=!q?'Selecione uma escola e sorteie uma pergunta.':state.recorded?'Resposta registrada. Selecione a próxima escola.':state.revealed?`Resposta correta: ${'ABC'[q.c]}) ${q.a[q.c]}`:'Aguardando resposta da dupla...';
+ $('revealBtn').disabled=!q||state.revealed||state.recorded;$('correctBtn').disabled=!q||!state.school||state.recorded||state.round===6;$('wrongBtn').disabled=!q||!state.school||state.recorded||state.round===6;
+ $('rankingTitle').textContent=ph==='F'?'Final — 4 duplas':`Chave ${ph} — 8 duplas`;
+ const sorted=[...list].sort((a,b)=>score(ph,b)-score(ph,a)||a.localeCompare(b,'pt-BR'));
+ $('ranking').replaceChildren();sorted.forEach((name,i)=>{const r=el('div','rankRow'+(ph!=='F'&&i<2?' top':''));r.append(el('span','rankNo',`${i+1}º`),el('span','rankName',name),el('span','score',`${score(ph,name)} pts`));$('ranking').append(r)});
+ $('rankingNote').textContent=ph==='F'?'A classificação final exige desempate quando houver igualdade de pontos.':`Projeção: duas melhores da Chave ${ph} avançam. Empate pela segunda vaga: realização obrigatória de desempate.`;
+ $('roundProgress').textContent=state.round===6?'Desempates devem ser conduzidos e homologados manualmente pela organização.':`${list.filter(n=>completed(ph,state.round,n)).length} de ${list.length} escolas com resposta registrada nesta rodada.`;
+ if(ph==='F'&&(hasCutTie('A',A)||hasCutTie('B',B)))$('rankingNote').textContent+=' ATENÇÃO: há empate provisório na vaga de classificação em uma chave. A final não está homologada.';
+ persist();}
+function changePhase(){if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.revealed=false;state.recorded=false;refresh();}
+function changeRound(){if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.revealed=false;state.recorded=false;refresh();}
+function changeSchool(){const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.revealed=false;state.recorded=false;refresh();}
+function drawQuestion(){if(!state.school)return alert('Selecione a escola.');if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');if(state.round!==6&&completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');const available=questions.map((_,i)=>i).filter(i=>!state.used[state.phase].includes(i));if(!available.length)return alert('As perguntas de teste acabaram nesta etapa.');const idx=available[Math.floor(Math.random()*available.length)];state.question=idx;state.used[state.phase].push(idx);state.revealed=false;state.recorded=false;refresh();}
+function reveal(){if(!currentQuestion())return;state.revealed=true;refresh();}
+function record(correct){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=$('helper').disabled?'':$('helper').value;if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!confirm('Confirmar registro?\n\n'+text))return;state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,gain,part,correct});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=true;refresh();}
+function undo(){const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.round=last.round;state.recorded=false;state.revealed=true;refresh();}
+function clearPhase(){if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.revealed=false;state.recorded=false;refresh();}
+function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
+function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-teste-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+refresh();
 </script>
-</body>
-</html>
-
+</body></html>
