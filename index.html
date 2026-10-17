@@ -107,6 +107,7 @@ let state;try{state=JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){stat
 if(!state.scores||!state.events||!state.used)state=blank();
 const $=id=>document.getElementById(id);
 let timerId=null, deadline=0, timeLeft=30, timerTotal=30, timerMode='normal', timerRunning=false;
+let activeHelperName='';
 function displayTimer(){
  if(!IS_DISPLAY)pushDisplayTimer();
  const n=$('timerNum');n.textContent='00:'+String(Math.ceil(Math.max(0,timeLeft))).padStart(2,'0');
@@ -118,7 +119,7 @@ function displayTimer(){
 }
 function stopTicker(){if(timerId!==null){clearInterval(timerId);timerId=null}timerRunning=false;}
 function pauseTimer(){if(!timerRunning)return;timeLeft=Math.max(0,(deadline-Date.now())/1000);stopTicker();$('timerInfo').textContent='Cronômetro pausado pela organização.';displayTimer();}
-function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
+function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
 function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);displayTimer();if(timeLeft<=0){stopTicker();state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
 function startTimer(){if(!currentQuestion()||state.recorded||state.revealed||state.expired)return;timerRunning=true;deadline=Date.now()+timeLeft*1000;timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada.';displayTimer();}
 function startHelpTimer(){
@@ -126,7 +127,7 @@ function startHelpTimer(){
  const helper=$('helper').value;
  if(!helper)return alert('Selecione primeiro a escola que prestará auxílio.');
  if(helpedAlready(state.phase,state.round,helper))return alert('Esta escola já prestou auxílio na rodada.');
- stopTicker();timerMode='help';timerTotal=15;timeLeft=15;
+ stopTicker();timerMode='help';activeHelperName=helper;timerTotal=15;timeLeft=15;
  $('timerInfo').textContent='Auxílio selecionado: 15 segundos para a escola auxiliadora.';
  displayTimer();startTimer();
 }
@@ -244,11 +245,14 @@ function pushDisplayTimer(){
  localStorage.setItem(DISPLAY_TIMER_KEY,JSON.stringify({
   deadline:timerRunning?deadline:0,seconds,total:timerTotal,running:timerRunning,
   label:timerMode==='help'?'Auxílio — 15 segundos':'Resposta — 30 segundos',
-  mode:timerMode,helper:timerMode==='help'?$('helper').value:''
+  mode:timerMode,helper:timerMode==='help'?activeHelperName:''
  }));
 }
 function readDisplayTimer(){
- try{displayTimerSnapshot=JSON.parse(localStorage.getItem(DISPLAY_TIMER_KEY))||displayTimerSnapshot}catch(e){}
+ try{
+  const incoming=JSON.parse(localStorage.getItem(DISPLAY_TIMER_KEY));
+  if(incoming)displayTimerSnapshot=incoming;
+ }catch(e){}
 }
 function renderScreenTimer(){
  if(!IS_DISPLAY)return;
@@ -258,11 +262,11 @@ function renderScreenTimer(){
  n.textContent='00:'+String(Math.ceil(seconds)).padStart(2,'0');
  n.classList.toggle('low',seconds<=5);
  document.getElementById('screenTimerDesc').textContent=displayTimerSnapshot.label||'Aguardando início da contagem.';
- const helping=displayTimerSnapshot.mode==='help'&&!!displayTimerSnapshot.helper;
+ const helping=displayTimerSnapshot.mode==='help'||displayTimerSnapshot.label?.startsWith('Auxílio');
  $('screenHelperBanner').classList.toggle('active',helping);
  $('screenTimer').classList.toggle('isHelping',helping);
  $('screenTimerHeading').textContent=helping?'Tempo do auxílio':'Tempo da pergunta';
- $('screenHelperName').textContent=helping?displayTimerSnapshot.helper:'';
+ $('screenHelperName').textContent=helping?(displayTimerSnapshot.helper||'Escola auxiliadora a confirmar'):'';
 }
 if(IS_DISPLAY){
  document.body.classList.add('publicScreen');
