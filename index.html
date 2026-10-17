@@ -29,14 +29,14 @@
 body.publicScreen #screenTimer,body.publicScreen #screenAccess{display:block}
 body.publicScreen{background:#063d2b}
 body.publicScreen header{padding:10px 22px}
-body.publicScreen .admin,body.publicScreen .warning,body.publicScreen #screenBtn,body.publicScreen #backupBtn{display:none!important}
+body.publicScreen .admin,body.publicScreen .warning,body.publicScreen #screenBtn,body.publicScreen #backupBtn,body.publicScreen #openDisplay{display:none!important}
 body.publicScreen .panel{background:#fbfff6}
 body.publicScreen .option{cursor:default;font-size:clamp(18px,2vw,32px);pointer-events:none}
 body.publicScreen .school{font-size:clamp(22px,2.5vw,38px)}
 body.publicScreen .rankName{font-size:clamp(12px,1.3vw,19px)}
 body.publicScreen #screenTimer{display:block}
 body.publicScreen #screenAccess{display:block}
-body.publicScreen #options .picked:not(.correct):not(.incorrect){background:#f2f7f2;border-color:#e0e9df;font-weight:normal}
+body.publicScreen #options .picked:not(.correct):not(.incorrect){background:#d7ebff;border-color:#2676ad;color:#123a57;font-weight:850;box-shadow:0 0 0 2px rgba(38,118,173,.16)}
 body.publicScreen .timerPanel{display:none}
 body.publicScreen .institutionalBrands{padding:8px;gap:8px}
 body.publicScreen .instCard{min-height:70px;padding:6px}
@@ -135,7 +135,7 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
    o.type='button';o.disabled=state.revealed||state.recorded||state.expired;o.onclick=()=>selectAnswer(i);$('options').append(o);
  });}
  $('status').textContent=!q?'Selecione uma escola e sorteie uma pergunta.':state.recorded?'Resposta registrada. Selecione a próxima escola.':state.revealed?(state.selected===null?`Resposta correta: ${'ABC'[q.c]}) ${q.a[q.c]}`:(state.selected===q.c?'✓ RESPOSTA CORRETA. ':'✕ RESPOSTA INCORRETA. ')+`Gabarito: ${'ABC'[q.c]}) ${q.a[q.c]}`):state.expired?(state.selected===null?'Tempo esgotado sem resposta. Confirme o registro sem pontuação.':'Tempo encerrado com alternativa já escolhida. Clique em Revelar resposta escolhida.'):state.selected===null?'Aguardando seleção da alternativa...':`Alternativa ${'ABC'[state.selected]} selecionada. Pode alterar antes de revelar.`;
- if(IS_DISPLAY&&!state.revealed&&!state.recorded)$('status').textContent='Aguardando resposta da dupla...';
+ if(IS_DISPLAY&&!state.revealed&&!state.recorded)$('status').textContent=state.selected===null?'Aguardando resposta da dupla...':`Alternativa ${'ABC'[state.selected]} escolhida pela dupla. Aguardando conferência.`;
  $('revealBtn').disabled=!q||state.revealed||state.recorded||state.selected===null;
  $('confirmBtn').disabled=!q||!state.school||state.recorded||!state.revealed||state.selected===null||state.round===6;
  $('timeoutBtn').disabled=!q||state.recorded||!state.expired||state.selected!==null||state.round===6;
