@@ -101,6 +101,27 @@ body.publicScreen #publicHelperPicker .helperPickerPanel{width:min(1120px,100%);
 body.publicScreen #publicHelperPicker .helperChoice{pointer-events:none}
 body.publicScreen #publicHelperPicker .helperPickerGrid{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media(max-width:560px){.helperPickerGrid{grid-template-columns:1fr}}
+
+/* Prévia e homologação visual dos pontos: operador decide quando exibir no telão. */
+.scoreOverlay{display:none;position:fixed;inset:0;z-index:1200;background:rgba(3,27,17,.83);padding:20px;overflow-y:auto;align-items:center;justify-content:center}
+.scoreOverlay.open{display:flex}
+.scorePanel{width:min(820px,100%);background:#f9fff7;border-radius:20px;padding:clamp(18px,3vw,36px);box-shadow:0 24px 85px #001b1580}
+.scorePanel h2{font-size:clamp(23px,3vw,40px);margin:0 0 10px;color:#075537}
+.scoreSubtitle{font-size:15px;color:#436557;margin:0 0 18px}
+.scoreCards{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin:16px 0}
+.scoreCard{background:#e6f5e0;border:2px solid #a8d698;border-radius:14px;padding:18px;min-width:0}
+.scoreCard.helper{background:#fff4d9;border-color:#e7ba60}
+.scoreRole{font-size:12px;font-weight:850;letter-spacing:.03em;text-transform:uppercase;color:#416652}
+.scoreSchool{font-size:clamp(17px,2vw,26px);font-weight:850;color:#163b2b;line-height:1.25;margin:10px 0}
+.scoreAmount{font-size:clamp(42px,5vw,74px);line-height:1;font-weight:950;color:#07613b;font-variant-numeric:tabular-nums}
+.scoreResult{font-size:15px;font-weight:750;color:#31533d}
+.scoreActions{display:flex;flex-wrap:wrap;gap:9px;margin-top:20px}
+.scoreConfirm{background:#075537;color:white;border:0}
+.scoreDismiss{background:#fff;border:1px solid #b1c6b5;color:#063b29}
+body.publicScreen #publicScoreOverlay .scorePanel{width:min(1100px,96%);background:#f8fff5}
+body.publicScreen #publicScoreOverlay .scoreSchool{font-size:clamp(19px,2.5vw,38px)}
+body.publicScreen #publicScoreOverlay .scoreAmount{font-size:clamp(56px,8vw,124px)}
+@media(max-width:550px){.scoreOverlay{padding:10px}.scorePanel{padding:15px}.scoreCards{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -108,7 +129,7 @@ body.publicScreen #publicHelperPicker .helperPickerGrid{grid-template-columns:re
 <main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas, sem login ou sincronização entre dispositivos. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
 <div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
-<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><button class="primary" id="confirmBtn" onclick="recordSelected()">✓ Confirmar pontuação</button><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
+<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação</button><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div id="screenAccess"><strong>🦉 Torcida no celular</strong><div><img src="data:image/png;base64,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" alt="QR Code para página pública da torcida"></div><div class="fine">Aponte a câmera para conhecer a página da torcida.</div><div class="fine">A classificação ao vivo nos celulares ainda está em desenvolvimento.</div></div><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
@@ -124,6 +145,25 @@ body.publicScreen #publicHelperPicker .helperPickerGrid{grid-template-columns:re
 <div id="publicHelperPicker" class="helperPickerOverlay" role="status" aria-live="polite">
  <div class="helperPickerPanel"><h2>🤝 Escolas disponíveis para auxiliar</h2><p>A organização está escolhendo a escola auxiliadora. A contagem está pausada.</p>
   <div class="helperPickerGrid" id="publicHelperChoices"></div>
+ </div>
+</div>
+<div id="operatorScoreOverlay" class="scoreOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorScoreTitle">
+ <div class="scorePanel"><h2 id="operatorScoreTitle">🏆 Pontuação da pergunta</h2>
+  <p class="scoreSubtitle" id="operatorScoreSubtitle"></p>
+  <div class="scoreCards" id="operatorScoreCards"></div>
+  <div class="scoreResult" id="operatorScoreResult"></div>
+  <div class="scoreActions">
+   <button class="scoreConfirm" id="scoreConfirmAction" onclick="confirmScorePreview()">✓ Confirmar e registrar pontos</button>
+   <button class="scoreDismiss" id="scoreCancelAction" onclick="hideScorePreview()">Voltar sem registrar</button>
+   <button class="scoreDismiss" id="scoreCloseAction" onclick="closeScorePresentation()" style="display:none">Encerrar apresentação no telão</button>
+  </div>
+ </div>
+</div>
+<div id="publicScoreOverlay" class="scoreOverlay" role="status" aria-live="polite">
+ <div class="scorePanel"><h2 id="publicScoreTitle">🏆 Pontuação da pergunta</h2>
+  <p class="scoreSubtitle" id="publicScoreSubtitle"></p>
+  <div class="scoreCards" id="publicScoreCards"></div>
+  <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
 <script>
@@ -230,6 +270,79 @@ function startHelpCountdown(){
  startTimer();refresh();
 }
 function selectAnswer(i){if(!currentQuestion()||state.revealed||state.recorded||state.expired)return;state.selected=i;refresh();}
+const SCORE_PREVIEW_KEY='gincana_score_preview_v1';
+let scorePreview=null;
+function scorePreviewData(){
+ const q=currentQuestion();
+ if(!q||!state.revealed||state.recorded||state.selected===null||state.round===6)return null;
+ const correct=state.selected===q.c;
+ const helper=timerMode==='help'?activeHelperName:'';
+ const gain=correct?points[state.round]:0;
+ return {open:true,confirmed:false,phase:state.phase,round:state.round,school:state.school,
+  helper,correct,gain,part:helper?gain/2:gain,question:state.question,selected:state.selected};
+}
+function scorePreviewValid(d){
+ return d&&d.open&&d.phase===state.phase&&d.round===state.round&&
+ d.school===state.school&&d.question===state.question;
+}
+function paintScore(target,subtitle,result,data){
+ const holder=$(target);holder.replaceChildren();
+ const subjects=[{school:data.school,role:'ESCOLA QUE RESPONDE',helper:false}];
+ if(data.helper)subjects.push({school:data.helper,role:'ESCOLA AUXILIADORA',helper:true});
+ for(const subject of subjects){
+  const card=el('div','scoreCard'+(subject.helper?' helper':''));
+  card.append(el('div','scoreRole',subject.role),el('div','scoreSchool',subject.school),
+   el('div','scoreAmount','+'+data.part),
+   el('div','fine','ponto'+(data.part===1?'':'s')));
+  holder.append(card);
+ }
+ $(subtitle).textContent=data.confirmed?
+  'PONTUAÇÃO REGISTRADA — resultado da rodada':
+  'PRÉVIA DE PONTUAÇÃO — aguardando confirmação do operador';
+ $(result).textContent=(data.correct?'✓ Resposta correta':'✕ Resposta incorreta')+
+  ' • Rodada '+data.round+' • Total distribuído: '+data.gain+' ponto'+(data.gain===1?'':'s');
+}
+function renderScorePreview(){
+ const d=scorePreview;
+ const valid=scorePreviewValid(d);
+ if(IS_DISPLAY){
+  $('publicScoreOverlay').classList.toggle('open',!!valid);
+  if(valid){
+   paintScore('publicScoreCards','publicScoreSubtitle','publicScoreResult',d);
+   $('publicScoreTitle').textContent=d.confirmed?'🏆 PONTUAÇÃO CONFIRMADA':'🏆 PONTUAÇÃO DA PERGUNTA';
+  }
+  return;
+ }
+ $('operatorScoreOverlay').classList.toggle('open',!!valid);
+ if(valid){
+  paintScore('operatorScoreCards','operatorScoreSubtitle','operatorScoreResult',d);
+  $('operatorScoreTitle').textContent=d.confirmed?'🏆 Pontuação registrada':'🏆 Conferir pontuação';
+  $('scoreConfirmAction').style.display=d.confirmed?'none':'';
+  $('scoreCancelAction').style.display=d.confirmed?'none':'';
+  $('scoreCloseAction').style.display=d.confirmed?'':'none';
+ }
+}
+function publishScorePreview(data){
+ scorePreview=data;
+ localStorage.setItem(SCORE_PREVIEW_KEY,JSON.stringify(data||{open:false}));
+ renderScorePreview();
+}
+function showScorePreview(){
+ const data=scorePreviewData();
+ if(!data)return alert('Revele primeiro a resposta escolhida para calcular a pontuação.');
+ pauseTimer();
+ publishScorePreview(data);
+}
+function hideScorePreview(){publishScorePreview(null);}
+function closeScorePresentation(){publishScorePreview(null);}
+function confirmScorePreview(){
+ const d=scorePreview;
+ if(!scorePreviewValid(d)||d.confirmed||state.recorded)return;
+ if(state.selected!==d.selected||state.question!==d.question)return alert('A resposta mudou. Refaça a conferência.');
+ const succeeded=record(d.correct,false,true);
+ if(!succeeded)return;
+ publishScorePreview({...d,confirmed:true});
+}
 function recordSelected(){
  if(state.selected===null||!state.revealed)return alert('Selecione e revele a alternativa antes de confirmar.');
  record(state.selected===currentQuestion().c);
@@ -320,14 +433,14 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  paintRoundBoard('publicRoundBoard',ph,list);
  if(ph==='F'&&(hasCutTie('A',A)||hasCutTie('B',B)))$('rankingNote').textContent+=' ATENÇÃO: há empate provisório na vaga de classificação em uma chave. A final não está homologada.';
  persist();}
-function changePhase(){if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeRound(){if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeSchool(){const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function drawQuestion(){if(!state.school)return alert('Selecione a escola.');if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');if(state.round!==6&&completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');const available=questions.map((_,i)=>i).filter(i=>!state.used[state.phase].includes(i));if(!available.length)return alert('As perguntas de teste acabaram nesta etapa.');const idx=available[Math.floor(Math.random()*available.length)];state.question=idx;state.used[state.phase].push(idx);state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changePhase(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeSchool(){hideScorePreview();const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function drawQuestion(){hideScorePreview();if(!state.school)return alert('Selecione a escola.');if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');if(state.round!==6&&completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');const available=questions.map((_,i)=>i).filter(i=>!state.used[state.phase].includes(i));if(!available.length)return alert('As perguntas de teste acabaram nesta etapa.');const idx=available[Math.floor(Math.random()*available.length)];state.question=idx;state.used[state.phase].push(idx);state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function reveal(){if(timerMode==='help-wait')return alert('Aguarde o posicionamento e inicie os 15 segundos de auxílio antes de revelar.');if(!currentQuestion()||state.selected===null||state.recorded)return;pauseTimer();state.revealed=true;refresh();}
-function record(correct,timeout=false){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(timerMode==='help'?activeHelperName:(timerMode==='normal'?'':''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!confirm('Confirmar registro?\n\n'+text))return;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();}
-function undo(){const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
-function clearPhase(){if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function record(correct,timeout=false,approved=false){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(timerMode==='help'?activeHelperName:(timerMode==='normal'?'':''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
+function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
+function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
 function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-teste-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
 
@@ -379,9 +492,15 @@ if(IS_DISPLAY){
   }
   if(e.key===DISPLAY_TIMER_KEY){readDisplayTimer();renderScreenTimer()}
   if(e.key===HELPER_PICKER_KEY)showPublicHelperPicker();
+  if(e.key===SCORE_PREVIEW_KEY){
+   try{scorePreview=JSON.parse(e.newValue||'null')}catch(err){scorePreview=null}
+   renderScorePreview();
+  }
  });
  readDisplayTimer();
  showPublicHelperPicker();
+ try{scorePreview=JSON.parse(localStorage.getItem(SCORE_PREVIEW_KEY)||'null')}catch(e){}
+ renderScorePreview();
  setInterval(renderScreenTimer,100);
 }
 
