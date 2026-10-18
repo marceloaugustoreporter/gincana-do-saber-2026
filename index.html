@@ -140,7 +140,7 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
 </style>
 </head>
 <body>
-<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
+<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="pdfReportBtn" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
 <main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas que podem se repetir após esgotamento, sem login ou sincronização entre dispositivos. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
 <div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
@@ -493,6 +493,83 @@ function record(correct,timeout=false,approved=false,approvedHelper=null){if(!cu
 function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
 function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
+
+// Relatório de conferência: gerado somente no navegador local do operador.
+// Abre a impressão do navegador; escolher "Salvar como PDF".
+// Não representa homologação nem autenticação de resultados.
+function reportEscape(v){
+ return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function generatePDFReport(){
+ if(IS_DISPLAY)return alert('O relatório deve ser gerado no painel do operador.');
+ const ph=state.phase;
+ const all=ph==='A'?A:ph==='B'?B:finalists();
+ const names={A:'Chave A — 20/10/2026',B:'Chave B — 21/10/2026',F:'Final municipal — 23/10/2026'};
+ const answers=(state.events[ph]||[]).filter(e=>e.kind==='answer');
+ const ranking=[...all].sort((a,b)=>score(ph,b)-score(ph,a)||a.localeCompare(b,'pt-BR'));
+ const completedAll=all.length>0&&all.every(n=>[1,2,3,4,5].every(r=>completed(ph,r,n)));
+ const cutTie=ph!=='F'&&hasCutTie(ph,all);
+ const fmt=n=>Number(n||0).toLocaleString('pt-BR');
+ const esc=reportEscape;
+ const rows=ranking.map((name,i)=>{
+  const values=[1,2,3,4,5].map(round=>answers.filter(e=>e.round===round&&(e.school===name||e.helper===name)).reduce((t,e)=>t+Number(e.part||0),0));
+  const cells=values.map((v,j)=>`<td class="num">${fmt(v)}${!completed(ph,j+1,name)&&!answers.some(e=>e.round===j+1&&e.helper===name)?'<span class="na"> *</span>':''}</td>`).join('');
+  return `<tr><td>${i+1}º</td><td>${esc(name)}</td>${cells}<td class="num strong">${fmt(score(ph,name))}</td></tr>`;
+ }).join('');
+ const register=answers.map((e,i)=>{
+  const answer=e.timeout?'Tempo esgotado':e.selected==null?'Não registrada':String.fromCharCode(65+Number(e.selected));
+  const outcome=e.timeout?'Tempo esgotado':e.correct?'Correta':'Incorreta';
+  return `<tr><td>${i+1}</td><td>${e.round}ª</td><td>${esc(e.school)}</td><td>${esc(e.helper||'—')}</td><td>${esc(answer)}</td><td>${outcome}</td><td class="num">${fmt(e.part||0)}</td><td class="num">${e.helper?fmt(e.part||0):'—'}</td></tr>`;
+ }).join('');
+ const helperRows=answers.filter(e=>e.helper).map(e=>`<tr><td>${e.round}ª</td><td>${esc(e.school)}</td><td>${esc(e.helper)}</td><td>${e.correct?'Acerto':'Erro'}</td><td class="num">${fmt(e.part||0)} / ${fmt(e.part||0)}</td></tr>`).join('');
+ const finalistsNote=ph==='F'?'A final usa a lista projetada no protótipo. Validar participantes com a comissão organizadora.':cutTie?'EMPATE NA VAGA: não definir finalistas antes do desempate e homologação.':completedAll?'Duas primeiras escolas exibidas apenas como projeção. A classificação definitiva depende de homologação.':'Apuração incompleta: não declarar finalistas.';
+ const brand=esc(new URL('imagens/README.md/camara-de-passos.png.png',location.href).href);
+ const brand2=esc(new URL('imagens/README.md/escola-do-legislativo.png.png',location.href).href);
+ const doc=`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+ <title>Relatório provisório — Gincana do Saber 2026 — ${esc(names[ph])}</title>
+ <style>
+ @page{size:A4 landscape;margin:14mm 12mm}
+ *{box-sizing:border-box}body{font:10pt Arial,Helvetica,sans-serif;color:#15382b;margin:0}
+ header{border-bottom:3px solid #075537;display:flex;align-items:center;justify-content:space-between;padding:0 0 12px;margin-bottom:15px}
+ .logos{display:flex;gap:12px;align-items:center}.logos img{max-height:55px;max-width:150px;object-fit:contain}
+ h1{font-size:18pt;color:#075537;margin:0}h2{font-size:13pt;color:#075537;margin:22px 0 8px}
+ .subtitle{font-size:10pt;color:#426857;margin:4px 0}.status{font-weight:bold;color:#9a4c00;border:1px solid #dfb370;padding:7px 10px;margin:12px 0}
+ .info{margin:8px 0 12px;line-height:1.5}
+ table{border-collapse:collapse;width:100%;font-size:8pt;table-layout:auto}th,td{border:1px solid #cbd9cc;padding:5px 6px;vertical-align:top}
+ th{background:#e9f4e5;text-align:left}tr:nth-child(even){background:#f8fbf6}
+ .num{text-align:right;white-space:nowrap}.strong{font-weight:bold}.na{color:#8a5b00}
+ .note{font-size:8pt;color:#526c5c;margin:7px 0}
+ .pagebreak{break-before:page;page-break-before:always}
+ .signatures{display:flex;gap:35px;margin-top:42px}.sig{width:48%;border-top:1px solid #6b8171;padding-top:6px;text-align:center}
+ footer{margin-top:22px;font-size:8pt;color:#587463;border-top:1px solid #cfdfd2;padding-top:8px}
+ .screen-only{margin:0 0 14px;background:#fff4d9;padding:10px;border:1px solid #eedca7}
+ @media print{.screen-only{display:none}header{-webkit-print-color-adjust:exact;print-color-adjust:exact}th{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+ </style></head><body>
+ <div class="screen-only"><b>Como salvar:</b> na janela de impressão selecione a impressora <b>Salvar como PDF</b>. Este relatório é provisório.</div>
+ <header><div><h1>Gincana do Saber 2026</h1><div class="subtitle">Câmara Municipal de Passos • Escola do Legislativo</div>
+ <div class="subtitle"><b>RELATÓRIO DE APURAÇÃO — ${esc(names[ph])}</b></div></div>
+ <div class="logos"><img alt="Câmara Municipal de Passos" src="${brand}"><img alt="Escola do Legislativo" src="${brand2}"></div></header>
+ <div class="status">DOCUMENTO PROVISÓRIO — NÃO HOMOLOGADO. Dados demonstrativos do navegador; NÃO utilizar para apuração oficial.</div>
+ <div class="info">Emitido em: ${esc(new Date().toLocaleString('pt-BR'))} • Escolas: ${all.length} • Respostas registradas: ${answers.length} • Total esperado: ${all.length*5}<br>
+ Situação: ${completedAll?'Cinco rodadas registradas para todas as escolas':'Apuração incompleta: há respostas ou rodadas pendentes'}.</div>
+ <h2>1. Classificação e pontos por rodada</h2>
+ <table><thead><tr><th>Pos.</th><th>Escola</th><th>R1 (2)</th><th>R2 (2)</th><th>R3 (4)</th><th>R4 (4)</th><th>R5 (6)</th><th>Total</th></tr></thead><tbody>${rows}</tbody></table>
+ <p class="note">* Asterisco: a escola não teve resposta própria registrada na rodada. Pontos de auxílio, se houver, são somados à rodada. Empates na ordenação não equivalem a desempate oficial.</p>
+ <div class="status">${esc(finalistsNote)}</div>
+ <h2>2. Auxílios registrados</h2>
+ ${helperRows?`<table><thead><tr><th>Rodada</th><th>Escola que respondeu</th><th>Escola auxiliadora</th><th>Resultado</th><th>Pontos: resposta / auxílio</th></tr></thead><tbody>${helperRows}</tbody></table>`:'<p>Nenhum auxílio registrado nesta etapa.</p>'}
+ <h2 class="pagebreak">3. Histórico dos lançamentos</h2>
+ ${register?`<table><thead><tr><th>Nº</th><th>Rodada</th><th>Escola que respondeu</th><th>Auxiliadora</th><th>Alternativa</th><th>Resultado</th><th>Pontos escola</th><th>Pontos auxílio</th></tr></thead><tbody>${register}</tbody></table>`:'<p>Nenhuma resposta registrada.</p>'}
+ <p class="note">As linhas representam lançamentos armazenados no navegador do operador; não demonstram homologação, autenticação ou auditoria independente.</p>
+ <div class="signatures"><div class="sig">Conferência da organização</div><div class="sig">Homologação — responsável autorizado</div></div>
+ <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido a partir do protótipo demonstrativo.</footer>
+ </body></html>`;
+ const popup=window.open('','_blank');
+ if(!popup){alert('O navegador bloqueou a janela. Permita pop-ups para este site e clique novamente em Gerar relatório PDF.');return;}
+ popup.document.open();popup.document.write(doc);popup.document.close();
+ popup.addEventListener('load',()=>setTimeout(()=>popup.print(),600),{once:true});
+}
+
 function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-teste-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
 
 // Separação do operador e do telão: sincronização local no mesmo navegador.
