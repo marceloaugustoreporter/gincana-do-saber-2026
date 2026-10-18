@@ -23,10 +23,7 @@
 #screenTimer{display:none;margin:12px 0;padding:18px;border:3px solid #d0e1cb;border-radius:14px;background:#f0fae7}
 #screenTimerNum{font-size:clamp(52px,7vw,112px);line-height:1;font-weight:900;color:#075537;font-variant-numeric:tabular-nums}
 #screenTimerNum.low{color:#d12c27}
-#screenAccess{display:none;background:#f8fff4;padding:14px;border:1px solid #c8dec7;border-radius:14px;margin:12px auto;text-align:center}
-#screenAccess img{width:105px;height:105px;object-fit:contain;background:white;border-radius:8px}
-#screenAccess .fine{overflow-wrap:anywhere}
-body.publicScreen #screenTimer,body.publicScreen #screenAccess{display:block}
+body.publicScreen #screenTimer{display:block}
 body.publicScreen{background:#063d2b}
 body.publicScreen header{padding:10px 22px}
 body.publicScreen .admin,body.publicScreen .warning,body.publicScreen #screenBtn,body.publicScreen #backupBtn,body.publicScreen #openDisplay{display:none!important}
@@ -35,7 +32,7 @@ body.publicScreen .option{cursor:default;font-size:clamp(18px,2vw,32px);pointer-
 body.publicScreen .school{font-size:clamp(22px,2.5vw,38px)}
 body.publicScreen .rankName{font-size:clamp(12px,1.3vw,19px)}
 body.publicScreen #screenTimer{display:block}
-body.publicScreen #screenAccess{display:block}
+
 body.publicScreen #options .picked:not(.correct):not(.incorrect){background:#d7ebff;border-color:#2676ad;color:#123a57;font-weight:850;box-shadow:0 0 0 2px rgba(38,118,173,.16)}
 body.publicScreen .timerPanel{display:none}
 body.publicScreen .institutionalBrands{padding:8px;gap:8px}
@@ -140,12 +137,12 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
 </style>
 </head>
 <body>
-<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas que podem se repetir após esgotamento, sem login ou sincronização entre dispositivos. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
+<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
+<main><div class="warning"><strong>VERSÃO DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas que podem se repetir após esgotamento, sem login ou sincronização entre dispositivos diferentes. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
 <div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
 <div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
-</section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div id="screenAccess"><strong>🦉 Torcida no celular</strong><div><img src="data:image/png;base64,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" alt="QR Code para página pública da torcida"></div><div class="fine">Aponte a câmera para conhecer a página da torcida.</div><div class="fine">A classificação ao vivo nos celulares ainda está em desenvolvimento.</div></div><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
+</section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
@@ -584,6 +581,67 @@ function generatePDFReport(){
  },{once:true});
 }
 
+// Restauração manual de backup para contingência no mesmo notebook ou reserva.
+// Não sincroniza dispositivos diferentes. Exige cópia JSON previamente baixada.
+function requestRestoreBackup(){
+ if(IS_DISPLAY)return;
+ if(!confirm('RESTAURAÇÃO DE BACKUP — MODO DE TESTES\n\nEsta ação vai SUBSTITUIR todas as pontuações e o histórico deste navegador pelos dados do arquivo JSON.\n\nAntes de prosseguir, use "Baixar backup" para guardar os dados atuais.\n\nDeseja escolher um arquivo de backup?'))return;
+ $('restoreFileInput').value='';$('restoreFileInput').click();
+}
+function validateRestoreBackup(data){
+ if(!data||typeof data!=='object'||Array.isArray(data)||!data.state||typeof data.state!=='object')throw Error('O arquivo não possui um backup reconhecido do aplicativo.');
+ const st=data.state;
+ if(!['A','B','F'].includes(st.phase)||!Number.isInteger(st.round)||st.round<1||st.round>6)throw Error('Etapa ou rodada inválida.');
+ if(typeof st.school!=='string'||st.school.length>220)throw Error('Escola atual inválida.');
+ if(!(st.question===null||(Number.isInteger(st.question)&&st.question>=0&&st.question<questions.length)))throw Error('A pergunta do backup não existe nesta versão.');
+ if(!(st.selected===null||(Number.isInteger(st.selected)&&st.selected>=0&&st.selected<=2)))throw Error('Alternativa selecionada inválida.');
+ for(const prop of ['revealed','recorded','expired'])if(typeof st[prop]!=='boolean')throw Error('Campo de estado inválido: '+prop);
+ if(!st.events||!st.scores||!st.used)throw Error('O arquivo não contém o histórico completo.');
+ const known=new Set([...A,...B]);let n=0;
+ for(const ph of ['A','B','F']){
+  if(!Array.isArray(st.events[ph])||st.events[ph].length>1500)throw Error('Histórico inválido para '+ph);
+  if(!Array.isArray(st.used[ph])||st.used[ph].length>5000||st.used[ph].some(v=>!Number.isInteger(v)||v<0||v>=questions.length))throw Error('Sorteios inválidos para '+ph);
+  if(!st.scores[ph]||typeof st.scores[ph]!=='object'||Array.isArray(st.scores[ph]))throw Error('Pontuação inválida para '+ph);
+  const allowed=ph==='A'?new Set(A):ph==='B'?new Set(B):known;
+  for(const [name,amount] of Object.entries(st.scores[ph]))if(!allowed.has(name)||typeof amount!=='number'||!Number.isFinite(amount)||amount<0||amount>1000)throw Error('Pontuação ou escola inválida em '+ph);
+  for(const e of st.events[ph]){
+   if(!e||e.kind!=='answer'||!Number.isInteger(e.round)||e.round<1||e.round>5||!allowed.has(e.school)||!(e.helper===''||e.helper==null||allowed.has(e.helper))||e.helper===e.school)throw Error('Há registros inválidos no histórico de '+ph);
+   if(typeof e.part!=='number'||!Number.isFinite(e.part)||e.part<0||e.part>6||typeof e.correct!=='boolean')throw Error('Pontos ou resultado inválidos no histórico.');
+   if(!Number.isInteger(e.question)||e.question<0||e.question>=questions.length)throw Error('Questão histórica não encontrada nesta versão.');
+   if(!(e.selected===null||(Number.isInteger(e.selected)&&e.selected>=0&&e.selected<=2)))throw Error('Alternativa histórica inválida.');
+   n++;
+  }
+ }
+ if(st.school&&!known.has(st.school))throw Error('A escola selecionada não consta na lista desta versão.');
+ return {state:st,records:n,exportedAt:typeof data.exportedAt==='string'?data.exportedAt:'Não informada'};
+}
+async function restoreBackupFile(input){
+ if(IS_DISPLAY)return;
+ const file=input.files&&input.files[0];if(!file)return;
+ try{
+  if(file.size>2*1024*1024)throw Error('Arquivo maior que 2 MB; confira se é um backup do aplicativo.');
+  const raw=await file.text();
+  const pack=validateRestoreBackup(JSON.parse(raw));
+  const when=new Date(pack.exportedAt);
+  const whenLabel=Number.isNaN(when.getTime())?'não informada':when.toLocaleString('pt-BR');
+  const first=confirm('CONFERÊNCIA DO ARQUIVO\n\nNome: '+file.name+'\nData do backup: '+whenLabel+'\nLançamentos: '+pack.records+'\nEtapa: '+pack.state.phase+'\nRodada: '+pack.state.round+'\n\nTODOS OS DADOS LOCAIS ATUAIS SERÃO SUBSTITUÍDOS.\n\nTem certeza de que este é o backup correto?');
+  if(!first)return;
+  if(!confirm('ÚLTIMA CONFIRMAÇÃO\n\nSubstituir agora os dados deste navegador pelos registros do backup? Esta ação não pode ser desfeita sem outro backup.'))return;
+  stopTicker();
+  state=pack.state;
+  timerRunning=false;timerId=null;deadline=0;timerMode='normal';timeLeft=30;timerTotal=30;activeHelperName='';
+  localStorage.setItem(HELPER_PICKER_KEY,JSON.stringify({open:false}));
+  localStorage.setItem(SCORE_PREVIEW_KEY,JSON.stringify({open:false}));
+  scorePreview=null;
+  $('operatorHelperPicker').classList.remove('open');
+  $('operatorScoreOverlay').classList.remove('open');
+  $('timerInfo').textContent='Backup restaurado. Cronômetro parado: confira etapa, rodada e escola antes de continuar.';
+  localStorage.setItem(KEY,JSON.stringify(state));
+  displayTimer();refresh();
+  alert('Backup restaurado no navegador.\n\nLançamentos carregados: '+pack.records+'\n\nConfira o ranking no operador e no telão. O cronômetro não é retomado automaticamente.');
+ }catch(err){alert('NÃO FOI POSSÍVEL RESTAURAR O BACKUP.\n\n'+err.message+'\n\nNenhum dado foi alterado.');}
+ finally{input.value='';}
+}
 function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-teste-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
 
 // Separação do operador e do telão: sincronização local no mesmo navegador.
