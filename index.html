@@ -135,7 +135,7 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
  background:#e8eaeb;color:#76817c;border-color:#d9dede;opacity:.72;
 }
 
-/* Versão 6.0 beta: autenticação do painel e teste isolado do banco oficial. */
+/* Versão 6.1 beta: autenticação do painel e teste isolado do banco oficial. */
 #authGate{position:fixed;inset:0;background:#063824f5;z-index:5000;display:flex;justify-content:center;align-items:center;padding:18px}
 #authGate[hidden]{display:none!important}
 #authBox{width:min(470px,100%);background:#fff;border-radius:16px;padding:28px;color:#10452f;box-shadow:0 20px 70px #001b12}
@@ -157,20 +157,18 @@ body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicS
 </head>
 <body>
 <header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO 6.0 BETA — TREINAMENTO, NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Login Supabase habilitado para o operador e consulta separada de perguntas oficiais para treino. O painel de pontuação abaixo AINDA usa perguntas demonstrativas e registros locais: não está ligado ao sorteio oficial. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
-<section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🔐 Banco oficial — consulta de treinamento</h2>
-<p class="fine">Acesso restrito aos operadores cadastrados. O sorteio abaixo mostra uma pergunta real e suas alternativas <strong>sem gabarito</strong>, sem marcar a pergunta como utilizada. Este módulo é independente do painel demonstrativo de pontuação.</p>
-<div><label for="trainingDifficulty">Dificuldade:</label> <select id="trainingDifficulty"><option value="facil">Verde — fácil (2 pontos)</option><option value="media">Laranja — média (4 pontos)</option><option value="dificil">Vermelho — difícil (6 pontos)</option></select><button id="fetchTraining" onclick="requestTrainingQuestion()">🎲 Sortear pergunta para treino</button></div>
-<div id="trainingStatus" class="trainingMeta" role="status">Aguardando seleção de uma pergunta.</div>
-<div id="trainingQuestion" hidden><div id="trainingNumber" class="trainingMeta"></div><div id="trainingTitle" class="trainingTitle"></div><div id="trainingOptions" class="trainingOptions"></div></div>
+<main><div class="warning"><strong>VERSÃO 6.1 BETA — TREINAMENTO, NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Login Supabase habilitado. O sorteio principal utiliza perguntas oficiais em TREINAMENTO com correção protegida. Pontos e histórico continuam LOCAIS e demonstrativos; NÃO estão ligados à apuração oficial. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
+<section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🦉 Treinamento integrado — perguntas oficiais</h2>
+<p>Selecione a <strong>Chave, a rodada e a escola</strong> no painel abaixo. Clique em <strong>Sortear pergunta oficial (TREINO)</strong>; use o cronômetro, o auxílio, a seleção da resposta e a conferência normal. A pergunta também aparece no telão conectado ao mesmo navegador.</p>
+<p class="trainingMeta"><strong>IMPORTANTE:</strong> Pontuações de treino somente neste navegador. O banco de 206 questões não é consumido e o resultado não é oficial. Nunca utilizar como apuração dos dias 20, 21 ou 23.</p>
 </section><div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
-<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
+<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta oficial (TREINO)</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
-</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 6.0 beta — treinamento</div></main>
+</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 6.1 beta — treinamento</div></main>
 <div id="operatorHelperPicker" class="helperPickerOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorHelperPickerTitle">
  <div class="helperPickerPanel"><h2 id="operatorHelperPickerTitle">🤝 Escolher escola auxiliadora</h2>
   <p>O cronômetro da pergunta foi pausado. Selecione uma escola disponível; as que já ajudaram nesta rodada estão bloqueadas. A dupla escolhida ainda terá tempo para se posicionar antes dos 15 segundos.</p>
@@ -202,7 +200,7 @@ body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicS
   <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
-<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 6.0 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase. Não utilize esta versão para apuração oficial.</p></form></div>
+<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 6.1 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase. Não utilize esta versão para apuração oficial.</p></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
@@ -219,8 +217,8 @@ const questions=[
  {q:"Qual é uma forma de participação popular?",a:["Audiência pública","Censura à imprensa","Impedimento de debates"],c:0},
  {q:"Quem fiscaliza a atuação do Poder Executivo municipal entre suas atribuições?",a:["Somente o prefeito","A Câmara Municipal","Somente escolas particulares"],c:1}
 ];
-const KEY="gincana_saber_demo_v2";const points=[0,2,2,4,4,6,0];
-function blank(){return {phase:"A",round:1,school:"",question:null,revealed:false,recorded:false,selected:null,expired:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},finalists:[]};}
+const KEY="gincana_saber_treino_v61";const points=[0,2,2,4,4,6,0];
+function blank(){return {phase:"A",round:1,school:"",question:null,trainingQuestion:null,revealed:false,recorded:false,selected:null,expired:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},finalists:[]};}
 let state;try{state=JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){state=blank()}
 if(!state.scores||!state.events||!state.used)state=blank();
 const $=id=>document.getElementById(id);
@@ -416,7 +414,7 @@ function projected(phase,schools){return [...schools].sort((a,b)=>score(phase,b)
 function hasCutTie(phase,schools){const scores=schools.map(x=>score(phase,x)).sort((a,b)=>b-a);return scores.length>2&&scores[1]===scores[2];}
 function finalists(){return [...projected('A',A),...projected('B',B)];}
 function schools(){return state.phase==='A'?A:state.phase==='B'?B:finalists();}
-function currentQuestion(){return state.question===null?null:questions[state.question];}
+function currentQuestion(){return state.question===-1?(state.trainingQuestion||null):(state.question===null?null:questions[state.question]);}
 function completed(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.school===school&&e.kind==='answer');}
 function helpedAlready(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.helper===school&&e.kind==='answer');}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
@@ -427,7 +425,7 @@ function drawSchool(){
  const candidates=schools().filter(n=>!completed(state.phase,state.round,n));
  if(!candidates.length)return alert('Todas as escolas já responderam nesta rodada.');
  const name=candidates[Math.floor(Math.random()*candidates.length)];
- state.school=name;state.question=null;state.selected=null;state.revealed=false;state.recorded=false;state.expired=false;
+ state.school=name;state.question=null;state.trainingQuestion=null;state.selected=null;state.revealed=false;state.recorded=false;state.expired=false;
  resetTimer();refresh();
  alert('Escola sorteada para responder:\n\n'+name);
 }
@@ -474,7 +472,7 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  }
  if([...$('helper').options].some(x=>x.value===previousHelper&&!x.disabled))$('helper').value=previousHelper;
  $('helper').disabled=ph==='F'||state.round>=5||state.recorded||timerMode!=='normal';
- const q=currentQuestion();$('questionTitle').textContent=q?q.q:'Aguardando sorteio da pergunta...';$('options').replaceChildren();
+ const q=currentQuestion();$('questionTitle').textContent=q?(state.question===-1?'Questão '+q.numero+' — '+q.q:q.q):'Aguardando sorteio da pergunta...';$('options').replaceChildren();
  if(q){q.a.forEach((v,i)=>{
    const o=el('button','option'+(state.revealed&&q.c===i?' correct':'')+(state.revealed&&state.selected===i&&q.c!==i?' incorrect':'')+(!state.revealed&&state.selected===i?' picked':''),`${'ABC'[i]}) ${v}${state.revealed&&q.c===i?' ✓':state.revealed&&state.selected===i?' ✕':''}`);
    o.type='button';o.disabled=state.revealed||state.recorded||state.expired;o.onclick=()=>selectAnswer(i);$('options').append(o);
@@ -495,26 +493,57 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  paintRoundBoard('publicRoundBoard',ph,list);
  if(ph==='F'&&(hasCutTie('A',A)||hasCutTie('B',B)))$('rankingNote').textContent+=' ATENÇÃO: há empate provisório na vaga de classificação em uma chave. A final não está homologada.';
  persist();}
-function changePhase(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeSchool(){hideScorePreview();const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function drawQuestion(){hideScorePreview();if(!state.school)return alert('Selecione a escola.');if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');if(state.round!==6&&completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');// MODO DEMONSTRATIVO: quando as perguntas inéditas acabam, permite repetir
-// questões de treinamento sem apagar pontuação, histórico ou participações.
-// Nunca utilizar esta rotina para sorteios oficiais.
-const allQuestions=questions.map((_,i)=>i);
-const available=allQuestions.filter(i=>!state.used[state.phase].includes(i));
-if(!allQuestions.length)return alert('Não há perguntas demonstrativas cadastradas.');
-const recycling=available.length===0;
-const pool=recycling?allQuestions:available;
-const idx=pool[Math.floor(Math.random()*pool.length)];
-if(recycling&&!confirm('Todas as perguntas demonstrativas desta etapa já foram utilizadas.\n\nRepetir uma pergunta APENAS PARA TESTES?\n\nAs pontuações e os registros anteriores serão preservados.'))return;
-state.question=idx;
-if(!state.used[state.phase].includes(idx))state.used[state.phase].push(idx);
-if(recycling)alert('MODO TESTE: pergunta demonstrativa reutilizada. Não utilizar na competição oficial.');state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function reveal(){if(timerMode==='help-wait')return alert('Aguarde o posicionamento e inicie os 15 segundos de auxílio antes de revelar.');if(!currentQuestion()||state.selected===null||state.recorded)return;pauseTimer();state.revealed=true;refresh();}
-function record(correct,timeout=false,approved=false,approvedHelper=null){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(approvedHelper!==null?approvedHelper:(timerMode==='help'||timerMode==='help-wait'?activeHelperName:''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
-function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
-function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changePhase(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeSchool(){hideScorePreview();const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+// Toda pergunta do fluxo principal nesta versão vem do Supabase.
+// O treino é independente do registro oficial de sorteios.
+let trainingBusy=false;
+async function drawQuestion(){
+ hideScorePreview();
+ if(trainingBusy)return;
+ if(!state.school)return alert('Selecione a escola.');
+ if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');
+ if(state.round===6)return alert('Desempate ainda não está automatizado nesta versão de treinamento.');
+ if(completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada de treinamento.');
+ if(!trainingClient)return alert('Faça login para consultar o banco protegido.');
+ const diff=state.round<=2?'facil':state.round<=4?'media':'dificil';
+ trainingBusy=true;
+ const btn=$('drawBtn');if(btn)btn.disabled=true;
+ try{
+  const {data,error}=await trainingClient.rpc('gincana_sortear_treino',{p_dificuldade:diff});
+  if(error)throw error;
+  if(!Array.isArray(data)||data.length!==1)throw Error('Nenhuma pergunta encontrada para a dificuldade.');
+  const q=data[0];
+  if(!Number.isInteger(q.numero)||!q.enunciado||!q.alternativa_a||!q.alternativa_b||!q.alternativa_c)throw Error('Pergunta incompleta no banco.');
+  state.question=-1;
+  state.trainingQuestion={numero:q.numero,q:q.enunciado,a:[q.alternativa_a,q.alternativa_b,q.alternativa_c],c:null,dificuldade:q.dificuldade};
+  state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;
+  resetTimer();refresh();
+ }catch(e){alert('Não foi possível sortear a pergunta de treino: '+e.message);}
+ finally{trainingBusy=false;if(btn)btn.disabled=false;}
+}
+async function reveal(){
+ if(timerMode==='help-wait')return alert('Inicie primeiro os 15 segundos de auxílio.');
+ if(!currentQuestion()||state.selected===null||state.recorded||state.revealed)return;
+ pauseTimer();
+ if(state.question===-1){
+  const q=state.trainingQuestion;
+  if(!trainingClient)return alert('Sessão de operador não disponível.');
+  const selected=state.selected,number=q.numero;
+  try{
+   const {data,error}=await trainingClient.rpc('gincana_conferir_treino',{p_numero:number,p_alternativa:'ABC'[selected]});
+   if(error)throw error;
+   if(!Array.isArray(data)||data.length!==1||!['A','B','C'].includes(data[0].correta))throw Error('Resultado de conferência inválido.');
+   if(state.question!==-1||state.trainingQuestion?.numero!==number||state.selected!==selected)return alert('A pergunta mudou durante a conferência; tente novamente.');
+   q.c='ABC'.indexOf(data[0].correta);
+  }catch(e){return alert('Falha na conferência da resposta: '+e.message+'\nÉ necessário instalar a função SQL de conferência no Supabase.');}
+ }
+ state.revealed=true;refresh();
+}
+function record(correct,timeout=false,approved=false,approvedHelper=null){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(approvedHelper!==null?approvedHelper:(timerMode==='help'||timerMode==='help-wait'?activeHelperName:''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct,trainingQuestion:state.question===-1?structuredClone(state.trainingQuestion):null});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
+function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
+function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
 
 // Relatório de conferência: gerado somente no navegador local do operador.
@@ -619,7 +648,7 @@ function validateRestoreBackup(data){
  const st=data.state;
  if(!['A','B','F'].includes(st.phase)||!Number.isInteger(st.round)||st.round<1||st.round>6)throw Error('Etapa ou rodada inválida.');
  if(typeof st.school!=='string'||st.school.length>220)throw Error('Escola atual inválida.');
- if(!(st.question===null||(Number.isInteger(st.question)&&st.question>=0&&st.question<questions.length)))throw Error('A pergunta do backup não existe nesta versão.');
+ if(!(st.question===null||(Number.isInteger(st.question)&&((st.question>=0&&st.question<questions.length)||(st.question===-1&&st.trainingQuestion)))))throw Error('A pergunta do backup não existe nesta versão.');
  if(!(st.selected===null||(Number.isInteger(st.selected)&&st.selected>=0&&st.selected<=2)))throw Error('Alternativa selecionada inválida.');
  for(const prop of ['revealed','recorded','expired'])if(typeof st[prop]!=='boolean')throw Error('Campo de estado inválido: '+prop);
  if(!st.events||!st.scores||!st.used)throw Error('O arquivo não contém o histórico completo.');
@@ -633,7 +662,7 @@ function validateRestoreBackup(data){
   for(const e of st.events[ph]){
    if(!e||e.kind!=='answer'||!Number.isInteger(e.round)||e.round<1||e.round>5||!allowed.has(e.school)||!(e.helper===''||e.helper==null||allowed.has(e.helper))||e.helper===e.school)throw Error('Há registros inválidos no histórico de '+ph);
    if(typeof e.part!=='number'||!Number.isFinite(e.part)||e.part<0||e.part>6||typeof e.correct!=='boolean')throw Error('Pontos ou resultado inválidos no histórico.');
-   if(!Number.isInteger(e.question)||e.question<0||e.question>=questions.length)throw Error('Questão histórica não encontrada nesta versão.');
+   if(!Number.isInteger(e.question)||(e.question!==-1&&(e.question<0||e.question>=questions.length))||(e.question===-1&&!e.trainingQuestion))throw Error('Questão histórica não encontrada nesta versão.');
    // Backups das versões anteriores à gravação das alternativas podem não conter
    // "selected" nem "timeout". Preservar o histórico sem inventar uma resposta.
    const legacyMissingAnswer=!Object.prototype.hasOwnProperty.call(e,'selected')&&!Object.prototype.hasOwnProperty.call(e,'timeout');
@@ -672,7 +701,7 @@ async function restoreBackupFile(input){
  }catch(err){alert('NÃO FOI POSSÍVEL RESTAURAR O BACKUP.\n\n'+err.message+'\n\nNenhum dado foi alterado.');}
  finally{input.value='';}
 }
-function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-teste-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-treino-v61-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
 
 // Separação do operador e do telão: sincronização local no mesmo navegador.
 // A versão beta autentica o operador, mas o placar local permanece demonstrativo.
@@ -787,26 +816,6 @@ async function logoutOperator(){
  if(!trainingClient)return;
  await trainingClient.auth.signOut();document.getElementById('authGate').hidden=false;
  authNotice('Sessão encerrada.');
-}
-async function requestTrainingQuestion(){
- const btn=document.getElementById('fetchTraining');btn.disabled=true;
- const stat=document.getElementById('trainingStatus');stat.textContent='Consultando o banco protegido...';
- document.getElementById('trainingQuestion').hidden=true;
- try{
-  const {data,error}=await trainingClient.rpc('gincana_sortear_treino',{p_dificuldade:document.getElementById('trainingDifficulty').value});
-  if(error)throw error;
-  if(!data?.length)throw Error('Nenhuma pergunta disponível nesta dificuldade.');
-  const q=data[0];
-  document.getElementById('trainingNumber').textContent='Questão nº '+q.numero+' • '+q.dificuldade+' • não consumida oficialmente';
-  document.getElementById('trainingTitle').textContent=q.enunciado;
-  const opts=document.getElementById('trainingOptions');opts.replaceChildren();
-  for(const [letter,val] of [['A',q.alternativa_a],['B',q.alternativa_b],['C',q.alternativa_c]]){
-   const div=document.createElement('div');div.className='trainingOption';div.textContent=letter+') '+val;opts.append(div);
-  }
-  document.getElementById('trainingQuestion').hidden=false;
-  stat.textContent='Pergunta carregada com sucesso. O gabarito não foi enviado ao navegador e o registro de sorteios oficiais continua intacto.';
- }catch(err){stat.textContent='Não foi possível sortear: '+err.message;}
- finally{btn.disabled=false;}
 }
 startAuth();
 
