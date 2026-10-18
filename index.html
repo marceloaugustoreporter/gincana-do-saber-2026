@@ -134,19 +134,43 @@ body.publicScreen #publicHelperPicker .helperChoice.availableHelper:disabled{
 body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
  background:#e8eaeb;color:#76817c;border-color:#d9dede;opacity:.72;
 }
+
+/* Versão 6.0 beta: autenticação do painel e teste isolado do banco oficial. */
+#authGate{position:fixed;inset:0;background:#063824f5;z-index:5000;display:flex;justify-content:center;align-items:center;padding:18px}
+#authGate[hidden]{display:none!important}
+#authBox{width:min(470px,100%);background:#fff;border-radius:16px;padding:28px;color:#10452f;box-shadow:0 20px 70px #001b12}
+#authBox h2{font-size:25px;margin:0 0 10px}#authBox p{font-size:14px;line-height:1.5}
+#authBox input{width:100%;padding:13px 11px;margin:5px 0 12px;border:1px solid #8fb3a0;border-radius:8px;font-size:16px}
+#authBox button{width:100%;padding:13px;background:#006e44;color:white;border:none;border-radius:8px;font-weight:800}
+#authStatus{min-height:25px;font-size:13px;color:#8c3b0b}
+#trainingBank{margin:12px auto 20px;max-width:1200px;padding:20px;background:#fff;border:2px solid #a7cfb1;border-radius:12px}
+#trainingBank h2{margin:0 0 8px;color:#075537;font-size:22px}
+#trainingBank .trainingOptions{display:grid;gap:8px;margin:12px 0}
+#trainingBank .trainingOption{padding:9px;background:#eef6e8;border-radius:7px;border:1px solid #d6e4d8}
+#trainingBank .trainingMeta{font-size:13px;color:#48745c;margin:6px 0}
+#trainingBank .trainingTitle{font-size:20px;font-weight:800;color:#16452d;margin:10px 0}
+#trainingBank select{padding:9px;border-radius:7px;margin:5px 8px 5px 0}
+#trainingBank button{margin:5px 8px 5px 0}
+#operatorIdentity{font-size:12px;font-weight:700;color:#fff;align-self:center}
+body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicScreen #logoutBtn{display:none!important}
 </style>
 </head>
 <body>
-<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO 5.4 DE TESTES — NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Perguntas demonstrativas que podem se repetir após esgotamento, sem login ou sincronização entre dispositivos diferentes. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
-<div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
+<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
+<main><div class="warning"><strong>VERSÃO 6.0 BETA — TREINAMENTO, NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Login Supabase habilitado para o operador e consulta separada de perguntas oficiais para treino. O painel de pontuação abaixo AINDA usa perguntas demonstrativas e registros locais: não está ligado ao sorteio oficial. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
+<section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🔐 Banco oficial — consulta de treinamento</h2>
+<p class="fine">Acesso restrito aos operadores cadastrados. O sorteio abaixo mostra uma pergunta real e suas alternativas <strong>sem gabarito</strong>, sem marcar a pergunta como utilizada. Este módulo é independente do painel demonstrativo de pontuação.</p>
+<div><label for="trainingDifficulty">Dificuldade:</label> <select id="trainingDifficulty"><option value="facil">Verde — fácil (2 pontos)</option><option value="media">Laranja — média (4 pontos)</option><option value="dificil">Vermelho — difícil (6 pontos)</option></select><button id="fetchTraining" onclick="requestTrainingQuestion()">🎲 Sortear pergunta para treino</button></div>
+<div id="trainingStatus" class="trainingMeta" role="status">Aguardando seleção de uma pergunta.</div>
+<div id="trainingQuestion" hidden><div id="trainingNumber" class="trainingMeta"></div><div id="trainingTitle" class="trainingTitle"></div><div id="trainingOptions" class="trainingOptions"></div></div>
+</section><div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
 <div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
-</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo</div></main>
+</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 6.0 beta — treinamento</div></main>
 <div id="operatorHelperPicker" class="helperPickerOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorHelperPickerTitle">
  <div class="helperPickerPanel"><h2 id="operatorHelperPickerTitle">🤝 Escolher escola auxiliadora</h2>
   <p>O cronômetro da pergunta foi pausado. Selecione uma escola disponível; as que já ajudaram nesta rodada estão bloqueadas. A dupla escolhida ainda terá tempo para se posicionar antes dos 15 segundos.</p>
@@ -178,6 +202,8 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
   <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
+<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 6.0 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase. Não utilize esta versão para apuração oficial.</p></form></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
 const A=["Escola Estadual Neca Quirino","Escola Municipal Doutor Manoel Patti","Colégio COC São Francisco","Escola Municipal Geralda Cândida de Oliveira","Escola Estadual Prof. Julia Kubitschek","Escola Municipal Prof. Jalile Barbosa Calixto","Colégio Del Rey","Escola Municipal Oilda Valéria Silveira Coelho"];
@@ -649,7 +675,7 @@ async function restoreBackupFile(input){
 function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-teste-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
 
 // Separação do operador e do telão: sincronização local no mesmo navegador.
-// Acesso público remoto e autenticação ainda NÃO estão implementados.
+// A versão beta autentica o operador, mas o placar local permanece demonstrativo.
 const IS_DISPLAY = new URLSearchParams(location.search).get('view')==='telao';
 const DISPLAY_TIMER_KEY='gincana_timer_preview_v1';
 let displayTimerSnapshot={deadline:0,seconds:30,total:30,running:false};
@@ -709,5 +735,80 @@ if(IS_DISPLAY){
 }
 
 if(!IS_DISPLAY)resetTimer();refresh();
+
+// LOGIN: somente frontend de teste. Controle real de perguntas fica no RPC do banco.
+// Nunca colocar service_role, sb_secret ou gabaritos nesta página.
+const GINCANA_SUPABASE_URL='https://vqpvihzeczpnzxexcegf.supabase.co';
+const GINCANA_PUBLISHABLE_KEY='sb_publishable_gJ4huXRFWu4Ts3V9tRvMrw_rAUW7THa';
+let trainingClient=null;
+function authNotice(message){const el=document.getElementById('authStatus');if(el)el.textContent=message;}
+function startAuth(){
+ if(IS_DISPLAY)return;
+ const gate=document.getElementById('authGate');gate.hidden=false;
+ document.getElementById('trainingBank').hidden=true;
+ if(!window.supabase?.createClient){authNotice('Não foi possível carregar a biblioteca de autenticação. Confira a internet e atualize a página.');return;}
+ trainingClient=window.supabase.createClient(GINCANA_SUPABASE_URL,GINCANA_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+ trainingClient.auth.onAuthStateChange((event,session)=>{
+  // Não fazemos consulta assíncrona ao SDK dentro deste callback.
+  if(!session){gate.hidden=false;document.getElementById('trainingBank').hidden=true;document.getElementById('operatorIdentity').hidden=true;document.getElementById('logoutBtn').hidden=true;}
+ });
+ trainingClient.auth.getSession().then(({data,error})=>{
+  if(error){authNotice('Falha ao restaurar sessão: '+error.message);return;}
+  if(data.session)authorizeOperator();
+ }).catch(err=>authNotice('Falha ao conectar: '+err.message));
+}
+async function authorizeOperator(){
+ if(!trainingClient)return;
+ const {data:userResult,error:userError}=await trainingClient.auth.getUser();
+ if(userError||!userResult?.user){authNotice('Faça login para continuar.');return;}
+ // A consulta por RPC faz a verificação REAL de autorização na tabela privada.
+ const {error}=await trainingClient.rpc('gincana_sortear_treino',{p_dificuldade:'facil'});
+ if(error){
+  authNotice('Não foi possível validar a autorização do operador: '+error.message);
+  await trainingClient.auth.signOut();return;
+ }
+ document.getElementById('authGate').hidden=true;
+ document.getElementById('trainingBank').hidden=false;
+ const identity=document.getElementById('operatorIdentity');identity.textContent='Operador: '+userResult.user.email;identity.hidden=false;
+ document.getElementById('logoutBtn').hidden=false;
+ document.getElementById('operatorPassword').value='';
+}
+async function loginOperator(){
+ const btn=document.getElementById('authSubmit');btn.disabled=true;authNotice('Verificando acesso...');
+ try{
+  if(!trainingClient)throw Error('A conexão não foi carregada. Atualize a página.');
+  const {error}=await trainingClient.auth.signInWithPassword({email:document.getElementById('operatorEmail').value.trim(),password:document.getElementById('operatorPassword').value});
+  if(error)throw error;
+  await authorizeOperator();
+ }catch(err){authNotice('Não foi possível entrar: '+err.message)}
+ finally{btn.disabled=false;}
+}
+async function logoutOperator(){
+ if(!trainingClient)return;
+ await trainingClient.auth.signOut();document.getElementById('authGate').hidden=false;
+ authNotice('Sessão encerrada.');
+}
+async function requestTrainingQuestion(){
+ const btn=document.getElementById('fetchTraining');btn.disabled=true;
+ const stat=document.getElementById('trainingStatus');stat.textContent='Consultando o banco protegido...';
+ document.getElementById('trainingQuestion').hidden=true;
+ try{
+  const {data,error}=await trainingClient.rpc('gincana_sortear_treino',{p_dificuldade:document.getElementById('trainingDifficulty').value});
+  if(error)throw error;
+  if(!data?.length)throw Error('Nenhuma pergunta disponível nesta dificuldade.');
+  const q=data[0];
+  document.getElementById('trainingNumber').textContent='Questão nº '+q.numero+' • '+q.dificuldade+' • não consumida oficialmente';
+  document.getElementById('trainingTitle').textContent=q.enunciado;
+  const opts=document.getElementById('trainingOptions');opts.replaceChildren();
+  for(const [letter,val] of [['A',q.alternativa_a],['B',q.alternativa_b],['C',q.alternativa_c]]){
+   const div=document.createElement('div');div.className='trainingOption';div.textContent=letter+') '+val;opts.append(div);
+  }
+  document.getElementById('trainingQuestion').hidden=false;
+  stat.textContent='Pergunta carregada com sucesso. O gabarito não foi enviado ao navegador e o registro de sorteios oficiais continua intacto.';
+ }catch(err){stat.textContent='Não foi possível sortear: '+err.message;}
+ finally{btn.disabled=false;}
+}
+startAuth();
+
 </script>
 </body></html>
