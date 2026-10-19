@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gincana do Saber 2026 — Protótipo operacional</title>
+<title>Gincana do Saber 2026 — v7.0 beta</title>
 <style>
 :root{--green:#075537;--dark:#063a2b;--lime:#d1ef28;--orange:#f7941d;--paper:#f5f8f2;--ink:#133a2c}*{box-sizing:border-box}body{margin:0;background:#e9f0e9;color:var(--ink);font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:linear-gradient(125deg,#064029,#09844b);color:white;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.branding{display:flex;align-items:center;gap:12px}.owl{font-size:44px}.branding h1{font-size:29px;line-height:1;margin:0;color:var(--lime)}.branding small{display:block;margin-top:8px}button,select{font:inherit;border-radius:9px;padding:10px 12px;border:1px solid #bed3c4;background:white;color:var(--ink)}button{cursor:pointer;font-weight:650}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:white;border-color:var(--green)}.orange{background:var(--orange);border-color:var(--orange);color:#24200c}.headbtn{background:white;color:var(--green)}main{max-width:1600px;margin:auto;padding:16px}.warning{padding:12px;background:#fff0c7;border-left:5px solid var(--orange);border-radius:9px;margin-bottom:15px;font-size:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;background:white;padding:14px;border-radius:12px;margin-bottom:14px}.field{display:flex;flex-direction:column;gap:5px;min-width:120px}.field label{font-weight:750;font-size:12px}.grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(290px,1fr);gap:14px}.panel{border-radius:15px;background:white;padding:20px;min-width:0}.step{color:#08764b;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}.school{font-size:22px;font-weight:800;background:#e3f4d3;border-left:6px solid #8dbd11;padding:13px;border-radius:9px;margin:15px 0}h2{font-size:clamp(23px,2.4vw,36px);margin:12px 0 20px}.option{cursor:pointer;width:100%;text-align:left;color:var(--ink);background:#f2f7f2;padding:13px 15px;margin:9px 0;border-radius:10px;border:2px solid #e0e9df;font-size:20px}.correct{background:#c5efc7;border-color:#168a48;font-weight:800}.picked{background:#d7ebff;border-color:#2676ad;font-weight:800}.incorrect{background:#ffe0df;border-color:#cc2531;font-weight:800}.timerPanel{margin:14px 0;padding:14px;border:2px solid #dce8dc;border-radius:12px}.timerNum{font-size:clamp(38px,5vw,68px);font-weight:900;font-variant-numeric:tabular-nums;color:#075537}.timerNum.low{color:#c92b28}.timerActions{display:flex;gap:8px;flex-wrap:wrap}.timerBar{background:#e3ebe2;border-radius:30px;height:12px;overflow:hidden;margin:10px 0}.timerFill{height:100%;width:100%;background:#4eaa52;transition:width .2s linear}.timerFill.low{background:#e45245}body.screen .timerPanel{display:none}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.muted{color:#496a58}.status{background:#edf6ec;border-radius:8px;padding:12px;margin-top:15px}.rankRow{display:flex;align-items:center;gap:9px;border-bottom:1px solid #e7ece7;padding:11px 7px}.rankRow.top{background:#e7f7d6}.rankNo{font-weight:800;min-width:28px}.rankName{flex:1;font-size:14px}.score{font-weight:900;font-size:22px;white-space:nowrap}.subhead{font-size:14px;color:#497056;margin:7px 0 15px}.control{margin-top:16px;border:2px solid #cae0d0;border-radius:12px;padding:15px}select{max-width:100%}.control .field{flex:1}.fine{font-size:13px;line-height:1.5}.line{border:0;border-top:1px solid #e6ede4;margin:18px 0}.small{font-size:12px}.footer{text-align:center;padding:18px;color:#597663}.hidden{display:none!important}body.screen{background:#062d23}body.screen .admin,body.screen .warning,body.screen #screenBtn,body.screen #backupBtn{display:none!important}body.screen main{max-width:none}body.screen .panel{background:#fafff5}body.screen .school{font-size:clamp(24px,3vw,42px)}body.screen .option{font-size:clamp(20px,2.3vw,35px)}body.screen .rankName{font-size:clamp(13px,1.3vw,20px)}body.screen .footer{color:white}@media(max-width:850px){.grid{grid-template-columns:1fr}.branding h1{font-size:23px}}@media(min-width:1300px){body.screen .grid{grid-template-columns:minmax(0,2fr) minmax(360px,.9fr)}}
 
@@ -153,22 +153,56 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
 #trainingBank button{margin:5px 8px 5px 0}
 #operatorIdentity{font-size:12px;font-weight:700;color:#fff;align-self:center}
 body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicScreen #logoutBtn{display:none!important}
+
+/* Versão 7.0 — Supabase, som do telão e tela do aluno. */
+.cloudStatus{font-size:12px;font-weight:750;padding:6px 9px;border-radius:8px;align-self:center;max-width:330px;line-height:1.3}
+.cloudStatus:empty{display:none}
+.cloudStatus.ok{background:#d9f5d4;color:#0b5130}.cloudStatus.wait{background:#fff1c9;color:#6b4a00}.cloudStatus.err{background:#ffd9d6;color:#8a1610}
+body.publicScreen .cloudStatus{position:fixed;right:12px;bottom:12px;z-index:6000;display:block}
+body.publicScreen .cloudStatus.ok,body.publicScreen .cloudStatus:empty{display:none}
+#displaySoundBtn{display:none}
+body.publicScreen:not(.studentScreen) #displaySoundBtn{display:inline-block;opacity:.85}
+body.publicScreen #studentLinkBtn{display:none!important}
+body.salaOficial header{background:linear-gradient(125deg,#3d1f02,#8a4b06)}
+body.salaOficial .warning{background:#ffe2c2;border-left-color:#b85a00}
+.linkBox{margin-top:12px;padding:12px;border:2px dashed #8dbd11;border-radius:10px;background:#f6fbef}
+.linkRow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:6px}
+.linkRow input{flex:1;min-width:220px;padding:9px;border:1px solid #9fbfa9;border-radius:7px;font-size:13px}
+.linkRow a{font-weight:800;color:#075537}
+.screenBar{height:16px;margin:12px 0 4px}
+/* Tela do aluno: somente pergunta, alternativas e cronômetro, com o visual do telão. */
+body.studentScreen header .actions,body.studentScreen aside.panel,body.studentScreen .institutionalBrands,
+body.studentScreen #currentSchool,body.studentScreen #phaseLabel,body.studentScreen #questionValue,
+body.studentScreen #screenHelperBanner,body.studentScreen #publicHelperPicker,body.studentScreen #publicScoreOverlay,
+body.studentScreen .footer,body.studentScreen #publicRoundBoard{display:none!important}
+body.studentScreen .grid{grid-template-columns:1fr!important}
+body.studentScreen main{max-width:1100px;padding:12px}
+body.studentScreen .panel{padding:clamp(14px,3vw,30px)}
+body.studentScreen h2#questionTitle{font-size:clamp(21px,3.4vw,40px);line-height:1.25}
+body.studentScreen .option{pointer-events:auto;cursor:pointer;font-size:clamp(20px,3vw,34px);padding:clamp(14px,2.4vw,24px);margin:12px 0;min-height:64px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+body.studentScreen .option:not(:disabled):active{transform:scale(.99)}
+body.studentScreen .option:disabled{cursor:default;opacity:1}
+body.studentScreen .option:disabled:not(.picked):not(.correct):not(.incorrect){color:#5d7468;background:#eef3ee}
+body.studentScreen #options .picked:not(.correct):not(.incorrect){background:#d7ebff;border-color:#2676ad;color:#123a57;font-weight:850;box-shadow:0 0 0 3px rgba(38,118,173,.25)}
+body.studentScreen #screenTimer{margin-top:16px}
+body.studentScreen #status{font-size:clamp(16px,2vw,22px);font-weight:750;text-align:center}
 </style>
 </head>
 <body>
-<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO 6.2 BETA — ÁUDIO — TREINAMENTO, NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Login Supabase habilitado. O sorteio principal utiliza perguntas oficiais em TREINAMENTO com correção protegida. Pontos e histórico continuam LOCAIS e demonstrativos; NÃO estão ligados à apuração oficial. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
-<section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🦉 Treinamento integrado — perguntas oficiais</h2>
-<p>Selecione a <strong>Chave, a rodada e a escola</strong> no painel abaixo. Clique em <strong>Sortear pergunta oficial (TREINO)</strong>; use o cronômetro, o auxílio, a seleção da resposta e a conferência normal. A pergunta também aparece no telão conectado ao mesmo navegador.</p>
-<p class="trainingMeta"><strong>IMPORTANTE:</strong> Pontuações de treino somente neste navegador. O banco de 206 questões não é consumido e o resultado não é oficial. Nunca utilizar como apuração dos dias 20, 21 ou 23.</p>
-</section><div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
-<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="soundToggle" onclick="toggleTimerSound()" title="Ativar ou silenciar os alertas do tempo">🔊 Alertas ligados</button><button id="soundTest" onclick="testTimerSound()" title="Testar os sons no notebook do operador">♪ Testar áudio</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
-<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta oficial (TREINO)</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
+<header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="cloudStatus" class="cloudStatus admin"></span><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="studentLinkBtn" class="headbtn admin" onclick="showStudentLink()">📱 Link da tela do aluno</button><button id="displaySoundBtn" class="headbtn" onclick="enableDisplaySound()">🔊 Ativar som do telão</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
+<main><div class="warning"><strong>VERSÃO 7.0 BETA.</strong> Placar e histórico gravados no Supabase.</div>
+<section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🦉 Perguntas oficiais — banco protegido no Supabase</h2>
+<p>Selecione a <strong>Chave, a rodada e a escola</strong> no painel abaixo. Clique em <strong>Sortear pergunta oficial</strong>; use o cronômetro, o auxílio, a seleção da resposta e a conferência normal. A pergunta aparece no telão e na tela do aluno, em qualquer aparelho conectado à internet. A dupla pode tocar na alternativa na tela do aluno enquanto o cronômetro corre.</p>
+<p class="trainingMeta" id="trainingBankText"></p>
+<div id="studentLinkBox" class="linkBox" hidden><label for="studentLinkUrl"><strong>📱 Link da tela do aluno</strong> (já copiado; abra no tablet ou celular da dupla — não precisa de login):</label><div class="linkRow"><input id="studentLinkUrl" readonly onclick="this.select()"><a id="studentLinkOpen" target="_blank" rel="noopener">Abrir</a><button type="button" onclick="showStudentLink(true)">Gerar link novo</button></div><p class="fine muted">O link só funciona nesta sala. Gerar um link novo invalida o anterior.</p></div>
+</section><div class="toolbar admin"><div class="field"><label for="salaSelect">SALA</label><select id="salaSelect" onchange="changeSala()"><option value="treinamento">Treinamento</option><option value="oficial">Oficial</option></select></div><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
+<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div class="timerBar screenBar"><div id="screenTimerFill" class="timerFill"></div></div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="soundToggle" onclick="toggleTimerSound()" title="Ativar ou silenciar os alertas do tempo">🔊 Alertas ligados</button><button id="soundTest" onclick="testTimerSound()" title="Testar os sons no notebook do operador">♪ Testar áudio</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
+<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta oficial</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
-</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 6.2 beta — etapa áudio — treinamento</div></main>
+</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 7.0 beta — Supabase</div></main>
 <div id="operatorHelperPicker" class="helperPickerOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorHelperPickerTitle">
  <div class="helperPickerPanel"><h2 id="operatorHelperPickerTitle">🤝 Escolher escola auxiliadora</h2>
   <p>O cronômetro da pergunta foi pausado. Selecione uma escola disponível; as que já ajudaram nesta rodada estão bloqueadas. A dupla escolhida ainda terá tempo para se posicionar antes dos 15 segundos.</p>
@@ -200,7 +234,7 @@ body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicS
   <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
-<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 6.2 beta — etapa áudio. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase. Não utilize esta versão para apuração oficial.</p></form></div>
+<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 7.0 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase.</p></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
@@ -217,52 +251,141 @@ const questions=[
  {q:"Qual é uma forma de participação popular?",a:["Audiência pública","Censura à imprensa","Impedimento de debates"],c:0},
  {q:"Quem fiscaliza a atuação do Poder Executivo municipal entre suas atribuições?",a:["Somente o prefeito","A Câmara Municipal","Somente escolas particulares"],c:1}
 ];
-const KEY="gincana_saber_treino_v61";const points=[0,2,2,4,4,6,0];
-function blank(){return {phase:"A",round:1,school:"",question:null,trainingQuestion:null,revealed:false,recorded:false,selected:null,expired:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},finalists:[]};}
-let state;try{state=JSON.parse(localStorage.getItem(KEY))||blank()}catch(e){state=blank()}
-if(!state.scores||!state.events||!state.used)state=blank();
+const points=[0,2,2,4,4,6,0];
+// Versão 7.0: modo da página pela URL.
+//   (sem parâmetro)   painel do operador (login)
+//   ?view=telao       telão público
+//   ?view=aluno&k=…   tela de resposta da dupla, sem login
+//   &sala=oficial     sala oficial; sem o parâmetro, sala de treinamento
+const PARAMS=new URLSearchParams(location.search);
+const VIEW=PARAMS.get('view');
+const IS_STUDENT=VIEW==='aluno';
+const IS_DISPLAY=VIEW==='telao'||IS_STUDENT;
+const SALA=PARAMS.get('sala')==='oficial'?'oficial':'treinamento';
+const STUDENT_KEY=PARAMS.get('k')||'';
+const KEY='gincana_saber_v7_'+SALA;
+const LEGACY_KEY='gincana_saber_treino_v61';
+function blank(){return {phase:"A",round:1,school:"",question:null,trainingQuestion:null,qid:null,revealed:false,recorded:false,selected:null,selectedAt:0,selectedBy:null,expired:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},finalists:[]};}
+function normalizeState(s){return s&&typeof s==='object'&&s.scores&&s.events&&s.used?s:blank();}
+function loadLocalState(){
+ if(IS_DISPLAY)return blank();
+ try{
+  const own=localStorage.getItem(KEY);
+  if(own)return normalizeState(JSON.parse(own));
+  // Primeira abertura da v7 na sala de treinamento: aproveita o placar local da v6.
+  if(SALA==='treinamento'){const old=localStorage.getItem(LEGACY_KEY);if(old)return normalizeState(JSON.parse(old));}
+ }catch(e){}
+ return blank();
+}
+let state=loadLocalState();
 const $=id=>document.getElementById(id);
-let timerId=null, deadline=0, timeLeft=30, timerTotal=30, timerMode='normal', timerRunning=false;
+function newQid(){try{return crypto.randomUUID()}catch(e){return Date.now().toString(36)+Math.random().toString(36).slice(2)}}
+let timerId=null, deadline=0, deadlineServer=0, timeLeft=30, timerTotal=30, timerMode='normal', timerRunning=false;
 let activeHelperName='';
-// Alertas do cronômetro: somente no painel operador, evitando áudio duplicado no telão.
-// O Web Audio é desbloqueado pelo clique do operador; nenhum arquivo externo é necessário.
-let timerAudioContext=null, timerSoundEnabled=true, lastSoundSecond=null;
+
+// Relógio do servidor: todos os aparelhos usam a hora do Supabase para o cronômetro.
+let serverOffset=0, bestRtt=Infinity;
+function serverNow(){return Date.now()+serverOffset;}
+
+// Alertas sonoros do cronômetro (Web Audio, sem arquivos externos).
+// Os sons são agendados no relógio de áudio quando a contagem começa: bipe a cada
+// segundo nos 5 finais e buzina forte no zero, mesmo com a aba em segundo plano.
+// Operador: ligado por padrão. Telão: desligado até clicar em "Ativar som do telão".
+let timerAudioContext=null, timerSoundEnabled=!IS_DISPLAY, audioOut=null;
+let scheduledSounds=[], scheduledFor='';
 function audioContextForTimer(){
- if(IS_DISPLAY||!timerSoundEnabled)return null;
  try{
   if(!timerAudioContext)timerAudioContext=new (window.AudioContext||window.webkitAudioContext)();
   if(timerAudioContext.state==='suspended')timerAudioContext.resume().catch(()=>{});
   return timerAudioContext;
  }catch(e){return null;}
 }
-function toneTimer(freq,duration,volume=0.16,startDelay=0){
- const ctx=audioContextForTimer();if(!ctx)return;
- const osc=ctx.createOscillator(),gain=ctx.createGain(),now=ctx.currentTime+startDelay;
- osc.type='sine';osc.frequency.setValueAtTime(freq,now);
- gain.gain.setValueAtTime(0.0001,now);
- gain.gain.exponentialRampToValueAtTime(volume,now+0.012);
- gain.gain.exponentialRampToValueAtTime(0.0001,now+duration);
- osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+duration+0.015);
+function audioDestination(ctx){
+ if(audioOut&&audioOut.context===ctx)return audioOut;
+ const comp=ctx.createDynamicsCompressor();
+ comp.threshold.value=-12;comp.knee.value=8;comp.ratio.value=5;comp.attack.value=0.003;comp.release.value=0.25;
+ const master=ctx.createGain();master.gain.value=1;
+ master.connect(comp);comp.connect(ctx.destination);
+ audioOut=master;return master;
 }
-function soundAtEnd(){toneTimer(680,0.27,0.21);toneTimer(470,0.42,0.23,0.31);}
-function soundTick(){
- if(!timerRunning||IS_DISPLAY||!timerSoundEnabled)return;
- const seconds=Math.ceil(timeLeft);
- if(seconds!==lastSoundSecond){
-  lastSoundSecond=seconds;
-  if(seconds>=1&&seconds<=5)toneTimer(1020,0.12);
+function tone(ctx,at,freq,dur,vol,type){
+ const osc=ctx.createOscillator(),gain=ctx.createGain();
+ osc.type=type;osc.frequency.setValueAtTime(freq,at);
+ gain.gain.setValueAtTime(0.0001,at);
+ gain.gain.exponentialRampToValueAtTime(vol,at+0.012);
+ gain.gain.setValueAtTime(vol,at+Math.max(0.013,dur-0.07));
+ gain.gain.exponentialRampToValueAtTime(0.0001,at+dur);
+ osc.connect(gain);gain.connect(audioDestination(ctx));
+ osc.start(at);osc.stop(at+dur+0.03);
+ return {osc,at};
+}
+// Bipe curto e agudo dos 5 segundos finais.
+function beepAt(ctx,at){return [tone(ctx,at,1046,0.15,0.5,'triangle'),tone(ctx,at,2093,0.15,0.12,'sine')];}
+// Fim do tempo: buzina grave, mais forte e diferente do bipe (dois toques curtos e um longo).
+function endAlarmAt(ctx,at){
+ const out=[];
+ for(const [off,dur] of [[0,0.24],[0.3,0.24],[0.6,1.1]]){
+  out.push(tone(ctx,at+off,196,dur,0.6,'sawtooth'));
+  out.push(tone(ctx,at+off,247,dur,0.42,'square'));
+  out.push(tone(ctx,at+off,98,dur,0.55,'sawtooth'));
  }
+ return out;
+}
+// Cancela apenas os sons ainda não iniciados (a buzina que já está tocando termina).
+function cancelScheduledSounds(){
+ const ctx=timerAudioContext,now=ctx?ctx.currentTime:0;
+ scheduledSounds=scheduledSounds.filter(s=>{
+  if(s.at>now+0.01){try{s.osc.stop()}catch(e){}return false;}
+  return s.at+3>now;
+ });
+ scheduledFor='';
+}
+// Converte "daqui a X segundos" (relógio da página) para o relógio de áudio. Usa o
+// horário real de saída do som, porque o áudio leva um instante para começar a andar.
+function audioTimeIn(ctx,seconds){
+ const ts=ctx.getOutputTimestamp?ctx.getOutputTimestamp():null;
+ if(ctx.state==='running'&&ts&&ts.performanceTime>0)return ts.contextTime+(performance.now()-ts.performanceTime)/1000+seconds;
+ return ctx.currentTime+seconds;
+}
+// remaining: segundos até o zero. key: identifica a contagem. Chamado de novo durante a
+// contagem, só reagenda se o relógio de áudio tiver se desviado do cronômetro.
+let scheduledZero=0;
+function scheduleCountdownSounds(remaining,key){
+ if(!timerSoundEnabled){if(scheduledFor)cancelScheduledSounds();return;}
+ const ctx=audioContextForTimer();if(!ctx)return;
+ const zero=audioTimeIn(ctx,remaining);
+ if(key===scheduledFor&&Math.abs(zero-scheduledZero)<0.08)return;
+ const isNew=key!==scheduledFor;
+ cancelScheduledSounds();
+ const now=ctx.currentTime;
+ for(let k=5;k>=1;k--){
+  if(zero-k>now+0.005)scheduledSounds.push(...beepAt(ctx,zero-k));
+ }
+ if(zero>now+0.005)scheduledSounds.push(...endAlarmAt(ctx,zero));
+ else if(isNew&&zero>now-0.08)scheduledSounds.push(...endAlarmAt(ctx,now+0.005));
+ scheduledFor=key;scheduledZero=zero;
 }
 function toggleTimerSound(){
  timerSoundEnabled=!timerSoundEnabled;
  const b=$('soundToggle');if(b)b.textContent=timerSoundEnabled?'🔊 Alertas ligados':'🔇 Alertas silenciados';
- if(timerSoundEnabled)audioContextForTimer();
+ if(timerSoundEnabled){audioContextForTimer();if(timerRunning)scheduleCountdownSounds(Math.max(0,(deadline-Date.now())/1000),'op:'+deadline);}
+ else cancelScheduledSounds();
 }
 function testTimerSound(){
  if(!timerSoundEnabled)return alert('Ative os alertas sonoros antes de testar.');
- audioContextForTimer();toneTimer(1020,0.15);toneTimer(1020,0.15,0.16,0.32);
- toneTimer(680,0.25,0.21,0.72);toneTimer(470,0.4,0.23,1.01);
+ const ctx=audioContextForTimer();if(!ctx)return alert('Este navegador não liberou o áudio.');
+ const at=ctx.currentTime+0.05;
+ beepAt(ctx,at);beepAt(ctx,at+1);beepAt(ctx,at+2);endAlarmAt(ctx,at+3);
 }
+function enableDisplaySound(){
+ timerSoundEnabled=true;
+ const ctx=audioContextForTimer();
+ if(ctx)beepAt(ctx,ctx.currentTime+0.05);
+ const b=$('displaySoundBtn');if(b){b.textContent='🔊 Som do telão ativo';setTimeout(()=>b.classList.add('hidden'),2500);}
+ renderScreenTimer();
+}
+// Primeiro clique na página desbloqueia o áudio do navegador.
+document.addEventListener('pointerdown',()=>{if(timerSoundEnabled)audioContextForTimer();},{capture:true});
 
 function displayTimer(){
  if(!IS_DISPLAY)pushDisplayTimer();
@@ -277,12 +400,14 @@ function displayTimer(){
  $('startHelpClock').disabled=timerMode!=='help-wait'||state.recorded||state.revealed;
  $('timerReset').disabled=timerMode==='help-wait'||timerMode==='help';
 }
-function stopTicker(){if(timerId!==null){clearInterval(timerId);timerId=null}timerRunning=false;}
+// keepSound: no zero do cronômetro a buzina já agendada precisa continuar tocando.
+function stopTicker(keepSound=false){if(timerId!==null){clearInterval(timerId);timerId=null}timerRunning=false;if(!keepSound)cancelScheduledSounds();}
 function pauseTimer(){if(!timerRunning)return;timeLeft=Math.max(0,(deadline-Date.now())/1000);stopTicker();$('timerInfo').textContent='Cronômetro pausado pela organização.';displayTimer();}
-function resetTimer(){stopTicker();lastSoundSecond=null;timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
-function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);soundTick();displayTimer();if(timeLeft<=0){soundAtEnd();stopTicker();state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
-function startTimer(){if(timerMode==='help-wait'||!currentQuestion()||state.recorded||state.revealed||state.expired||timerRunning)return;audioContextForTimer();lastSoundSecond=Math.ceil(timeLeft);timerRunning=true;deadline=Date.now()+timeLeft*1000;timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada.';displayTimer();}
-const HELPER_PICKER_KEY='gincana_helper_picker_preview_v1';
+function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
+function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);if(timeLeft>0)scheduleCountdownSounds(timeLeft,'op:'+deadline);displayTimer();if(timeLeft<=0){stopTicker(true);state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
+function startTimer(){if(timerMode==='help-wait'||!currentQuestion()||state.recorded||state.revealed||state.expired||timerRunning)return;timerRunning=true;deadline=Date.now()+timeLeft*1000;deadlineServer=Math.round(deadline+serverOffset);scheduleCountdownSounds(timeLeft,'op:'+deadline);timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada (também pela tela do aluno).';displayTimer();}
+// Seletor de auxílio e prévia de pontos vão ao telão pelo Supabase (colunas helper_picker e score_preview).
+let helperPickerData={open:false};
 function getHelperPickerData(){
  const ph=state.phase,round=state.round;
  return {open:true,phase:ph,round,school:state.school,schools:schools().filter(n=>n!==state.school).map(name=>({name,used:helpedAlready(ph,round,name)}))};
@@ -305,24 +430,23 @@ function openHelperPicker(){
  if(!data.schools.some(x=>!x.used)){alert('Nenhuma escola disponível para prestar auxílio nesta rodada.');return;}
  $('operatorHelperPicker').classList.add('open');
  drawPickerChoices('operatorHelperChoices',data,true);
- localStorage.setItem(HELPER_PICKER_KEY,JSON.stringify(data));
+ cloudQueue('helper_picker',data);
 }
 function cancelHelperPicker(){
  $('operatorHelperPicker').classList.remove('open');
- localStorage.setItem(HELPER_PICKER_KEY,JSON.stringify({open:false}));
+ cloudQueue('helper_picker',{open:false});
  $('timerInfo').textContent='Chamada cancelada; cronômetro continua pausado. Clique em Iniciar 30s para continuar.';
 }
 function chooseHelperFromPicker(name){
  if(!schools().includes(name)||name===state.school||helpedAlready(state.phase,state.round,name))return alert('Escola indisponível para auxílio.');
  $('helper').value=name;
  $('operatorHelperPicker').classList.remove('open');
- localStorage.setItem(HELPER_PICKER_KEY,JSON.stringify({open:false}));
+ cloudQueue('helper_picker',{open:false});
  callHelperNow();
 }
 function showPublicHelperPicker(){
  if(!IS_DISPLAY)return;
- let data;
- try{data=JSON.parse(localStorage.getItem(HELPER_PICKER_KEY)||'null')}catch(e){}
+ const data=helperPickerData;
  const valid=data&&data.open&&data.phase===state.phase&&data.round===state.round&&data.school===state.school;
  $('publicHelperPicker').classList.toggle('open',!!valid);
  if(valid)drawPickerChoices('publicHelperChoices',data,false);
@@ -345,8 +469,7 @@ function startHelpCountdown(){
  $('timerInfo').textContent='Tempo de auxílio em andamento para '+activeHelperName+'.';
  startTimer();refresh();
 }
-function selectAnswer(i){if(!currentQuestion()||state.revealed||state.recorded||state.expired)return;state.selected=i;refresh();}
-const SCORE_PREVIEW_KEY='gincana_score_preview_v1';
+function selectAnswer(i){if(IS_DISPLAY||!currentQuestion()||state.revealed||state.recorded||state.expired)return;state.selected=i;state.selectedAt=serverNow();state.selectedBy='operador';refresh();}
 let scorePreview=null;
 function activeScoreHelper(){
  return state.phase!=='F'&&state.round<=4&&activeHelperName&&['help','help-wait'].includes(timerMode)?activeHelperName:'';
@@ -423,7 +546,7 @@ function renderScorePreview(){
 }
 function publishScorePreview(data){
  scorePreview=data;
- localStorage.setItem(SCORE_PREVIEW_KEY,JSON.stringify(data||{open:false}));
+ cloudQueue('score_preview',data||{open:false});
  renderScorePreview();
 }
 function showScorePreview(){
@@ -448,7 +571,16 @@ function recordSelected(){
 }
 function recordTimeout(){if(!currentQuestion()||state.recorded)return;if(!state.expired)return alert('A contagem ainda não terminou.');if(state.selected!==null)return alert('Há uma alternativa selecionada dentro do prazo. Revele a resposta e confirme a pontuação.');record(false,true);}
 
-function persist(){if(IS_DISPLAY)return;localStorage.setItem(KEY,JSON.stringify(state));}
+// Grava no navegador (cópia de segurança) e envia ao Supabase quando o conteúdo muda.
+let lastPersisted='';
+function stateFingerprint(){const {_savedAt,...rest}=state;return JSON.stringify(rest);}
+function persist(){
+ if(IS_DISPLAY)return;
+ const fp=stateFingerprint();
+ if(fp!==lastPersisted){lastPersisted=fp;state._savedAt=Date.now();}
+ try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}
+ cloudQueue('state',state);
+}
 function score(phase,school){return state.scores[phase][school]||0;}
 function projected(phase,schools){return [...schools].sort((a,b)=>score(phase,b)-score(phase,a)||a.localeCompare(b,'pt-BR')).slice(0,2);}
 function hasCutTie(phase,schools){const scores=schools.map(x=>score(phase,x)).sort((a,b)=>b-a);return scores.length>2&&scores[1]===scores[2];}
@@ -513,12 +645,19 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  if([...$('helper').options].some(x=>x.value===previousHelper&&!x.disabled))$('helper').value=previousHelper;
  $('helper').disabled=ph==='F'||state.round>=5||state.recorded||timerMode!=='normal';
  const q=currentQuestion();$('questionTitle').textContent=q?(state.question===-1?'Questão '+q.numero+' — '+q.q:q.q):'Aguardando sorteio da pergunta...';$('options').replaceChildren();
+ // Antes da revelação, telão e aluno mostram a escolha mais recente (inclusive a feita na tela do aluno).
+ const shown=state.revealed?state.selected:IS_STUDENT&&studentPending&&studentPending.qid===state.qid?studentPending.selected:effectiveSelected();
  if(q){q.a.forEach((v,i)=>{
-   const o=el('button','option'+(state.revealed&&q.c===i?' correct':'')+(state.revealed&&state.selected===i&&q.c!==i?' incorrect':'')+(!state.revealed&&state.selected===i?' picked':''),`${'ABC'[i]}) ${v}${state.revealed&&q.c===i?' ✓':state.revealed&&state.selected===i?' ✕':''}`);
-   o.type='button';o.disabled=state.revealed||state.recorded||state.expired;o.onclick=()=>selectAnswer(i);$('options').append(o);
+   const o=el('button','option'+(state.revealed&&q.c===i?' correct':'')+(state.revealed&&state.selected===i&&q.c!==i?' incorrect':'')+(!state.revealed&&shown===i?' picked':''),`${'ABC'[i]}) ${v}${state.revealed&&q.c===i?' ✓':state.revealed&&state.selected===i?' ✕':''}`);
+   o.type='button';
+   if(IS_STUDENT){o.disabled=!studentCanAnswer();o.onclick=()=>studentAnswer(i);}
+   else{o.disabled=state.revealed||state.recorded||state.expired;o.onclick=()=>selectAnswer(i);}
+   $('options').append(o);
  });}
  $('status').textContent=!q?'Selecione uma escola e sorteie uma pergunta.':state.recorded?'Resposta registrada. Selecione a próxima escola.':state.revealed?(state.selected===null?`Resposta correta: ${'ABC'[q.c]}) ${q.a[q.c]}`:(state.selected===q.c?'✓ RESPOSTA CORRETA. ':'✕ RESPOSTA INCORRETA. ')+`Gabarito: ${'ABC'[q.c]}) ${q.a[q.c]}`):state.expired?(state.selected===null?'Tempo esgotado sem resposta. Confirme o registro sem pontuação.':'Tempo encerrado com alternativa já escolhida. Clique em Revelar resposta escolhida.'):state.selected===null?'Aguardando seleção da alternativa...':`Alternativa ${'ABC'[state.selected]} selecionada. Pode alterar antes de revelar.`;
- if(IS_DISPLAY&&!state.revealed&&!state.recorded)$('status').textContent=state.selected===null?'Aguardando resposta da dupla...':`Alternativa ${'ABC'[state.selected]} escolhida pela dupla. Aguardando conferência.`;
+ if(!IS_DISPLAY&&q&&!state.revealed&&!state.recorded&&state.selected!==null&&state.selectedBy==='aluno')$('status').textContent+=' (escolhida na tela do aluno)';
+ if(IS_DISPLAY&&!state.revealed&&!state.recorded)$('status').textContent=shown===null?'Aguardando resposta da dupla...':`Alternativa ${'ABC'[shown]} escolhida pela dupla. Aguardando conferência.`;
+ if(IS_STUDENT)$('status').textContent=studentStatusText(q,shown);
  $('revealBtn').disabled=!q||state.revealed||state.recorded||state.selected===null;
  $('confirmBtn').disabled=!q||!state.school||state.recorded||!state.revealed||state.selected===null||state.round===6;
  if(!IS_DISPLAY)updateScoreButton();
@@ -544,23 +683,27 @@ async function drawQuestion(){
  if(trainingBusy)return;
  if(!state.school)return alert('Selecione a escola.');
  if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');
- if(state.round===6)return alert('Desempate ainda não está automatizado nesta versão de treinamento.');
- if(completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada de treinamento.');
+ if(state.round===6)return alert('Desempate ainda não está automatizado nesta versão.');
+ if(completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');
  if(!trainingClient)return alert('Faça login para consultar o banco protegido.');
  const diff=state.round<=2?'facil':state.round<=4?'media':'dificil';
  trainingBusy=true;
  const btn=$('drawBtn');if(btn)btn.disabled=true;
  try{
-  const {data,error}=await trainingClient.rpc('gincana_sortear_treino',{p_dificuldade:diff});
+  // Não repete perguntas já usadas no placar desta sala (todas as etapas).
+  const usedNumbers=[...new Set(['A','B','F'].flatMap(ph=>(state.events[ph]||[]).map(e=>e.trainingQuestion?.numero)).filter(Number.isInteger))];
+  const {data,error}=await trainingClient.rpc('gincana_sortear',{p_sala:SALA,p_dificuldade:diff,p_etapa:state.phase,p_excluir:usedNumbers});
   if(error)throw error;
   if(!Array.isArray(data)||data.length!==1)throw Error('Nenhuma pergunta encontrada para a dificuldade.');
   const q=data[0];
   if(!Number.isInteger(q.numero)||!q.enunciado||!q.alternativa_a||!q.alternativa_b||!q.alternativa_c)throw Error('Pergunta incompleta no banco.');
   state.question=-1;
   state.trainingQuestion={numero:q.numero,q:q.enunciado,a:[q.alternativa_a,q.alternativa_b,q.alternativa_c],c:null,dificuldade:q.dificuldade};
+  state.qid=newQid();state.selectedAt=0;state.selectedBy=null;
   state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;
   resetTimer();refresh();
- }catch(e){alert('Não foi possível sortear a pergunta de treino: '+e.message);}
+  if(q.repetida)alert('ATENÇÃO: acabaram as perguntas inéditas desta dificuldade. Foi sorteada uma pergunta já utilizada.');
+ }catch(e){alert('Não foi possível sortear a pergunta: '+e.message);}
  finally{trainingBusy=false;if(btn)btn.disabled=false;}
 }
 async function reveal(){
@@ -581,9 +724,9 @@ async function reveal(){
  }
  state.revealed=true;refresh();
 }
-function record(correct,timeout=false,approved=false,approvedHelper=null){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(approvedHelper!==null?approvedHelper:(timerMode==='help'||timerMode==='help-wait'?activeHelperName:''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();state.events[ph].push({kind:'answer',round,school:state.school,helper,question:state.question,selected:timeout?null:state.selected,timeout,gain,part,correct,trainingQuestion:state.question===-1?structuredClone(state.trainingQuestion):null});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
-function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.expired=!!last.timeout;resetTimer();refresh();}
-function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function record(correct,timeout=false,approved=false,approvedHelper=null){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(approvedHelper!==null?approvedHelper:(timerMode==='help'||timerMode==='help-wait'?activeHelperName:''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();const ev={kind:'answer',round,school:state.school,helper,question:state.question,qid:state.qid||null,selected:timeout?null:state.selected,selectedBy:timeout?null:(state.selectedBy||null),timeout,gain,part,correct,trainingQuestion:state.question===-1?structuredClone(state.trainingQuestion):null};state.events[ph].push(ev);cloudLog('resposta',{...ev,phase:ph,numero:ev.trainingQuestion?.numero??null,letra:ev.selected===null?null:'ABC'[ev.selected]});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
+function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.qid=last.qid||newQid();state.selectedAt=0;state.expired=!!last.timeout;cloudLog('desfazer',{...last,phase:state.phase,numero:last.trainingQuestion?.numero??null});resetTimer();refresh();}
+function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;cloudLog('zerar',{phase:ph,removidos:state.events[ph].length,events:state.events[ph],scores:state.scores[ph]});state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
 
 // Relatório de conferência: gerado somente no navegador local do operador.
@@ -651,7 +794,7 @@ function generatePDFReport(){
  <div class="headerText"><h1>Gincana do Saber 2026</h1><div class="subtitle">Câmara Municipal de Passos • Escola do Legislativo</div>
  <div class="subtitle"><b>RELATÓRIO DE APURAÇÃO — ${esc(names[ph])}</b></div></div>
  <div class="logos"><div class="logoPlate"><img alt="Câmara Municipal de Passos" src="${brand}"></div><img class="schoolLogo" alt="Escola do Legislativo" src="${brand2}"></div></header>
- <div class="status">DOCUMENTO PROVISÓRIO — NÃO HOMOLOGADO. Dados demonstrativos do navegador; NÃO utilizar para apuração oficial.</div>
+ <div class="status">DOCUMENTO PROVISÓRIO — NÃO HOMOLOGADO. ${SALA==='oficial'?'Dados da sala OFICIAL gravados no Supabase; conferir antes da homologação.':'Dados da sala de TREINAMENTO; NÃO utilizar para apuração oficial.'}</div>
  <div class="info">Emitido em: ${esc(new Date().toLocaleString('pt-BR'))} • Escolas: ${all.length} • Respostas registradas: ${answers.length} • Total esperado: ${all.length*5}<br>
  Situação: ${completedAll?'Cinco rodadas registradas para todas as escolas':'Apuração incompleta: há respostas ou rodadas pendentes'}.</div>
  <h2>1. Classificação e pontos por rodada</h2>
@@ -662,9 +805,9 @@ function generatePDFReport(){
  ${helperRows?`<table><thead><tr><th>Rodada</th><th>Escola que respondeu</th><th>Escola auxiliadora</th><th>Resultado</th><th>Pontos: resposta / auxílio</th></tr></thead><tbody>${helperRows}</tbody></table>`:'<p>Nenhum auxílio registrado nesta etapa.</p>'}
  <h2 class="pagebreak">3. Histórico dos lançamentos</h2>
  ${register?`<table><thead><tr><th>Nº</th><th>Rodada</th><th>Escola que respondeu</th><th>Auxiliadora</th><th>Alternativa</th><th>Resultado</th><th>Pontos escola</th><th>Pontos auxílio</th></tr></thead><tbody>${register}</tbody></table>`:'<p>Nenhuma resposta registrada.</p>'}
- <p class="note">As linhas representam lançamentos armazenados no navegador do operador; não demonstram homologação, autenticação ou auditoria independente.</p>
+ <p class="note">As linhas representam os lançamentos gravados pelo operador (cópia no Supabase, sala ${esc(SALA)}); não substituem a homologação pela organização.</p>
  <div class="signatures"><div class="sig">Conferência da organização</div><div class="sig">Homologação — responsável autorizado</div></div>
- <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido a partir do protótipo demonstrativo.</footer>
+ <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido pela versão 7.0 beta (sala ${esc(SALA)}).</footer>
  </body></html>`;
  const popup=window.open('','_blank');
  if(!popup){alert('O navegador bloqueou a janela. Permita pop-ups para este site e clique novamente em Gerar relatório PDF.');return;}
@@ -729,118 +872,382 @@ async function restoreBackupFile(input){
   stopTicker();
   state=pack.state;
   timerRunning=false;timerId=null;deadline=0;timerMode='normal';timeLeft=30;timerTotal=30;activeHelperName='';
-  localStorage.setItem(HELPER_PICKER_KEY,JSON.stringify({open:false}));
-  localStorage.setItem(SCORE_PREVIEW_KEY,JSON.stringify({open:false}));
+  cloudQueue('helper_picker',{open:false});
+  cloudQueue('score_preview',{open:false});
   scorePreview=null;
   $('operatorHelperPicker').classList.remove('open');
   $('operatorScoreOverlay').classList.remove('open');
   $('timerInfo').textContent='Backup restaurado. Cronômetro parado: confira etapa, rodada e escola antes de continuar.';
-  localStorage.setItem(KEY,JSON.stringify(state));
+  cloudLog('restaurar',{arquivo:file.name,registros:pack.records,exportadoEm:pack.exportedAt});
   displayTimer();refresh();
   alert('Backup restaurado no navegador.\n\nLançamentos carregados: '+pack.records+'\n\nConfira o ranking no operador e no telão. O cronômetro não é retomado automaticamente.');
  }catch(err){alert('NÃO FOI POSSÍVEL RESTAURAR O BACKUP.\n\n'+err.message+'\n\nNenhum dado foi alterado.');}
  finally{input.value='';}
 }
-function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-treino-v61-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
+function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISOString(),state},null,2);const blob=new Blob([data],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='gincana-backup-v7-'+SALA+'-'+new Date().toISOString().slice(0,10)+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),3000);}
 
-// Separação do operador e do telão: sincronização local no mesmo navegador.
-// A versão beta autentica o operador, mas o placar local permanece demonstrativo.
-const IS_DISPLAY = new URLSearchParams(location.search).get('view')==='telao';
-const DISPLAY_TIMER_KEY='gincana_timer_preview_v1';
+// Textos de aviso conforme a sala aberta.
+function applySalaTexts(){
+ const oficial=SALA==='oficial';
+ document.body.classList.toggle('salaOficial',oficial);
+ const w=document.querySelector('.warning');
+ if(w)w.innerHTML=oficial?
+  '<strong>VERSÃO 7.0 BETA — SALA OFICIAL.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala oficial), separados do treinamento. As perguntas sorteadas aqui não se repetem. Confira o indicador "☁ Supabase: tudo salvo" antes de cada pergunta. A homologação dos resultados continua com a organização.':
+  '<strong>VERSÃO 7.0 BETA — SALA DE TREINAMENTO.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala de treinamento), separados da sala oficial. Telão e tela do aluno podem estar em outros aparelhos, abertos pelos links do painel. Não utilizar esta sala para a apuração oficial.';
+ const t=$('trainingBankText');
+ if(t)t.innerHTML=oficial?
+  '<strong>SALA OFICIAL:</strong> cada pergunta sorteada fica registrada e não volta a ser sorteada nesta sala. Todos os lançamentos ficam gravados no Supabase.':
+  '<strong>IMPORTANTE:</strong> sala de treinamento. As perguntas não se repetem enquanto estiverem no placar desta sala; ao zerar a etapa, voltam a ficar disponíveis. Nunca utilizar como apuração dos dias 20, 21 ou 23.';
+ document.title='Gincana do Saber 2026 — '+(IS_STUDENT?'Resposta da dupla':VIEW==='telao'?'Telão':'Operador')+(oficial?' (oficial)':' (treinamento)');
+}
+// ---------------------------------------------------------------------------
+// Supabase: estado compartilhado entre operador, telão e tela do aluno.
+// Tabela public.gincana_estado (uma linha por sala). O operador grava pela função
+// gincana_salvar_estado; telão e aluno só leem (Realtime + consulta periódica).
+// A tela do aluno grava apenas a alternativa, pela função gincana_responder.
+// Nunca colocar service_role, sb_secret ou gabaritos nesta página.
+// ---------------------------------------------------------------------------
+const GINCANA_SUPABASE_URL='https://vqpvihzeczpnzxecxegf.supabase.co';
+const GINCANA_PUBLISHABLE_KEY='sb_publishable_gJ4huXRFWu4Ts3V9tRvMrw_rAUW7THa';
+let trainingClient=null;   // cliente autenticado do operador
+let cloudClient=null;      // cliente usado para ler/assinar a sala (operador ou anônimo)
+let cloudReady=false;      // operador: só grava depois do login e da conciliação
+let realtimeStatus='';
+let lastRev=-1;
+let studentReply={};       // última resposta enviada pela tela do aluno (coluna resposta)
 let displayTimerSnapshot={deadline:0,seconds:30,total:30,running:false};
-function openDisplay(){window.open(new URL('?view=telao',location.href).href,'_blank');}
-function pushDisplayTimer(){
- if(IS_DISPLAY)return;
- const seconds=timerRunning?Math.max(0,(deadline-Date.now())/1000):timeLeft;
- localStorage.setItem(DISPLAY_TIMER_KEY,JSON.stringify({
-  deadline:timerRunning?deadline:0,seconds,total:timerTotal,running:timerRunning,
-  label:timerMode==='help-wait'?'Aguardando posicionamento da dupla auxiliadora':timerMode==='help'?'Auxílio — 15 segundos':'Resposta — 30 segundos',
-  mode:timerMode,helper:timerMode!=='normal'?activeHelperName:''
- }));
+
+// --- Relógio -----------------------------------------------------------------
+async function syncClock(){
+ if(!cloudClient)return;
+ bestRtt=bestRtt===Infinity?Infinity:bestRtt*1.5+20;
+ for(let i=0;i<3;i++){
+  const t0=Date.now();
+  const {data,error}=await cloudClient.rpc('gincana_agora');
+  const t1=Date.now();
+  if(error||typeof data!=='number')continue;
+  const rtt=t1-t0;
+  if(rtt<=bestRtt){bestRtt=rtt;serverOffset=data-(t0+t1)/2;}
+ }
 }
-function readDisplayTimer(){
+
+// --- Fila de gravação do operador ---------------------------------------------
+const cloudSent={};
+let cloudPending={}, cloudFlushTimer=null, cloudBusy=false, cloudError='', cloudLastOk=0;
+function cloudQueue(col,obj){
+ if(IS_DISPLAY||!cloudReady)return;
+ const json=JSON.stringify(obj);
+ if(!(col in cloudPending)&&cloudSent[col]===json)return;
+ cloudPending[col]=JSON.parse(json);
+ scheduleCloudFlush(col==='timer'?0:60);
+}
+function scheduleCloudFlush(delay){
+ if(cloudFlushTimer)return;
+ cloudFlushTimer=setTimeout(flushCloud,delay);
+ setCloudStatus();
+}
+async function flushCloud(){
+ cloudFlushTimer=null;
+ if(!cloudReady||!trainingClient)return;
+ if(cloudBusy){scheduleCloudFlush(80);return;}
+ const patch=cloudPending;
+ if(!Object.keys(patch).length){setCloudStatus();return;}
+ cloudPending={};cloudBusy=true;setCloudStatus();
  try{
-  const incoming=JSON.parse(localStorage.getItem(DISPLAY_TIMER_KEY));
-  if(incoming)displayTimerSnapshot=incoming;
- }catch(e){}
+  const {error}=await trainingClient.rpc('gincana_salvar_estado',{p_sala:SALA,p_patch:patch});
+  if(error)throw error;
+  for(const k in patch)cloudSent[k]=JSON.stringify(patch[k]);
+  cloudError='';cloudLastOk=Date.now();
+ }catch(e){
+  for(const k in patch)if(!(k in cloudPending))cloudPending[k]=patch[k];
+  cloudError=e.message||String(e);
+  scheduleCloudFlush(2000);
+ }finally{
+  cloudBusy=false;
+  if(Object.keys(cloudPending).length)scheduleCloudFlush(30);
+  setCloudStatus();
+ }
 }
+// Registro permanente dos lançamentos (gincana_privado.lancamentos), com nova tentativa.
+const cloudLogQueue=[];let cloudLogBusy=false;
+function cloudLog(tipo,dados){
+ if(IS_DISPLAY)return;
+ cloudLogQueue.push({tipo,dados:JSON.parse(JSON.stringify(dados??{})),em:new Date().toISOString()});
+ flushCloudLog();
+}
+async function flushCloudLog(){
+ if(cloudLogBusy||!cloudReady||!trainingClient||!cloudLogQueue.length)return;
+ cloudLogBusy=true;
+ try{
+  while(cloudLogQueue.length){
+   const item=cloudLogQueue[0];
+   const {error}=await trainingClient.rpc('gincana_registrar_lancamento',{p_sala:SALA,p_tipo:item.tipo,p_dados:{...item.dados,registradoNoNavegadorEm:item.em}});
+   if(error)throw error;
+   cloudLogQueue.shift();
+  }
+ }catch(e){cloudError=e.message||String(e);setTimeout(flushCloudLog,3000);}
+ finally{cloudLogBusy=false;setCloudStatus();}
+}
+function setCloudStatus(){
+ const n=$('cloudStatus');if(!n)return;
+ let text,cls;
+ if(IS_DISPLAY){
+  const ok=realtimeStatus==='SUBSCRIBED'||Date.now()-cloudLastOk<8000;
+  text=ok?'':'⚠ Reconectando ao Supabase…';cls=ok?'ok':'err';
+ }else if(!cloudReady){text='☁ Supabase: aguardando login';cls='wait';}
+ else if(cloudError){text='⚠ Sem conexão com o Supabase — dados guardados neste navegador; tentando de novo';cls='err';}
+ else if(cloudBusy||cloudFlushTimer||Object.keys(cloudPending).length||cloudLogQueue.length){text='☁ Salvando no Supabase…';cls='wait';}
+ else{text='☁ Supabase: tudo salvo';cls='ok';}
+ n.textContent=text;n.className='cloudStatus '+cls+(IS_DISPLAY?'':' admin');
+ n.title=cloudError||'';
+}
+window.addEventListener('beforeunload',e=>{
+ if(!IS_DISPLAY&&cloudReady&&(Object.keys(cloudPending).length||cloudBusy||cloudLogQueue.length)){e.preventDefault();e.returnValue='';}
+});
+
+// --- Leitura da sala ------------------------------------------------------------
+async function pollCloud(){
+ if(!cloudClient)return;
+ const {data,error}=await cloudClient.from('gincana_estado').select('*').eq('sala',SALA).maybeSingle();
+ if(error){realtimeStatus=realtimeStatus==='SUBSCRIBED'?realtimeStatus:'ERRO';setCloudStatus();return;}
+ cloudLastOk=Date.now();
+ if(data)onCloudRow(data);
+ setCloudStatus();
+}
+function subscribeCloud(){
+ cloudClient.channel('gincana-estado-'+SALA)
+  .on('postgres_changes',{event:'*',schema:'public',table:'gincana_estado',filter:'sala=eq.'+SALA},payload=>{
+   const row=payload.new;
+   // Registro grande demais chega incompleto pelo Realtime: busca a linha inteira.
+   if(!row||!('state' in row)||payload.errors)return pollCloud();
+   cloudLastOk=Date.now();onCloudRow(row);
+  })
+  .subscribe(status=>{realtimeStatus=status;setCloudStatus();if(status==='SUBSCRIBED')pollCloud();});
+}
+function onCloudRow(row){
+ if(!row||row.sala!==SALA)return;
+ if(typeof row.rev==='number'){if(row.rev<lastRev)return;lastRev=row.rev;}
+ if(!IS_DISPLAY){mergeStudentAnswer(row.resposta);return;}
+ state=normalizeState(row.state);
+ const t=row.timer||{};
+ displayTimerSnapshot=Object.keys(t).length?t:{deadline:0,seconds:30,total:30,running:false};
+ helperPickerData=row.helper_picker||{open:false};
+ scorePreview=row.score_preview||null;
+ studentReply=row.resposta||{};
+ if(studentPending&&studentPending.qid!==state.qid)studentPending=null;
+ refresh();renderScreenTimer();showPublicHelperPicker();renderScorePreview();
+}
+
+// --- Resposta da tela do aluno ---------------------------------------------------
+// Escolha mais recente entre a do operador e a do aluno (pela hora do servidor).
+function effectiveSelected(){
+ const r=studentReply;
+ if(r&&r.qid&&r.qid===state.qid&&!state.revealed&&!state.recorded&&Number.isInteger(r.selected)&&(r.at||0)>(state.selectedAt||0))return r.selected;
+ return state.selected;
+}
+// Operador: incorpora ao placar a alternativa enviada pela tela do aluno.
+// O prazo já foi conferido pelo servidor; por isso vale mesmo se chegar logo após o zero.
+function mergeStudentAnswer(r){
+ studentReply=r||{};
+ if(!r||!r.qid||r.qid!==state.qid||!currentQuestion()||state.revealed||state.recorded)return;
+ if(!Number.isInteger(r.selected)||r.selected<0||r.selected>2)return;
+ if((r.at||0)<=(state.selectedAt||0))return;
+ state.selected=r.selected;state.selectedAt=r.at;state.selectedBy='aluno';
+ refresh();
+}
+
+// --- Telão e aluno: cronômetro ----------------------------------------------------
+function displayRemaining(){
+ const s=displayTimerSnapshot;
+ return s.running?Math.max(0,(s.deadline-serverNow())/1000):Math.max(0,Number(s.seconds??30));
+}
+let lastStudentCan=null;
 function renderScreenTimer(){
  if(!IS_DISPLAY)return;
- let seconds=displayTimerSnapshot.running?
- Math.max(0,(displayTimerSnapshot.deadline-Date.now())/1000):displayTimerSnapshot.seconds;
- const n=document.getElementById('screenTimerNum');
- const waiting=displayTimerSnapshot.mode==='help-wait';
+ const s=displayTimerSnapshot;
+ const seconds=displayRemaining();
+ const n=$('screenTimerNum');
+ const waiting=s.mode==='help-wait';
  n.textContent=waiting?'AGUARDANDO':('00:'+String(Math.ceil(seconds)).padStart(2,'0'));
  n.classList.toggle('isWaiting',waiting);
  $('screenTimer').classList.toggle('isWaiting',waiting);
  $('screenHelperBanner').classList.toggle('isWaiting',waiting);
  n.classList.toggle('low',seconds<=5);
- document.getElementById('screenTimerDesc').textContent=displayTimerSnapshot.label||'Aguardando início da contagem.';
- const helping=displayTimerSnapshot.mode==='help'||displayTimerSnapshot.mode==='help-wait';
+ $('screenTimerDesc').textContent=s.label||'Aguardando início da contagem.';
+ const helping=s.mode==='help'||s.mode==='help-wait';
  $('screenHelperBanner').classList.toggle('active',helping);
  $('screenHelperBanner').querySelector('strong').textContent=waiting?'🤝 AUXÍLIO SOLICITADO — AGUARDANDO POSICIONAMENTO':'🤝 AUXÍLIO SOLICITADO';
  $('screenTimer').classList.toggle('isHelping',helping);
  $('screenTimerHeading').textContent=waiting?'Aguardando dupla auxiliadora':helping?'Tempo do auxílio':'Tempo da pergunta';
- $('screenHelperName').textContent=helping?(displayTimerSnapshot.helper||'Escola auxiliadora a confirmar'):'';
+ $('screenHelperName').textContent=helping?(s.helper||'Escola auxiliadora a confirmar'):'';
+ const bar=$('screenTimerFill');
+ if(bar){bar.style.width=(100*seconds/(s.total||30))+'%';bar.classList.toggle('low',seconds<=5);}
+ // Som no telão (quando ativado): agenda pelo prazo do servidor.
+ if(timerSoundEnabled){
+  if(s.running&&s.deadline)scheduleCountdownSounds((s.deadline-serverNow())/1000,'tela:'+s.deadline);
+  else if(scheduledFor&&Number(s.seconds)>0.3)cancelScheduledSounds();
+ }
+ if(IS_STUDENT){
+  const can=studentCanAnswer();
+  if(can!==lastStudentCan){lastStudentCan=can;refresh();}
+ }
 }
-if(IS_DISPLAY){
- document.body.classList.add('publicScreen');
- window.addEventListener('storage',e=>{
-  if(e.key===KEY){
-   try{state=JSON.parse(e.newValue)||state;refresh()}catch(err){}
-  }
-  if(e.key===DISPLAY_TIMER_KEY){readDisplayTimer();renderScreenTimer()}
-  if(e.key===HELPER_PICKER_KEY)showPublicHelperPicker();
-  if(e.key===SCORE_PREVIEW_KEY){
-   try{scorePreview=JSON.parse(e.newValue||'null')}catch(err){scorePreview=null}
-   renderScorePreview();
-  }
+function studentCanAnswer(){
+ const s=displayTimerSnapshot;
+ return IS_STUDENT&&!!STUDENT_KEY&&!!currentQuestion()&&!!state.qid&&!state.revealed&&!state.recorded&&!state.expired&&!!s.running&&displayRemaining()>0&&(!s.qid||s.qid===state.qid);
+}
+// Envio em fila: só uma chamada por vez, e vale sempre o último toque.
+let studentPending=null, studentSending=false, studentMessage='';
+function studentAnswer(i){
+ if(!studentCanAnswer())return;
+ studentPending={qid:state.qid,selected:i};studentMessage='';
+ refresh();sendStudentAnswer();
+}
+async function sendStudentAnswer(){
+ if(studentSending||!studentPending)return;
+ studentSending=true;
+ const sent={...studentPending};
+ try{
+  const {data,error}=await cloudClient.rpc('gincana_responder',{p_sala:SALA,p_chave:STUDENT_KEY,p_qid:sent.qid,p_alternativa:sent.selected});
+  if(error)throw error;
+  if(sent.qid===state.qid&&(!studentReply.at||data.at>studentReply.at))studentReply={qid:sent.qid,selected:data.selected,at:data.at};
+  studentMessage='';
+ }catch(e){studentMessage='⚠ '+(e.message||'Não foi possível enviar a resposta.');}
+ finally{
+  studentSending=false;
+  if(studentPending&&(studentPending.qid!==sent.qid||studentPending.selected!==sent.selected))sendStudentAnswer();
+  else{studentPending=null;refresh();}
+ }
+}
+function studentStatusText(q,shown){
+ if(!STUDENT_KEY)return 'Link incompleto. Peça à organização o link da tela do aluno.';
+ if(studentMessage)return studentMessage;
+ if(!q)return 'Aguardando a próxima pergunta…';
+ if(state.recorded||state.revealed)return shown===null||shown===undefined?'Resposta encerrada.':'Resposta encerrada. Alternativa '+'ABC'[shown]+'.';
+ if(studentPending)return 'Enviando alternativa '+'ABC'[studentPending.selected]+'…';
+ const s=displayTimerSnapshot;
+ if(studentCanAnswer())return shown===null||shown===undefined?'Toque na alternativa escolhida. Você pode trocar enquanto o tempo correr.':'Alternativa '+'ABC'[shown]+' registrada. Você pode trocar enquanto o tempo correr.';
+ if(s.mode==='help-wait')return 'Aguardando a dupla auxiliadora…';
+ if(!s.running&&displayRemaining()>0)return shown===null||shown===undefined?'Aguardando o início do cronômetro…':'Cronômetro pausado. Alternativa '+'ABC'[shown]+'.';
+ return shown===null||shown===undefined?'Tempo esgotado.':'Tempo esgotado. Alternativa '+'ABC'[shown]+' registrada.';
+}
+
+// --- Operador: envia o cronômetro ao telão/aluno ------------------------------------
+function openDisplay(){window.open(new URL('?view=telao&sala='+SALA,location.href).href,'_blank');}
+function pushDisplayTimer(){
+ if(IS_DISPLAY)return;
+ cloudQueue('timer',{
+  deadline:timerRunning?deadlineServer:0,
+  seconds:timerRunning?null:Math.round(Math.max(0,timeLeft)*10)/10,
+  total:timerTotal,running:timerRunning,qid:state.qid||null,
+  label:timerMode==='help-wait'?'Aguardando posicionamento da dupla auxiliadora':timerMode==='help'?'Auxílio — 15 segundos':'Resposta — 30 segundos',
+  mode:timerMode,helper:timerMode!=='normal'?activeHelperName:''
  });
- readDisplayTimer();
- showPublicHelperPicker();
- try{scorePreview=JSON.parse(localStorage.getItem(SCORE_PREVIEW_KEY)||'null')}catch(e){}
- renderScorePreview();
- setInterval(renderScreenTimer,100);
+}
+async function showStudentLink(renew=false){
+ if(!trainingClient||!cloudReady)return alert('Faça login primeiro.');
+ if(renew&&!confirm('Gerar um link NOVO para a tela do aluno?\n\nO link antigo deixa de funcionar e o tablet/celular do aluno precisará abrir o novo.'))return;
+ const {data,error}=await trainingClient.rpc('gincana_chave_aluno',{p_sala:SALA,p_renovar:!!renew});
+ if(error)return alert('Não foi possível obter o link: '+error.message);
+ const url=new URL('?view=aluno&sala='+SALA+'&k='+encodeURIComponent(data),location.href).href;
+ try{await navigator.clipboard.writeText(url)}catch(e){}
+ const box=$('studentLinkBox');
+ box.hidden=false;
+ $('studentLinkUrl').value=url;
+ $('studentLinkOpen').href=url;
+}
+function changeSala(){
+ const target=$('salaSelect').value;
+ if(target===SALA)return;
+ const msg=target==='oficial'?
+  'Abrir a SALA OFICIAL?\n\nUse somente nos dias da competição. O placar oficial fica separado do treinamento, e o telão e a tela do aluno precisam ser abertos com os links da sala oficial.':
+  'Voltar para a SALA DE TREINAMENTO?\n\nO placar oficial continua salvo no Supabase.';
+ if(!confirm(msg)){$('salaSelect').value=SALA;return;}
+ location.href=new URL('?sala='+target,location.href).href;
 }
 
-if(!IS_DISPLAY)resetTimer();refresh();
+// --- Inicialização do telão e do aluno ------------------------------------------------
+function startDisplay(){
+ document.body.classList.add('publicScreen');
+ if(IS_STUDENT)document.body.classList.add('studentScreen');
+ if(!window.supabase?.createClient){$('status').textContent='Sem conexão: não foi possível carregar o Supabase. Confira a internet e atualize a página.';return;}
+ cloudClient=window.supabase.createClient(GINCANA_SUPABASE_URL,GINCANA_PUBLISHABLE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
+ syncClock().then(pollCloud);
+ subscribeCloud();
+ setInterval(()=>{if(realtimeStatus!=='SUBSCRIBED'||Date.now()-cloudLastOk>15000)pollCloud();},2500);
+ setInterval(syncClock,60000);
+ setInterval(renderScreenTimer,100);
+ setInterval(setCloudStatus,2000);
+}
 
-// LOGIN: somente frontend de teste. Controle real de perguntas fica no RPC do banco.
-// Nunca colocar service_role, sb_secret ou gabaritos nesta página.
-const GINCANA_SUPABASE_URL='https://vqpvihzeczpnzxecxegf.supabase.co';
-const GINCANA_PUBLISHABLE_KEY='sb_publishable_gJ4huXRFWu4Ts3V9tRvMrw_rAUW7THa';
-let trainingClient=null;
+// --- Login do operador e conciliação com o Supabase -------------------------------------
 function authNotice(message){const el=document.getElementById('authStatus');if(el)el.textContent=message;}
 function startAuth(){
- if(IS_DISPLAY)return;
  const gate=document.getElementById('authGate');gate.hidden=false;
  document.getElementById('trainingBank').hidden=true;
  if(!window.supabase?.createClient){authNotice('Não foi possível carregar a biblioteca de autenticação. Confira a internet e atualize a página.');return;}
  trainingClient=window.supabase.createClient(GINCANA_SUPABASE_URL,GINCANA_PUBLISHABLE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+ cloudClient=trainingClient;
  trainingClient.auth.onAuthStateChange((event,session)=>{
   // Não fazemos consulta assíncrona ao SDK dentro deste callback.
-  if(!session){gate.hidden=false;document.getElementById('trainingBank').hidden=true;document.getElementById('operatorIdentity').hidden=true;document.getElementById('logoutBtn').hidden=true;}
+  if(!session){cloudReady=false;setCloudStatus();gate.hidden=false;document.getElementById('trainingBank').hidden=true;document.getElementById('operatorIdentity').hidden=true;document.getElementById('logoutBtn').hidden=true;}
  });
  trainingClient.auth.getSession().then(({data,error})=>{
   if(error){authNotice('Falha ao restaurar sessão: '+error.message);return;}
   if(data.session)authorizeOperator();
  }).catch(err=>authNotice('Falha ao conectar: '+err.message));
 }
+function hasData(s){return !!s&&(['A','B','F'].some(ph=>(s.events?.[ph]||[]).length>0)||s.question!==null&&s.question!==undefined);}
+function countEvents(s){return ['A','B','F'].reduce((t,ph)=>t+(s?.events?.[ph]||[]).length,0);}
+// Decide qual placar vale ao entrar: o do Supabase ou o deste navegador.
+async function reconcileCloud(){
+ const {data,error}=await trainingClient.from('gincana_estado').select('*').eq('sala',SALA).maybeSingle();
+ if(error)throw error;
+ const remote=data&&data.state&&data.state.scores?normalizeState(data.state):null;
+ const keepLocalCopy=()=>{try{localStorage.setItem(KEY+'_copia_antes_sincronizar',JSON.stringify({salvoEm:new Date().toISOString(),state}))}catch(e){}};
+ if(remote&&hasData(remote)){
+  const same=JSON.stringify({...remote,_savedAt:0})===JSON.stringify({...state,_savedAt:0});
+  if(!same){
+   if(!hasData(state)||(remote._savedAt||0)>=(state._savedAt||0)){keepLocalCopy();state=remote;}
+   else if(!confirm('Os dados DESTE navegador são mais recentes que os do Supabase (sala '+SALA+').\n\nSupabase: '+countEvents(remote)+' lançamento(s)\nEste navegador: '+countEvents(state)+' lançamento(s)\n\nOK = enviar os dados deste navegador para o Supabase.\nCancelar = usar os dados do Supabase (uma cópia local fica guardada).')){keepLocalCopy();state=remote;}
+  }
+ }
+ lastRev=typeof data?.rev==='number'?data.rev:-1;
+ lastPersisted=stateFingerprint();
+ cloudReady=true;
+ stopTicker();timerMode='normal';timerTotal=30;timeLeft=30;activeHelperName='';
+ refresh();
+ cloudQueue('helper_picker',{open:false});cloudQueue('score_preview',{open:false});
+ mergeStudentAnswer(data?.resposta);
+ flushCloudLog();
+}
+let operatorStarted=false;
 async function authorizeOperator(){
  if(!trainingClient)return;
  const {data:userResult,error:userError}=await trainingClient.auth.getUser();
  if(userError||!userResult?.user){authNotice('Faça login para continuar.');return;}
- // A consulta por RPC faz a verificação REAL de autorização na tabela privada.
- const {error}=await trainingClient.rpc('gincana_sortear_treino',{p_dificuldade:'facil'});
- if(error){
-  authNotice('Não foi possível validar a autorização do operador: '+error.message);
+ // A verificação REAL de autorização é feita no banco (gincana_privado.operadores).
+ const {data:isOperator,error}=await trainingClient.rpc('gincana_sou_operador');
+ if(error||isOperator!==true){
+  authNotice('Não foi possível validar a autorização do operador'+(error?': '+error.message:'.'));
   await trainingClient.auth.signOut();return;
+ }
+ try{await syncClock();await reconcileCloud();}
+ catch(e){authNotice('Não foi possível ler os dados da sala no Supabase: '+e.message);return;}
+ if(!operatorStarted){
+  operatorStarted=true;
+  subscribeCloud();
+  setInterval(syncClock,60000);
+  // Sem Realtime, busca a resposta do aluno a cada 1,5 s enquanto o tempo corre.
+  setInterval(()=>{if(realtimeStatus!=='SUBSCRIBED'&&(timerRunning||timerMode!=='normal'))pollCloud();},1500);
+  setInterval(()=>{if(realtimeStatus!=='SUBSCRIBED')pollCloud();},10000);
  }
  document.getElementById('authGate').hidden=true;
  document.getElementById('trainingBank').hidden=false;
  const identity=document.getElementById('operatorIdentity');identity.textContent='Operador: '+userResult.user.email;identity.hidden=false;
  document.getElementById('logoutBtn').hidden=false;
  document.getElementById('operatorPassword').value='';
+ setCloudStatus();
 }
 async function loginOperator(){
  const btn=document.getElementById('authSubmit');btn.disabled=true;authNotice('Verificando acesso...');
@@ -854,10 +1261,20 @@ async function loginOperator(){
 }
 async function logoutOperator(){
  if(!trainingClient)return;
+ if(Object.keys(cloudPending).length||cloudLogQueue.length){await flushCloud();await flushCloudLog();}
+ cloudReady=false;
  await trainingClient.auth.signOut();document.getElementById('authGate').hidden=false;
- authNotice('Sessão encerrada.');
+ authNotice('Sessão encerrada.');setCloudStatus();
 }
-startAuth();
+
+// --- Partida -----------------------------------------------------------------------------
+lastPersisted=stateFingerprint();
+if(IS_DISPLAY){applySalaTexts();startDisplay();refresh();}
+else{
+ const sel=$('salaSelect');if(sel)sel.value=SALA;
+ applySalaTexts();
+ resetTimer();refresh();startAuth();setCloudStatus();
+}
 
 </script>
 </body></html>
