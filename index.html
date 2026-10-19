@@ -135,7 +135,7 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
  background:#e8eaeb;color:#76817c;border-color:#d9dede;opacity:.72;
 }
 
-/* Versão 6.1 beta: autenticação do painel e teste isolado do banco oficial. */
+/* Versão 6.2 beta — etapa áudio: autenticação do painel e teste isolado do banco oficial. */
 #authGate{position:fixed;inset:0;background:#063824f5;z-index:5000;display:flex;justify-content:center;align-items:center;padding:18px}
 #authGate[hidden]{display:none!important}
 #authBox{width:min(470px,100%);background:#fff;border-radius:16px;padding:28px;color:#10452f;box-shadow:0 20px 70px #001b12}
@@ -157,18 +157,18 @@ body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicS
 </head>
 <body>
 <header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO 6.1 BETA — TREINAMENTO, NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Login Supabase habilitado. O sorteio principal utiliza perguntas oficiais em TREINAMENTO com correção protegida. Pontos e histórico continuam LOCAIS e demonstrativos; NÃO estão ligados à apuração oficial. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
+<main><div class="warning"><strong>VERSÃO 6.2 BETA — ÁUDIO — TREINAMENTO, NÃO UTILIZAR PARA APURAÇÃO OFICIAL.</strong> Login Supabase habilitado. O sorteio principal utiliza perguntas oficiais em TREINAMENTO com correção protegida. Pontos e histórico continuam LOCAIS e demonstrativos; NÃO estão ligados à apuração oficial. Operador e telão devem estar no mesmo computador e navegador. Dados gravados somente neste navegador. O banco oficial e os gabaritos não estão neste arquivo público.</div>
 <section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🦉 Treinamento integrado — perguntas oficiais</h2>
 <p>Selecione a <strong>Chave, a rodada e a escola</strong> no painel abaixo. Clique em <strong>Sortear pergunta oficial (TREINO)</strong>; use o cronômetro, o auxílio, a seleção da resposta e a conferência normal. A pergunta também aparece no telão conectado ao mesmo navegador.</p>
 <p class="trainingMeta"><strong>IMPORTANTE:</strong> Pontuações de treino somente neste navegador. O banco de 206 questões não é consumido e o resultado não é oficial. Nunca utilizar como apuração dos dias 20, 21 ou 23.</p>
 </section><div class="toolbar admin"><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
-<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
+<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="soundToggle" onclick="toggleTimerSound()" title="Ativar ou silenciar os alertas do tempo">🔊 Alertas ligados</button><button id="soundTest" onclick="testTimerSound()" title="Testar os sons no notebook do operador">♪ Testar áudio</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
 <div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta oficial (TREINO)</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
-</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 6.1 beta — treinamento</div></main>
+</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 6.2 beta — etapa áudio — treinamento</div></main>
 <div id="operatorHelperPicker" class="helperPickerOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorHelperPickerTitle">
  <div class="helperPickerPanel"><h2 id="operatorHelperPickerTitle">🤝 Escolher escola auxiliadora</h2>
   <p>O cronômetro da pergunta foi pausado. Selecione uma escola disponível; as que já ajudaram nesta rodada estão bloqueadas. A dupla escolhida ainda terá tempo para se posicionar antes dos 15 segundos.</p>
@@ -200,7 +200,7 @@ body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicS
   <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
-<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 6.1 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase. Não utilize esta versão para apuração oficial.</p></form></div>
+<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 6.2 beta — etapa áudio. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase. Não utilize esta versão para apuração oficial.</p></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
@@ -224,6 +224,46 @@ if(!state.scores||!state.events||!state.used)state=blank();
 const $=id=>document.getElementById(id);
 let timerId=null, deadline=0, timeLeft=30, timerTotal=30, timerMode='normal', timerRunning=false;
 let activeHelperName='';
+// Alertas do cronômetro: somente no painel operador, evitando áudio duplicado no telão.
+// O Web Audio é desbloqueado pelo clique do operador; nenhum arquivo externo é necessário.
+let timerAudioContext=null, timerSoundEnabled=true, lastSoundSecond=null;
+function audioContextForTimer(){
+ if(IS_DISPLAY||!timerSoundEnabled)return null;
+ try{
+  if(!timerAudioContext)timerAudioContext=new (window.AudioContext||window.webkitAudioContext)();
+  if(timerAudioContext.state==='suspended')timerAudioContext.resume().catch(()=>{});
+  return timerAudioContext;
+ }catch(e){return null;}
+}
+function toneTimer(freq,duration,volume=0.16,startDelay=0){
+ const ctx=audioContextForTimer();if(!ctx)return;
+ const osc=ctx.createOscillator(),gain=ctx.createGain(),now=ctx.currentTime+startDelay;
+ osc.type='sine';osc.frequency.setValueAtTime(freq,now);
+ gain.gain.setValueAtTime(0.0001,now);
+ gain.gain.exponentialRampToValueAtTime(volume,now+0.012);
+ gain.gain.exponentialRampToValueAtTime(0.0001,now+duration);
+ osc.connect(gain);gain.connect(ctx.destination);osc.start(now);osc.stop(now+duration+0.015);
+}
+function soundAtEnd(){toneTimer(680,0.27,0.21);toneTimer(470,0.42,0.23,0.31);}
+function soundTick(){
+ if(!timerRunning||IS_DISPLAY||!timerSoundEnabled)return;
+ const seconds=Math.ceil(timeLeft);
+ if(seconds!==lastSoundSecond){
+  lastSoundSecond=seconds;
+  if(seconds>=1&&seconds<=5)toneTimer(1020,0.12);
+ }
+}
+function toggleTimerSound(){
+ timerSoundEnabled=!timerSoundEnabled;
+ const b=$('soundToggle');if(b)b.textContent=timerSoundEnabled?'🔊 Alertas ligados':'🔇 Alertas silenciados';
+ if(timerSoundEnabled)audioContextForTimer();
+}
+function testTimerSound(){
+ if(!timerSoundEnabled)return alert('Ative os alertas sonoros antes de testar.');
+ audioContextForTimer();toneTimer(1020,0.15);toneTimer(1020,0.15,0.16,0.32);
+ toneTimer(680,0.25,0.21,0.72);toneTimer(470,0.4,0.23,1.01);
+}
+
 function displayTimer(){
  if(!IS_DISPLAY)pushDisplayTimer();
  const n=$('timerNum');
@@ -239,9 +279,9 @@ function displayTimer(){
 }
 function stopTicker(){if(timerId!==null){clearInterval(timerId);timerId=null}timerRunning=false;}
 function pauseTimer(){if(!timerRunning)return;timeLeft=Math.max(0,(deadline-Date.now())/1000);stopTicker();$('timerInfo').textContent='Cronômetro pausado pela organização.';displayTimer();}
-function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
-function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);displayTimer();if(timeLeft<=0){stopTicker();state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
-function startTimer(){if(timerMode==='help-wait'||!currentQuestion()||state.recorded||state.revealed||state.expired)return;timerRunning=true;deadline=Date.now()+timeLeft*1000;timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada.';displayTimer();}
+function resetTimer(){stopTicker();lastSoundSecond=null;timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
+function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);soundTick();displayTimer();if(timeLeft<=0){soundAtEnd();stopTicker();state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
+function startTimer(){if(timerMode==='help-wait'||!currentQuestion()||state.recorded||state.revealed||state.expired||timerRunning)return;audioContextForTimer();lastSoundSecond=Math.ceil(timeLeft);timerRunning=true;deadline=Date.now()+timeLeft*1000;timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada.';displayTimer();}
 const HELPER_PICKER_KEY='gincana_helper_picker_preview_v1';
 function getHelperPickerData(){
  const ph=state.phase,round=state.round;
