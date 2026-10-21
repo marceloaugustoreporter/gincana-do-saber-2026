@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gincana do Saber 2026 — v7.1 beta</title>
+<title>Gincana do Saber 2026 — v7.4 • Desempate oficial</title>
 <style>
 :root{--green:#075537;--dark:#063a2b;--lime:#d1ef28;--orange:#f7941d;--paper:#f5f8f2;--ink:#133a2c}*{box-sizing:border-box}body{margin:0;background:#e9f0e9;color:var(--ink);font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:linear-gradient(125deg,#064029,#09844b);color:white;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.branding{display:flex;align-items:center;gap:12px}.owl{font-size:44px}.branding h1{font-size:29px;line-height:1;margin:0;color:var(--lime)}.branding small{display:block;margin-top:8px}button,select{font:inherit;border-radius:9px;padding:10px 12px;border:1px solid #bed3c4;background:white;color:var(--ink)}button{cursor:pointer;font-weight:650}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:white;border-color:var(--green)}.orange{background:var(--orange);border-color:var(--orange);color:#24200c}.headbtn{background:white;color:var(--green)}main{max-width:1600px;margin:auto;padding:16px}.warning{padding:12px;background:#fff0c7;border-left:5px solid var(--orange);border-radius:9px;margin-bottom:15px;font-size:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;background:white;padding:14px;border-radius:12px;margin-bottom:14px}.field{display:flex;flex-direction:column;gap:5px;min-width:120px}.field label{font-weight:750;font-size:12px}.grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(290px,1fr);gap:14px}.panel{border-radius:15px;background:white;padding:20px;min-width:0}.step{color:#08764b;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}.school{font-size:22px;font-weight:800;background:#e3f4d3;border-left:6px solid #8dbd11;padding:13px;border-radius:9px;margin:15px 0}h2{font-size:clamp(23px,2.4vw,36px);margin:12px 0 20px}.option{cursor:pointer;width:100%;text-align:left;color:var(--ink);background:#f2f7f2;padding:13px 15px;margin:9px 0;border-radius:10px;border:2px solid #e0e9df;font-size:20px}.correct{background:#c5efc7;border-color:#168a48;font-weight:800}.picked{background:#d7ebff;border-color:#2676ad;font-weight:800}.incorrect{background:#ffe0df;border-color:#cc2531;font-weight:800}.timerPanel{margin:14px 0;padding:14px;border:2px solid #dce8dc;border-radius:12px}.timerNum{font-size:clamp(38px,5vw,68px);font-weight:900;font-variant-numeric:tabular-nums;color:#075537}.timerNum.low{color:#c92b28}.timerActions{display:flex;gap:8px;flex-wrap:wrap}.timerBar{background:#e3ebe2;border-radius:30px;height:12px;overflow:hidden;margin:10px 0}.timerFill{height:100%;width:100%;background:#4eaa52;transition:width .2s linear}.timerFill.low{background:#e45245}body.screen .timerPanel{display:none}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.muted{color:#496a58}.status{background:#edf6ec;border-radius:8px;padding:12px;margin-top:15px}.rankRow{display:flex;align-items:center;gap:9px;border-bottom:1px solid #e7ece7;padding:11px 7px}.rankRow.top{background:#e7f7d6}.rankNo{font-weight:800;min-width:28px}.rankName{flex:1;font-size:14px}.score{font-weight:900;font-size:22px;white-space:nowrap}.subhead{font-size:14px;color:#497056;margin:7px 0 15px}.control{margin-top:16px;border:2px solid #cae0d0;border-radius:12px;padding:15px}select{max-width:100%}.control .field{flex:1}.fine{font-size:13px;line-height:1.5}.line{border:0;border-top:1px solid #e6ede4;margin:18px 0}.small{font-size:12px}.footer{text-align:center;padding:18px;color:#597663}.hidden{display:none!important}body.screen{background:#062d23}body.screen .admin,body.screen .warning,body.screen #screenBtn,body.screen #backupBtn{display:none!important}body.screen main{max-width:none}body.screen .panel{background:#fafff5}body.screen .school{font-size:clamp(24px,3vw,42px)}body.screen .option{font-size:clamp(20px,2.3vw,35px)}body.screen .rankName{font-size:clamp(13px,1.3vw,20px)}body.screen .footer{color:white}@media(max-width:850px){.grid{grid-template-columns:1fr}.branding h1{font-size:23px}}@media(min-width:1300px){body.screen .grid{grid-template-columns:minmax(0,2fr) minmax(360px,.9fr)}}
 
@@ -187,6 +187,9 @@ body.studentScreen #options .picked:not(.correct):not(.incorrect){background:#d7
 body.studentScreen #screenTimer{margin-top:16px}
 body.studentScreen #status{font-size:clamp(16px,2vw,22px);font-weight:750;text-align:center}
 /* Desempate: painel visível ao operador e status no telão; sem decisões pelo aluno. */
+.tieModeNotice{margin:10px 0 12px;padding:10px 12px;border-radius:9px;font-weight:800;background:#e9f5e6;color:#075537;border-left:5px solid #168348;line-height:1.45}
+body.salaOficial #tieOperatorPanel{border-color:#8abfa4}
+body.salaOficial #tieOperatorPanel .tieModeNotice{background:#e7f6eb;border-left-color:#08764b}
 #tieOperatorPanel .tieState{background:#f0f7eb;border-radius:10px;padding:11px;font-size:14px;line-height:1.5;margin:8px 0}
 #tieOperatorPanel .tieHistory{max-height:275px;overflow:auto;font-size:13px}
 #tieOperatorPanel .tieRow{border-bottom:1px solid #dbe6dc;padding:6px 0}
@@ -218,13 +221,13 @@ body.studentScreen #studentHelperPicker .helperChoice:disabled{pointer-events:no
 </head>
 <body>
 <header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="cloudStatus" class="cloudStatus admin"></span><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="studentLinkBtn" class="headbtn admin" onclick="showStudentLink()">📱 Link da tela do aluno</button><button id="displaySoundBtn" class="headbtn" onclick="enableDisplaySound()">🔊 Ativar som do telão</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO 7.3 BETA.</strong> Placar e histórico gravados no Supabase.</div>
+<main><div class="warning"><strong>VERSÃO 7.4 — DESEMPATE OFICIAL HABILITADO.</strong> Placar e histórico gravados no Supabase.</div>
 <section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🦉 Perguntas oficiais — banco protegido no Supabase</h2>
 <p>Selecione a <strong>Chave, a rodada e a escola</strong> no painel abaixo. Clique em <strong>Sortear pergunta oficial</strong>; use o cronômetro, o auxílio, a seleção da resposta e a conferência normal. A pergunta aparece no telão e na tela do aluno, em qualquer aparelho conectado à internet. A dupla pode tocar na alternativa na tela do aluno enquanto o cronômetro corre.</p>
 <p class="trainingMeta" id="trainingBankText"></p>
 <p class="trainingMeta" id="usedQuestionGuard" role="status" aria-live="polite"></p>
 <div id="studentLinkBox" class="linkBox" hidden><label for="studentLinkUrl"><strong>📱 Link da tela do aluno</strong> (já copiado; abra no tablet ou celular da dupla — não precisa de login):</label><div class="linkRow"><input id="studentLinkUrl" readonly onclick="this.select()"><a id="studentLinkOpen" target="_blank" rel="noopener">Abrir</a><button type="button" onclick="showStudentLink(true)">Gerar link novo</button></div><p class="fine muted">O link só funciona nesta sala. Gerar um link novo invalida o anterior.</p></div>
-</section><div class="toolbar admin"><div class="field"><label for="salaSelect">SALA</label><select id="salaSelect" onchange="changeSala()"><option value="treinamento">Treinamento</option><option value="oficial">Oficial</option></select></div><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate — perguntas difíceis, 30s</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
+</section><div class="toolbar admin"><div class="field"><label for="salaSelect">SALA</label><select id="salaSelect" onchange="changeSala()"><option value="treinamento">Treinamento</option><option value="oficial">Oficial</option></select></div><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">6ª — DESEMPATE OFICIAL • 30s</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
 <div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div class="timerBar screenBar"><div id="screenTimerFill" class="timerFill"></div></div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro da pergunta — 30s por escola no desempate</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="soundToggle" onclick="toggleTimerSound()" title="Ativar ou silenciar os alertas do tempo">🔊 Alertas ligados</button><button id="soundTest" onclick="testTimerSound()" title="Testar os sons no notebook do operador">♪ Testar áudio</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="studentHelpPanel" aria-label="Solicitar auxílio de outra escola">
  <div id="studentAnsweringSchool" class="studentSchoolName"></div>
  <button id="studentHelpBtn" type="button" onclick="openStudentHelperPicker()" disabled>🤝 Chamar escola auxiliadora</button>
@@ -240,7 +243,7 @@ body.studentScreen #studentHelperPicker .helperChoice:disabled{pointer-events:no
  </div>
  <div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
 <div id="tieOperatorPanel" class="control admin" aria-label="Desempate">
- <div class="step">⚖️ Etapa de desempate — independente da pontuação</div>
+ <div class="step" id="tieModeTitle">⚖️ Etapa de desempate — independente da pontuação</div><div id="tieModeNotice" class="tieModeNotice" role="status"></div>
  <p class="fine">Cada escola recebe uma pergunta difícil por ciclo, com 30 segundos. O auxílio é proibido. As respostas ficam no histórico separado e não somam pontos regulares. O operador confirma o resultado de cada pergunta, a comparação do ciclo e a ordem final.</p>
  <div class="actions"><div class="field" style="flex:1;min-width:240px"><label for="tieGroupSelect">ESCOLAS EMPATADAS (MESMA PONTUAÇÃO)</label><select id="tieGroupSelect"></select></div><button id="startTieBtn" type="button" class="orange" onclick="startTieGroup()">⚖️ Iniciar desempate</button></div>
  <div class="tieState" id="tieState"></div>
@@ -252,7 +255,7 @@ body.studentScreen #studentHelperPicker .helperChoice:disabled{pointer-events:no
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
-</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 7.2 beta — desempate e Supabase</div></main>
+</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 7.4 — desempate oficial e Supabase</div></main>
 <div id="operatorHelperPicker" class="helperPickerOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorHelperPickerTitle">
  <div class="helperPickerPanel"><h2 id="operatorHelperPickerTitle">🤝 Escolher escola auxiliadora</h2>
   <p>O cronômetro da pergunta foi pausado. Selecione uma escola disponível; as que já ajudaram nesta rodada estão bloqueadas. A dupla escolhida ainda terá tempo para se posicionar antes dos 15 segundos.</p>
@@ -290,7 +293,7 @@ body.studentScreen #studentHelperPicker .helperChoice:disabled{pointer-events:no
   <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
-<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 7.2 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase.</p></form></div>
+<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 7.4. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase.</p></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
@@ -464,7 +467,7 @@ function displayTimer(){
 // keepSound: no zero do cronômetro a buzina já agendada precisa continuar tocando.
 function stopTicker(keepSound=false){if(timerId!==null){clearInterval(timerId);timerId=null}timerRunning=false;if(!keepSound)cancelScheduledSounds();}
 function pauseTimer(){if(!timerRunning)return;timeLeft=Math.max(0,(deadline-Date.now())/1000);stopTicker();$('timerInfo').textContent='Cronômetro pausado pela organização.';displayTimer();}
-function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent='Cronômetro reiniciado para teste.';displayTimer();persist();}
+function resetTimer(){stopTicker();timerTotal=30;timeLeft=30;timerMode='normal';activeHelperName='';if(!state.recorded)state.expired=false;$('timerInfo').textContent=(SALA==='oficial'?'Cronômetro reiniciado.':'Cronômetro reiniciado para teste.');displayTimer();persist();}
 function tick(){timeLeft=Math.max(0,(deadline-Date.now())/1000);if(timeLeft>0)scheduleCountdownSounds(timeLeft,'op:'+deadline);displayTimer();if(timeLeft<=0){stopTicker(true);state.expired=true;persist();$('timerInfo').textContent=state.selected===null?'TEMPO ESGOTADO — nenhuma alternativa registrada; confirme zero ponto.':'TEMPO ESGOTADO — alternativa registrada dentro do prazo; revele a resposta para conferir.';refresh();}}
 function startTimer(){if(timerMode==='help-wait'||!currentQuestion()||state.recorded||state.revealed||state.expired||timerRunning)return;timerRunning=true;deadline=Date.now()+timeLeft*1000;deadlineServer=Math.round(deadline+serverOffset);scheduleCountdownSounds(timeLeft,'op:'+deadline);timerId=setInterval(tick,100);$('timerInfo').textContent='Tempo em andamento. A alternativa pode ser alterada (também pela tela do aluno).';displayTimer();}
 // Seletor de auxílio e prévia de pontos vão ao telão pelo Supabase (colunas helper_picker e score_preview).
@@ -692,6 +695,11 @@ function resetQuestionForNext(){
 function renderTiePanel(){
  if(IS_DISPLAY)return;
  const ph=state.phase,sel=$('tieGroupSelect'),btn=$('startTieBtn'),info=$('tieState'),hist=$('tieHistory');
+ const isOfficial=SALA==='oficial';
+ const phaseName=ph==='A'?'CHAVE A • 20/10':ph==='B'?'CHAVE B • 21/10':'FINAL • 23/10';
+ $('tieModeTitle').textContent=isOfficial?'⚖️ DESEMPATE OFICIAL — '+phaseName:'⚖️ DESEMPATE DE TREINAMENTO — '+phaseName;
+ $('tieModeNotice').textContent=isOfficial?'✓ SALA OFICIAL: perguntas difíceis, 30 segundos por escola, ciclos confirmados e pontuação regular preservada.':'SALA DE TREINAMENTO: simulação independente dos resultados oficiais.';
+ btn.textContent=isOfficial?'⚖️ Iniciar desempate oficial':'⚖️ Simular desempate';
  const prior=sel.value;sel.replaceChildren();
  const groups=tiedScores(ph);
  for(const [v,names] of groups){
@@ -701,10 +709,11 @@ function renderTiePanel(){
  }
  if([...sel.options].some(o=>o.value===prior&&!o.disabled))sel.value=prior;
  else if([...sel.options].some(o=>!o.disabled))sel.value=[...sel.options].find(o=>!o.disabled).value;
- sel.disabled=!regularComplete(ph)||!!currentTie()&&currentTie().status!=='confirmed';
+ sel.disabled=!regularComplete(ph)||(SALA==='oficial'&&!cloudReady)||(!!currentTie()&&currentTie().status!=='confirmed');
  btn.disabled=sel.disabled||![...sel.options].some(o=>!o.disabled)||!!currentTie()&&currentTie().status!=='confirmed';
  const g=currentTie();
- if(!regularComplete(ph)){info.textContent='Registre as cinco rodadas de TODAS as escolas antes de iniciar o desempate. Nenhuma classificação provisória será homologada.';}
+ if(SALA==='oficial'&&!cloudReady){info.textContent='Aguardando login e sincronização da sala oficial no Supabase para liberar o desempate.';}
+ else if(!regularComplete(ph)){info.textContent='Registre as cinco rodadas de TODAS as escolas antes de iniciar o desempate. Nenhuma classificação provisória será homologada.';}
  else if(!g){info.textContent=groups.length?'Escolha um grupo de escolas empatadas pelo total das cinco rodadas. Só este grupo disputará as perguntas adicionais.':'Nenhum empate na pontuação normal desta etapa.';}
  else{
   const block=activeTieBlock(g),answered=tieCycleAnswers(g);
@@ -728,6 +737,7 @@ function renderTiePanel(){
  }
 }
 function startTieGroup(){
+ if(SALA==='oficial'&&!cloudReady)return alert('O desempate oficial requer conexão e autenticação do operador no Supabase. Confira o status da nuvem antes de continuar.');
  if(!regularComplete(state.phase))return alert('Termine as 5 rodadas regulares para todas as escolas antes do desempate.');
  if(currentTie()&&currentTie().status!=='confirmed')return alert('Conclua primeiro o desempate em andamento.');
  if(state.question!==null&&!state.recorded)return alert('Finalize a pergunta atual antes do desempate.');
@@ -735,7 +745,7 @@ function startTieGroup(){
  const candidate=tiedScores(state.phase).find(([v])=>v===pts);
  if(!candidate||tieGroupForScore(state.phase,pts))return alert('Grupo inválido ou já iniciado.');
  const names=candidate[1];
- if(!confirm(`INICIAR DESEMPATE\n\n${names.join('\n')}\n\nTodas com ${pts} pontos. Perguntas difíceis, 30 segundos, sem auxílio e sem alterar os pontos normais. Confirmar?`))return;
+ if(!confirm(`${SALA==='oficial'?'INICIAR DESEMPATE OFICIAL':'INICIAR DESEMPATE DE TREINAMENTO'} — ${state.phase==='A'?'CHAVE A (20/10)':state.phase==='B'?'CHAVE B (21/10)':'FINAL (23/10)'}\n\n${names.join('\n')}\n\nTodas com ${pts} pontos. Perguntas difíceis, 30 segundos, sem auxílio e sem alterar os pontos normais. Confirmar?`))return;
  const id=newQid(),blockId=newQid();
  state.tieBreaks[state.phase].push({id,score:pts,participants:names.slice(),blocks:[{id:blockId,schools:names.slice()}],blockId,cycle:1,status:'active',order:[],confirmedAt:null});
  state.activeTieId=id;state.round=6;resetQuestionForNext();
@@ -884,8 +894,8 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  renderOperatorHelpRequest();
  if(ph==='F'&&(hasCutTie('A',A)||hasCutTie('B',B)))$('rankingNote').textContent+=' ATENÇÃO: há empate provisório na vaga de classificação em uma chave. A final não está homologada.';
  persist();}
-function changePhase(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();const desired=Number($('round').value);if(desired===6&&!currentTie())return alert('Inicie o desempate pelo painel específico após encerrar as cinco rodadas.'),refresh();state.round=desired;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changePhase(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=currentTie()&&currentTie().status!=='confirmed'?6:1;state.school='';state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();const desired=Number($('round').value);if(desired===6&&(!currentTie()||currentTie().status==='confirmed'))return alert('Inicie o desempate pelo painel específico após encerrar as cinco rodadas.'),refresh();state.round=desired;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function changeSchool(){hideScorePreview();const s=$('schoolSelect').value;if(state.round===6&&s&&!tieNeedsAnswer(s))return alert('Esta escola não participa do ciclo atual ou já respondeu.'),refresh();if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 // Bloqueio de reutilização: a Chave B (21/10) nunca pode receber uma
 // questão utilizada na Chave A (20/10). A final mantém o mesmo bloqueio.
@@ -1002,7 +1012,7 @@ function undo(){hideScorePreview();const events=state.events[state.phase];if(!ev
   events.pop();g.status='active';state.round=6;state.activeTieId=g.id;state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.qid=last.qid||newQid();state.selected=last.selected??null;state.selectedAt=0;state.recorded=false;state.revealed=last.selected!==null;state.expired=!!last.timeout;
   cloudLog('desempate_desfazer',{...last,phase:state.phase});resetTimer();refresh();return;
  }if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.qid=last.qid||newQid();state.selectedAt=0;state.expired=!!last.timeout;cloudLog('desfazer',{...last,phase:state.phase,numero:last.trainingQuestion?.numero??null});resetTimer();refresh();}
-function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;cloudLog('zerar',{phase:ph,removidos:state.events[ph].length,events:state.events[ph],scores:state.scores[ph]});state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.tieBreaks[ph]=[];if(state.phase===ph)state.activeTieId=null;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function clearPhase(){hideScorePreview();if(!confirm(SALA==='oficial'?'ATENÇÃO: apagar TODOS os resultados OFICIAIS desta etapa, inclusive desempates? Antes de prosseguir, baixe o backup.':'ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;cloudLog('zerar',{phase:ph,removidos:state.events[ph].length,events:state.events[ph],scores:state.scores[ph]});state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.tieBreaks[ph]=[];if(state.phase===ph)state.activeTieId=null;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
 
 // Relatório de conferência: gerado somente no navegador local do operador.
@@ -1089,7 +1099,7 @@ function generatePDFReport(){
  <p class="note">As linhas representam os lançamentos gravados pelo operador (cópia no Supabase, sala ${esc(SALA)}); não substituem a homologação pela organização.</p>
  ${tieReportHtml}
  <div class="signatures"><div class="sig">Conferência da organização</div><div class="sig">Homologação — responsável autorizado</div></div>
- <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido pela versão 7.2 beta (sala ${esc(SALA)}).</footer>
+ <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido pela versão 7.4 (sala ${esc(SALA)}).</footer>
  </body></html>`;
  const popup=window.open('','_blank');
  if(!popup){alert('O navegador bloqueou a janela. Permita pop-ups para este site e clique novamente em Gerar relatório PDF.');return;}
@@ -1173,11 +1183,13 @@ function downloadBackup(){const data=JSON.stringify({exportedAt:new Date().toISO
 // Textos de aviso conforme a sala aberta.
 function applySalaTexts(){
  const oficial=SALA==='oficial';
+ const tieOption=$('round').querySelector('option[value="6"]');
+ if(tieOption)tieOption.textContent=oficial?'6ª — DESEMPATE OFICIAL • 30s':'6ª — Desempate de treinamento • 30s';
  document.body.classList.toggle('salaOficial',oficial);
  const w=document.querySelector('.warning');
  if(w)w.innerHTML=oficial?
-  '<strong>VERSÃO 7.2 BETA — SALA OFICIAL.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala oficial), separados do treinamento. As perguntas de 20/10 são excluídas do sorteio de 21/10. Se não houver questão inédita, o sorteio é bloqueado. Confira o indicador "☁ Supabase: tudo salvo" antes de cada pergunta. A homologação dos resultados continua com a organização.':
-  '<strong>VERSÃO 7.2 BETA — SALA DE TREINAMENTO.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala de treinamento), separados da sala oficial. Telão e tela do aluno podem estar em outros aparelhos, abertos pelos links do painel. Não utilizar esta sala para a apuração oficial.';
+  '<strong>VERSÃO 7.4 — SALA OFICIAL.</strong> O desempate está habilitado na Chave A (20/10), Chave B (21/10) e final (23/10), após as cinco rodadas completas. O placar oficial fica no Supabase, separado do treinamento. As perguntas de 20/10 são excluídas do sorteio de 21/10. Se não houver questão inédita, o sorteio é bloqueado. Confira o status "☁ Supabase: tudo salvo" antes de cada pergunta. A homologação continua com a organização.':
+  '<strong>VERSÃO 7.4 — SALA DE TREINAMENTO.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala de treinamento), separados da sala oficial. Telão e tela do aluno podem estar em outros aparelhos, abertos pelos links do painel. Não utilizar esta sala para a apuração oficial.';
  const t=$('trainingBankText');
  if(t)t.innerHTML=oficial?
   '<strong>SALA OFICIAL:</strong> cada pergunta sorteada fica registrada e não volta a ser sorteada nesta sala. Todos os lançamentos ficam gravados no Supabase.':
