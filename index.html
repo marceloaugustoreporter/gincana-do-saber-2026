@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gincana do Saber 2026 — v7.0 beta</title>
+<title>Gincana do Saber 2026 — v7.1 beta</title>
 <style>
 :root{--green:#075537;--dark:#063a2b;--lime:#d1ef28;--orange:#f7941d;--paper:#f5f8f2;--ink:#133a2c}*{box-sizing:border-box}body{margin:0;background:#e9f0e9;color:var(--ink);font:16px system-ui,-apple-system,Segoe UI,Arial,sans-serif}header{background:linear-gradient(125deg,#064029,#09844b);color:white;padding:17px 24px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}.branding{display:flex;align-items:center;gap:12px}.owl{font-size:44px}.branding h1{font-size:29px;line-height:1;margin:0;color:var(--lime)}.branding small{display:block;margin-top:8px}button,select{font:inherit;border-radius:9px;padding:10px 12px;border:1px solid #bed3c4;background:white;color:var(--ink)}button{cursor:pointer;font-weight:650}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:var(--green);color:white;border-color:var(--green)}.orange{background:var(--orange);border-color:var(--orange);color:#24200c}.headbtn{background:white;color:var(--green)}main{max-width:1600px;margin:auto;padding:16px}.warning{padding:12px;background:#fff0c7;border-left:5px solid var(--orange);border-radius:9px;margin-bottom:15px;font-size:14px}.toolbar{display:flex;flex-wrap:wrap;align-items:end;gap:12px;background:white;padding:14px;border-radius:12px;margin-bottom:14px}.field{display:flex;flex-direction:column;gap:5px;min-width:120px}.field label{font-weight:750;font-size:12px}.grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(290px,1fr);gap:14px}.panel{border-radius:15px;background:white;padding:20px;min-width:0}.step{color:#08764b;font-weight:800;font-size:13px;letter-spacing:.06em;text-transform:uppercase}.school{font-size:22px;font-weight:800;background:#e3f4d3;border-left:6px solid #8dbd11;padding:13px;border-radius:9px;margin:15px 0}h2{font-size:clamp(23px,2.4vw,36px);margin:12px 0 20px}.option{cursor:pointer;width:100%;text-align:left;color:var(--ink);background:#f2f7f2;padding:13px 15px;margin:9px 0;border-radius:10px;border:2px solid #e0e9df;font-size:20px}.correct{background:#c5efc7;border-color:#168a48;font-weight:800}.picked{background:#d7ebff;border-color:#2676ad;font-weight:800}.incorrect{background:#ffe0df;border-color:#cc2531;font-weight:800}.timerPanel{margin:14px 0;padding:14px;border:2px solid #dce8dc;border-radius:12px}.timerNum{font-size:clamp(38px,5vw,68px);font-weight:900;font-variant-numeric:tabular-nums;color:#075537}.timerNum.low{color:#c92b28}.timerActions{display:flex;gap:8px;flex-wrap:wrap}.timerBar{background:#e3ebe2;border-radius:30px;height:12px;overflow:hidden;margin:10px 0}.timerFill{height:100%;width:100%;background:#4eaa52;transition:width .2s linear}.timerFill.low{background:#e45245}body.screen .timerPanel{display:none}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:14px 0}.muted{color:#496a58}.status{background:#edf6ec;border-radius:8px;padding:12px;margin-top:15px}.rankRow{display:flex;align-items:center;gap:9px;border-bottom:1px solid #e7ece7;padding:11px 7px}.rankRow.top{background:#e7f7d6}.rankNo{font-weight:800;min-width:28px}.rankName{flex:1;font-size:14px}.score{font-weight:900;font-size:22px;white-space:nowrap}.subhead{font-size:14px;color:#497056;margin:7px 0 15px}.control{margin-top:16px;border:2px solid #cae0d0;border-radius:12px;padding:15px}select{max-width:100%}.control .field{flex:1}.fine{font-size:13px;line-height:1.5}.line{border:0;border-top:1px solid #e6ede4;margin:18px 0}.small{font-size:12px}.footer{text-align:center;padding:18px;color:#597663}.hidden{display:none!important}body.screen{background:#062d23}body.screen .admin,body.screen .warning,body.screen #screenBtn,body.screen #backupBtn{display:none!important}body.screen main{max-width:none}body.screen .panel{background:#fafff5}body.screen .school{font-size:clamp(24px,3vw,42px)}body.screen .option{font-size:clamp(20px,2.3vw,35px)}body.screen .rankName{font-size:clamp(13px,1.3vw,20px)}body.screen .footer{color:white}@media(max-width:850px){.grid{grid-template-columns:1fr}.branding h1{font-size:23px}}@media(min-width:1300px){body.screen .grid{grid-template-columns:minmax(0,2fr) minmax(360px,.9fr)}}
 
@@ -154,7 +154,7 @@ body.publicScreen #publicHelperPicker .helperChoice.alreadyHelped:disabled{
 #operatorIdentity{font-size:12px;font-weight:700;color:#fff;align-self:center}
 body.publicScreen #trainingBank,body.publicScreen #operatorIdentity,body.publicScreen #logoutBtn{display:none!important}
 
-/* Versão 7.0 — Supabase, som do telão e tela do aluno. */
+/* Versão 7.1 — Supabase, som do telão, resposta e auxílio solicitado pelo aluno. */
 .cloudStatus{font-size:12px;font-weight:750;padding:6px 9px;border-radius:8px;align-self:center;max-width:330px;line-height:1.3}
 .cloudStatus:empty{display:none}
 .cloudStatus.ok{background:#d9f5d4;color:#0b5130}.cloudStatus.wait{background:#fff1c9;color:#6b4a00}.cloudStatus.err{background:#ffd9d6;color:#8a1610}
@@ -176,7 +176,7 @@ body.studentScreen #currentSchool,body.studentScreen #phaseLabel,body.studentScr
 body.studentScreen #screenHelperBanner,body.studentScreen #publicHelperPicker,body.studentScreen #publicScoreOverlay,
 body.studentScreen .footer,body.studentScreen #publicRoundBoard{display:none!important}
 body.studentScreen .grid{grid-template-columns:1fr!important}
-body.studentScreen main{max-width:1100px;padding:12px}
+body.studentScreen main{width:90%;max-width:none;padding:12px}
 body.studentScreen .panel{padding:clamp(14px,3vw,30px)}
 body.studentScreen h2#questionTitle{font-size:clamp(21px,3.4vw,40px);line-height:1.25}
 body.studentScreen .option{pointer-events:auto;cursor:pointer;font-size:clamp(20px,3vw,34px);padding:clamp(14px,2.4vw,24px);margin:12px 0;min-height:64px;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
@@ -186,29 +186,85 @@ body.studentScreen .option:disabled:not(.picked):not(.correct):not(.incorrect){c
 body.studentScreen #options .picked:not(.correct):not(.incorrect){background:#d7ebff;border-color:#2676ad;color:#123a57;font-weight:850;box-shadow:0 0 0 3px rgba(38,118,173,.25)}
 body.studentScreen #screenTimer{margin-top:16px}
 body.studentScreen #status{font-size:clamp(16px,2vw,22px);font-weight:750;text-align:center}
+/* Desempate: painel visível ao operador e status no telão; sem decisões pelo aluno. */
+#tieOperatorPanel .tieState{background:#f0f7eb;border-radius:10px;padding:11px;font-size:14px;line-height:1.5;margin:8px 0}
+#tieOperatorPanel .tieHistory{max-height:275px;overflow:auto;font-size:13px}
+#tieOperatorPanel .tieRow{border-bottom:1px solid #dbe6dc;padding:6px 0}
+#tieOperatorPanel .tieOK{color:#086239;font-weight:800}
+#tieOperatorPanel .tieWarn{color:#94530b;font-weight:800}
+body.studentScreen #tieOperatorPanel,body.publicScreen #tieOperatorPanel{display:none!important}
+body.publicScreen .tieHint{font-weight:850;color:#8a5200}
+
+/* V7.1: a dupla solicita auxílio e seleciona uma escola na própria tela. */
+#studentHelpPanel{display:none;padding:18px;margin:14px 0;border:2px solid #aed8b0;border-radius:14px;background:#f1faeb}
+body.studentScreen #studentHelpPanel{display:block}
+#studentHelpPanel .studentSchoolName{font-size:14px;font-weight:800;color:#195d3d;margin:0 0 12px}
+#studentHelpBtn{width:100%;font-size:clamp(17px,2.4vw,23px);min-height:55px;background:#ef9f24;border:2px solid #d7820a;color:#302003}
+#studentHelpBtn:not(:disabled):hover{background:#ffd17a}
+#studentHelpBtn:disabled{opacity:.55}
+#studentHelpStatus{font-size:14px;line-height:1.45;margin:11px 0 0;color:#395b45;font-weight:650}
+#studentHelpStatus.success{color:#07613b}
+#studentHelpStatus.alert{color:#905108}
+#studentHelperPicker .helperPickerPanel{width:min(760px,100%)}
+#studentHelperPicker .helperChoice{min-height:68px}
+body.studentScreen #studentHelperPicker .helperChoice:disabled{pointer-events:none}
+#operatorHelpRequest[hidden]{display:none!important}
+#operatorHelpRequest{border:2px solid #e6a835;background:#fff7e3;margin:16px 0;padding:18px;border-radius:12px}
+#operatorHelpRequest strong{display:block;color:#7a4800;font-size:17px;margin-bottom:6px}
+#operatorHelpRequestSchool{font-weight:850;font-size:18px;margin:8px 0;overflow-wrap:anywhere}
+#operatorHelpRequest .actions{margin-bottom:0}
+@media(max-width:560px){#studentHelpPanel{padding:12px}}
 </style>
 </head>
 <body>
 <header><div class="branding"><img class="brandLogo" src="imagens/README.md/gincana-do-saber.png.png" alt="Marca oficial Gincana do Saber"><div><h1>Gincana do Saber</h1><small>Câmara Municipal de Passos • Escola do Legislativo • 2026</small></div></div><div class="actions"><span id="cloudStatus" class="cloudStatus admin"></span><span id="operatorIdentity" class="admin" hidden></span><button id="logoutBtn" class="admin" hidden onclick="logoutOperator()">Sair</button><button id="backupBtn" onclick="downloadBackup()">Baixar backup</button><button id="restoreBtn" class="admin" onclick="requestRestoreBackup()">↺ Restaurar backup JSON</button><input id="restoreFileInput" class="admin" type="file" accept=".json,application/json" style="display:none" onchange="restoreBackupFile(this)"><button id="pdfReportBtn" class="admin" onclick="generatePDFReport()">📄 Gerar relatório PDF</button><button id="openDisplay" class="headbtn" onclick="openDisplay()">🖥 Abrir telão separado</button><button id="studentLinkBtn" class="headbtn admin" onclick="showStudentLink()">📱 Link da tela do aluno</button><button id="displaySoundBtn" class="headbtn" onclick="enableDisplaySound()">🔊 Ativar som do telão</button><button id="screenBtn" class="headbtn" onclick="toggleScreen()">Prévia nesta tela</button></div></header>
-<main><div class="warning"><strong>VERSÃO 7.0 BETA.</strong> Placar e histórico gravados no Supabase.</div>
+<main><div class="warning"><strong>VERSÃO 7.3 BETA.</strong> Placar e histórico gravados no Supabase.</div>
 <section id="trainingBank" class="admin" hidden aria-label="Treinamento com banco reservado"><h2>🦉 Perguntas oficiais — banco protegido no Supabase</h2>
 <p>Selecione a <strong>Chave, a rodada e a escola</strong> no painel abaixo. Clique em <strong>Sortear pergunta oficial</strong>; use o cronômetro, o auxílio, a seleção da resposta e a conferência normal. A pergunta aparece no telão e na tela do aluno, em qualquer aparelho conectado à internet. A dupla pode tocar na alternativa na tela do aluno enquanto o cronômetro corre.</p>
 <p class="trainingMeta" id="trainingBankText"></p>
+<p class="trainingMeta" id="usedQuestionGuard" role="status" aria-live="polite"></p>
 <div id="studentLinkBox" class="linkBox" hidden><label for="studentLinkUrl"><strong>📱 Link da tela do aluno</strong> (já copiado; abra no tablet ou celular da dupla — não precisa de login):</label><div class="linkRow"><input id="studentLinkUrl" readonly onclick="this.select()"><a id="studentLinkOpen" target="_blank" rel="noopener">Abrir</a><button type="button" onclick="showStudentLink(true)">Gerar link novo</button></div><p class="fine muted">O link só funciona nesta sala. Gerar um link novo invalida o anterior.</p></div>
-</section><div class="toolbar admin"><div class="field"><label for="salaSelect">SALA</label><select id="salaSelect" onchange="changeSala()"><option value="treinamento">Treinamento</option><option value="oficial">Oficial</option></select></div><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate (teste)</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
-<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div class="timerBar screenBar"><div id="screenTimerFill" class="timerFill"></div></div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro demonstrativo — tempo sujeito à aprovação</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="soundToggle" onclick="toggleTimerSound()" title="Ativar ou silenciar os alertas do tempo">🔊 Alertas ligados</button><button id="soundTest" onclick="testTimerSound()" title="Testar os sons no notebook do operador">♪ Testar áudio</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
-<div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta oficial</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
+</section><div class="toolbar admin"><div class="field"><label for="salaSelect">SALA</label><select id="salaSelect" onchange="changeSala()"><option value="treinamento">Treinamento</option><option value="oficial">Oficial</option></select></div><div class="field"><label for="phase">ETAPA</label><select id="phase" onchange="changePhase()"><option value="A">20/10 — Chave A</option><option value="B">21/10 — Chave B</option><option value="F">23/10 — Final</option></select></div><div class="field"><label for="round">RODADA</label><select id="round" onchange="changeRound()"><option value="1">1ª — 2 pontos</option><option value="2">2ª — 2 pontos</option><option value="3">3ª — 4 pontos</option><option value="4">4ª — 4 pontos</option><option value="5">5ª — 6 pontos</option><option value="6">Desempate — perguntas difíceis, 30s</option></select></div><div><button onclick="showStandings()">Atualizar classificação</button></div></div>
+<div class="grid"><section class="panel"><div class="step" id="phaseLabel">Classificatória</div><div class="school" id="currentSchool">Aguardando escola</div><div class="step" id="questionValue">Rodada 1</div><h2 id="questionTitle">Aguardando sorteio da pergunta...</h2><div id="options"></div><div id="screenTimer"><div id="screenHelperBanner" role="status" aria-live="polite"><strong>🤝 AUXÍLIO SOLICITADO</strong><div id="screenHelperName"></div></div><div class="step" id="screenTimerHeading">Tempo da pergunta</div><div id="screenTimerNum">00:30</div><div class="timerBar screenBar"><div id="screenTimerFill" class="timerFill"></div></div><div id="screenTimerDesc" class="fine">Aguardando início da contagem.</div></div><div class="timerPanel admin"><div class="step">Cronômetro da pergunta — 30s por escola no desempate</div><div id="timerNum" class="timerNum">00:30</div><div class="timerBar"><div id="timerFill" class="timerFill"></div></div><div class="timerActions"><button id="timerStart" onclick="startTimer()">▶ Iniciar 30s</button><button onclick="pauseTimer()">⏸ Pausar</button><button id="timerReset" onclick="resetTimer()">↻ Reiniciar</button><button id="soundToggle" onclick="toggleTimerSound()" title="Ativar ou silenciar os alertas do tempo">🔊 Alertas ligados</button><button id="soundTest" onclick="testTimerSound()" title="Testar os sons no notebook do operador">♪ Testar áudio</button><button id="helpTimer" onclick="callHelper()">🤝 Chamar escola auxiliadora</button><button id="startHelpClock" onclick="startHelpCountdown()" disabled>▶ Iniciar 15s de auxílio</button></div><p class="fine muted" id="timerInfo">Inicie a contagem após a leitura da pergunta e das alternativas.</p></div><div id="studentHelpPanel" aria-label="Solicitar auxílio de outra escola">
+ <div id="studentAnsweringSchool" class="studentSchoolName"></div>
+ <button id="studentHelpBtn" type="button" onclick="openStudentHelperPicker()" disabled>🤝 Chamar escola auxiliadora</button>
+ <p id="studentHelpStatus" role="status" aria-live="polite">Aguardando a pergunta.</p>
+ </div>
+ <div id="operatorHelpRequest" class="admin" hidden role="status" aria-live="polite">
+ <strong>🤝 PEDIDO DE AUXÍLIO ENVIADO PELO ALUNO</strong>
+ <div>A dupla solicitou a escola auxiliadora:</div>
+ <div id="operatorHelpRequestSchool"></div>
+ <div id="operatorHelpRequestDesc" class="fine"></div>
+ <div class="actions"><button type="button" class="primary" onclick="acceptStudentHelp()">✓ Confirmar escola e chamar</button>
+ <button type="button" onclick="rejectStudentHelp()">✕ Recusar pedido</button></div>
+ </div>
+ <div id="status" class="status" role="status">Selecione a escola e sorteie uma pergunta.</div>
+<div id="tieOperatorPanel" class="control admin" aria-label="Desempate">
+ <div class="step">⚖️ Etapa de desempate — independente da pontuação</div>
+ <p class="fine">Cada escola recebe uma pergunta difícil por ciclo, com 30 segundos. O auxílio é proibido. As respostas ficam no histórico separado e não somam pontos regulares. O operador confirma o resultado de cada pergunta, a comparação do ciclo e a ordem final.</p>
+ <div class="actions"><div class="field" style="flex:1;min-width:240px"><label for="tieGroupSelect">ESCOLAS EMPATADAS (MESMA PONTUAÇÃO)</label><select id="tieGroupSelect"></select></div><button id="startTieBtn" type="button" class="orange" onclick="startTieGroup()">⚖️ Iniciar desempate</button></div>
+ <div class="tieState" id="tieState"></div>
+ <div class="actions"><button id="approveTieCycleBtn" class="primary" type="button" onclick="approveTieCycle()" hidden>✓ Conferir e confirmar ciclo</button><button id="approveTieOrderBtn" class="primary" type="button" onclick="confirmTieOrder()" hidden>✓ Validar ordem do desempate</button></div>
+ <div id="tieHistory" class="tieHistory"></div>
+ </div>
+ <div class="control admin"><div class="step">Painel do operador</div><div class="actions"><div class="field"><label for="schoolSelect">ESCOLA QUE RESPONDE</label><select id="schoolSelect" onchange="changeSchool()"></select></div><button onclick="drawSchool()">🎲 Sortear escola</button><button class="orange" onclick="drawQuestion()">🎲 Sortear pergunta oficial</button></div><div class="actions"><button id="revealBtn" onclick="reveal()">👁 Revelar resposta escolhida</button><div class="scoreTrigger"><button class="primary" id="confirmBtn" onclick="showScorePreview()">🏆 Mostrar pontuação da escola</button><div id="scoreButtonHint" class="scoreButtonHint" aria-live="polite">Sem auxílio: pontuação integral para a escola que responde.</div></div><button id="timeoutBtn" onclick="recordTimeout()">⌛ Registrar tempo esgotado (0 ponto)</button></div><div class="actions"><div class="field"><label for="helper">DUPLA QUE PRESTA AUXÍLIO (opcional)</label><select id="helper"></select></div></div><p class="fine muted">O auxílio distribui metade dos pontos para cada dupla se houver acerto. É permitido apenas nas rodadas 1 a 4, e uma dupla pode prestar auxílio uma vez por rodada. As dúvidas de interpretação do regulamento serão submetidas à organização.</p><div class="actions"><button onclick="undo()">↶ Desfazer último lançamento</button><button onclick="clearPhase()">Zerar etapa atual</button></div><p class="fine">A lista de finalistas é uma <strong>projeção</strong>: duas melhores de cada chave. Empates na vaga devem ser decididos pela organização antes da homologação. Na final, a pontuação começa em zero.</p></div>
 </section><aside class="panel"><div class="step">🏆 Classificação</div><h2 id="rankingTitle" style="font-size:23px">Chave A</h2><div id="ranking"></div><p id="rankingNote" class="status fine"></p><div class="admin"><hr class="line"><div class="step">Controle da rodada</div><div id="roundProgress" class="fine"></div><div id="roundBoard" class="roundBoard"></div><p class="small muted">Em caso de empate, a ordem de exibição não vale como desempate oficial.</p></div><div id="publicRoundBoard" class="roundBoard"></div></aside></div><div class="institutionalBrands" aria-label="Marcas institucionais">
 <div class="instCard camaraCard"><img class="camaraLogo" src="imagens/README.md/camara-de-passos.png.png" alt="Câmara Municipal de Passos"></div>
 <div class="instCard escolaCard"><img class="escolaLogo" src="imagens/README.md/escola-do-legislativo.png.png" alt="Escola do Legislativo da Câmara Municipal de Passos"></div>
 <p>Realização: Câmara Municipal de Passos • Escola do Legislativo — 2026</p>
-</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 7.0 beta — Supabase</div></main>
+</div><div class="footer">Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Versão 7.2 beta — desempate e Supabase</div></main>
 <div id="operatorHelperPicker" class="helperPickerOverlay admin" role="dialog" aria-modal="true" aria-labelledby="operatorHelperPickerTitle">
  <div class="helperPickerPanel"><h2 id="operatorHelperPickerTitle">🤝 Escolher escola auxiliadora</h2>
   <p>O cronômetro da pergunta foi pausado. Selecione uma escola disponível; as que já ajudaram nesta rodada estão bloqueadas. A dupla escolhida ainda terá tempo para se posicionar antes dos 15 segundos.</p>
   <div class="helperPickerGrid" id="operatorHelperChoices"></div>
   <button class="helperPickerClose" onclick="cancelHelperPicker()">Cancelar escolha</button>
  </div>
+</div>
+<div id="studentHelperPicker" class="helperPickerOverlay" role="dialog" aria-modal="true" aria-labelledby="studentHelperPickerTitle">
+ <div class="helperPickerPanel"><h2 id="studentHelperPickerTitle">🤝 Escolha a escola auxiliadora</h2>
+ <p>Selecione uma escola disponível. A organização receberá o pedido e deverá confirmar a chamada antes do auxílio.</p>
+ <div class="helperPickerGrid" id="studentHelperChoices"></div>
+ <button class="helperPickerClose" type="button" onclick="closeStudentHelperPicker()">Voltar sem solicitar</button></div>
 </div>
 <div id="publicHelperPicker" class="helperPickerOverlay" role="status" aria-live="polite">
  <div class="helperPickerPanel"><h2>🤝 Escolas disponíveis para auxiliar</h2><p>A organização está escolhendo a escola auxiliadora. A contagem está pausada.</p>
@@ -234,7 +290,7 @@ body.studentScreen #status{font-size:clamp(16px,2vw,22px);font-weight:750;text-a
   <div class="scoreResult" id="publicScoreResult"></div>
  </div>
 </div>
-<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 7.0 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase.</p></form></div>
+<div id="authGate" hidden><form id="authBox" onsubmit="event.preventDefault();loginOperator()"><h2>🔐 Acesso do operador</h2><p>Gincana do Saber 2026 — versão 7.2 beta. Use a conta de operador cadastrada no Supabase.</p><label for="operatorEmail">E-mail</label><input id="operatorEmail" type="email" autocomplete="username" required><label for="operatorPassword">Senha</label><input id="operatorPassword" type="password" autocomplete="current-password" required><button id="authSubmit" type="submit">Entrar</button><p id="authStatus" role="status"></p><p class="fine">As credenciais não são enviadas ao GitHub; o login é feito diretamente pelo Supabase.</p></form></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
@@ -265,8 +321,13 @@ const SALA=PARAMS.get('sala')==='oficial'?'oficial':'treinamento';
 const STUDENT_KEY=PARAMS.get('k')||'';
 const KEY='gincana_saber_v7_'+SALA;
 const LEGACY_KEY='gincana_saber_treino_v61';
-function blank(){return {phase:"A",round:1,school:"",question:null,trainingQuestion:null,qid:null,revealed:false,recorded:false,selected:null,selectedAt:0,selectedBy:null,expired:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},finalists:[]};}
-function normalizeState(s){return s&&typeof s==='object'&&s.scores&&s.events&&s.used?s:blank();}
+function blank(){return {phase:"A",round:1,school:"",question:null,trainingQuestion:null,qid:null,revealed:false,recorded:false,selected:null,selectedAt:0,selectedBy:null,expired:false,scores:{A:{},B:{},F:{}},used:{A:[],B:[],F:[]},events:{A:[],B:[],F:[]},tieBreaks:{A:[],B:[],F:[]},finalists:[]};}
+function normalizeState(s){
+ if(!(s&&typeof s==='object'&&s.scores&&s.events&&s.used))return blank();
+ if(!s.tieBreaks||typeof s.tieBreaks!=='object')s.tieBreaks={A:[],B:[],F:[]};
+ for(const ph of ['A','B','F'])if(!Array.isArray(s.tieBreaks[ph]))s.tieBreaks[ph]=[];
+ return s;
+}
 function loadLocalState(){
  if(IS_DISPLAY)return blank();
  try{
@@ -477,6 +538,7 @@ function activeScoreHelper(){
 function updateScoreButton(){
  const helper=activeScoreHelper();
  const button=$('confirmBtn'),hint=$('scoreButtonHint');
+ if(state.round===6){button.textContent='⚖️ Conferir resposta do desempate';button.classList.remove('withHelper');hint.classList.remove('withHelper');hint.textContent='O resultado desta pergunta não altera os pontos das rodadas normais.';return;}
  button.textContent=helper?'🤝 Mostrar divisão dos pontos':'🏆 Mostrar pontuação da escola';
  button.classList.toggle('withHelper',!!helper);
  hint.classList.toggle('withHelper',!!helper);
@@ -490,16 +552,16 @@ function updateScoreButton(){
 }
 function scorePreviewData(){
  const q=currentQuestion();
- if(!q||!state.revealed||state.recorded||state.selected===null||state.round===6)return null;
+ if(!q||!state.revealed||state.recorded||state.selected===null)return null;
  const correct=state.selected===q.c;
  const helper=activeScoreHelper();
  const gain=correct?points[state.round]:0;
- return {open:true,confirmed:false,phase:state.phase,round:state.round,school:state.school,
-  helper,correct,gain,part:helper?gain/2:gain,question:state.question,selected:state.selected};
+ return {open:true,confirmed:false,tie:state.round===6,cycle:currentTie()?.cycle||null,phase:state.phase,round:state.round,school:state.school,
+  helper,correct,gain,part:helper?gain/2:gain,question:state.question,qid:state.qid,selected:state.selected};
 }
 function scorePreviewValid(d){
  return d&&d.open&&d.phase===state.phase&&d.round===state.round&&
- d.school===state.school&&d.question===state.question;
+ d.school===state.school&&d.question===state.question&&(!d.qid||d.qid===state.qid);
 }
 function paintScore(target,subtitle,result,data){
  const holder=$(target);holder.replaceChildren();
@@ -508,15 +570,15 @@ function paintScore(target,subtitle,result,data){
  for(const subject of subjects){
   const card=el('div','scoreCard'+(subject.helper?' helper':''));
   card.append(el('div','scoreRole',subject.role),el('div','scoreSchool',subject.school),
-   el('div','scoreAmount','+'+data.part),
-   el('div','fine','ponto'+(data.part===1?'':'s')));
+   el('div','scoreAmount',data.tie?(data.correct?'ACERTO':'ERRO'):'+'+data.part),
+   el('div','fine',data.tie?'Desempate: nenhuma alteração nos pontos normais':'ponto'+(data.part===1?'':'s')));
   holder.append(card);
  }
  $(subtitle).textContent=data.confirmed?
   'PONTUAÇÃO REGISTRADA — resultado da rodada':
   'PRÉVIA DE PONTUAÇÃO — aguardando confirmação do operador';
  $(result).textContent=(data.correct?'✓ Resposta correta':'✕ Resposta incorreta')+
-  ' • Rodada '+data.round+' • Total distribuído: '+data.gain+' ponto'+(data.gain===1?'':'s');
+   (data.tie?' • Desempate, ciclo '+data.cycle+' • Pontos regulares inalterados':' • Rodada '+data.round+' • Total distribuído: '+data.gain+' ponto'+(data.gain===1?'':'s'));
 }
 function paintScoreDivision(target,data){
  const node=$(target);node.style.display=data.helper?'':'none';
@@ -560,7 +622,7 @@ function closeScorePresentation(){publishScorePreview(null);}
 function confirmScorePreview(){
  const d=scorePreview;
  if(!scorePreviewValid(d)||d.confirmed||state.recorded)return;
- if(state.selected!==d.selected||state.question!==d.question||activeScoreHelper()!==d.helper)return alert('Os dados do auxílio ou da resposta mudaram. Refaça a conferência.');
+ if(state.selected!==d.selected||state.question!==d.question||activeScoreHelper()!==d.helper||d.tie&&currentTie()?.cycle!==d.cycle)return alert('Os dados do auxílio, do desempate ou da resposta mudaram. Refaça a conferência.');
  const succeeded=record(d.correct,false,true,d.helper);
  if(!succeeded)return;
  publishScorePreview({...d,confirmed:true});
@@ -582,18 +644,157 @@ function persist(){
  cloudQueue('state',state);
 }
 function score(phase,school){return state.scores[phase][school]||0;}
-function projected(phase,schools){return [...schools].sort((a,b)=>score(phase,b)-score(phase,a)||a.localeCompare(b,'pt-BR')).slice(0,2);}
-function hasCutTie(phase,schools){const scores=schools.map(x=>score(phase,x)).sort((a,b)=>b-a);return scores.length>2&&scores[1]===scores[2];}
-function finalists(){return [...projected('A',A),...projected('B',B)];}
+// Critérios anteriores à validação administrativa não geram classificação definitiva.
+function tieGroupForScore(ph,pts){return (state.tieBreaks?.[ph]||[]).find(t=>t.score===pts);}
+function tieRank(ph,name){
+ const g=tieGroupForScore(ph,score(ph,name));
+ return g&&g.status==='confirmed'?g.order.indexOf(name):-1;
+}
+function rankSchools(ph,names){return [...names].sort((a,b)=>score(ph,b)-score(ph,a)||
+  (tieRank(ph,a)>=0&&tieRank(ph,b)>=0?tieRank(ph,a)-tieRank(ph,b):0)||a.localeCompare(b,'pt-BR'));}
+function regularComplete(ph){const list=ph==='A'?A:ph==='B'?B:finalists();return list.length>0&&list.every(n=>[1,2,3,4,5].every(r=>completed(ph,r,n)));}
+function tiedScores(ph){
+ const list=ph==='A'?A:ph==='B'?B:finalists();
+ const map=new Map();for(const n of list){const v=score(ph,n);map.set(v,[...(map.get(v)||[]),n]);}
+ return [...map.entries()].filter(([pts,names])=>names.length>1).sort((a,b)=>b[0]-a[0]);
+}
+function unresolvedTieAtCut(ph){
+ const list=ph==='A'?A:B;
+ if(!regularComplete(ph))return true;
+ const r=rankSchools(ph,list);if(r.length<3||score(ph,r[1])!==score(ph,r[2]))return false;
+ const g=tieGroupForScore(ph,score(ph,r[1]));return !g||g.status!=='confirmed';
+}
+function projected(phase,names){return rankSchools(phase,names).slice(0,2);}
+function hasCutTie(phase,names){if(phase==='F')return false;const r=rankSchools(phase,names);return r.length>2&&score(phase,r[1])===score(phase,r[2])&&unresolvedTieAtCut(phase);}
+function finalists(){if(unresolvedTieAtCut('A')||unresolvedTieAtCut('B'))return [];return [...projected('A',A),...projected('B',B)];}
 function schools(){return state.phase==='A'?A:state.phase==='B'?B:finalists();}
 function currentQuestion(){return state.question===-1?(state.trainingQuestion||null):(state.question===null?null:questions[state.question]);}
 function completed(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.school===school&&e.kind==='answer');}
 function helpedAlready(phase,round,school){return state.events[phase].some(e=>e.round===round&&e.helper===school&&e.kind==='answer');}
 function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n;}
 function optionsFor(select,list,empty){select.replaceChildren();const first=el('option','',empty);first.value='';select.append(first);for(const x of list){const op=el('option','',x);op.value=x;select.append(op)}}
+// --- Desempate isolado: não altera scores e só se resolve após conferências. ---
+function currentTie(){const groups=state.tieBreaks?.[state.phase]||[];return groups.find(g=>g.id===state.activeTieId)||groups.find(g=>g.status!=='confirmed')||null;}
+function activeTieBlock(g=currentTie()){return g?.blocks?.find(b=>b.id===g.blockId)||null;}
+function tieCycleAnswers(g=currentTie()){
+ const block=activeTieBlock(g);
+ return !g||!block?[]:(state.events[state.phase]||[]).filter(e=>e.kind==='tiebreak'&&e.groupId===g.id&&e.blockId===block.id&&e.cycle===g.cycle);
+}
+function tieNeedsAnswer(name,g=currentTie()){
+ const b=activeTieBlock(g);return !!g&&g.status==='active'&&!!b&&b.schools.includes(name)&&!tieCycleAnswers(g).some(e=>e.school===name);
+}
+function resetQuestionForNext(){
+ stopTicker();timerMode='normal';timerTotal=30;timeLeft=30;activeHelperName='';
+ state.school='';state.question=null;state.trainingQuestion=null;state.qid=null;state.revealed=false;
+ state.recorded=false;state.selected=null;state.selectedAt=0;state.selectedBy=null;state.expired=false;
+ displayTimer();
+}
+function renderTiePanel(){
+ if(IS_DISPLAY)return;
+ const ph=state.phase,sel=$('tieGroupSelect'),btn=$('startTieBtn'),info=$('tieState'),hist=$('tieHistory');
+ const prior=sel.value;sel.replaceChildren();
+ const groups=tiedScores(ph);
+ for(const [v,names] of groups){
+  const exists=tieGroupForScore(ph,v);
+  const op=el('option','',`${v} pts • ${names.length} escolas${exists?' — '+(exists.status==='confirmed'?'validado':'em andamento'):''}`);
+  op.value=String(v);op.disabled=!!exists;sel.append(op);
+ }
+ if([...sel.options].some(o=>o.value===prior&&!o.disabled))sel.value=prior;
+ else if([...sel.options].some(o=>!o.disabled))sel.value=[...sel.options].find(o=>!o.disabled).value;
+ sel.disabled=!regularComplete(ph)||!!currentTie()&&currentTie().status!=='confirmed';
+ btn.disabled=sel.disabled||![...sel.options].some(o=>!o.disabled)||!!currentTie()&&currentTie().status!=='confirmed';
+ const g=currentTie();
+ if(!regularComplete(ph)){info.textContent='Registre as cinco rodadas de TODAS as escolas antes de iniciar o desempate. Nenhuma classificação provisória será homologada.';}
+ else if(!g){info.textContent=groups.length?'Escolha um grupo de escolas empatadas pelo total das cinco rodadas. Só este grupo disputará as perguntas adicionais.':'Nenhum empate na pontuação normal desta etapa.';}
+ else{
+  const block=activeTieBlock(g),answered=tieCycleAnswers(g);
+  const body=g.status==='active'?`Ciclo ${g.cycle} • ${answered.length}/${block.schools.length} respostas registradas. Escola(s) restantes: ${block.schools.filter(n=>!answered.some(e=>e.school===n)).join(', ')||'nenhuma'}.`:
+   g.status==='review'?`Ciclo ${g.cycle} encerrado. Compare os resultados abaixo e confirme para avançar.`:
+   g.status==='awaiting_confirmation'?`Todas as posições foram determinadas pelos ciclos. Verifique e valide a ordem.`:
+   'Ordem do desempate validada pelo operador.';
+  info.textContent=`${g.participants.length} escolas empatadas com ${g.score} pontos normais. ${body}`;
+  if(g.status==='awaiting_confirmation'||g.status==='confirmed')info.textContent+=' Ordem: '+g.blocks.flatMap(b=>b.schools).join(' > ')+'.';
+ }
+ const a=$('approveTieCycleBtn'),b=$('approveTieOrderBtn');
+ a.hidden=!g||g.status!=='review'; b.hidden=!g||g.status!=='awaiting_confirmation';
+ hist.replaceChildren();
+ if(g){
+  for(const e of (state.events[ph]||[]).filter(e=>e.kind==='tiebreak'&&e.groupId===g.id)){
+   hist.append(el('div','tieRow',`Ciclo ${e.cycle} • ${e.school}: ${e.correct?'✓ ACERTO':e.timeout?'⌛ TEMPO ESGOTADO':'✕ ERRO'} • questão ${e.trainingQuestion?.numero??'?'} • ${e.selected===null?'sem alternativa':'alternativa '+('ABC'[e.selected]||'?')}`));
+  }
+  if(g.status==='review'){
+   const r=tieCycleAnswers(g);const box=el('div','tieRow tieWarn',r.map(e=>`${e.school}: ${e.correct?'ACERTO':'ERRO'}`).join(' • '));hist.append(box);
+  }
+ }
+}
+function startTieGroup(){
+ if(!regularComplete(state.phase))return alert('Termine as 5 rodadas regulares para todas as escolas antes do desempate.');
+ if(currentTie()&&currentTie().status!=='confirmed')return alert('Conclua primeiro o desempate em andamento.');
+ if(state.question!==null&&!state.recorded)return alert('Finalize a pergunta atual antes do desempate.');
+ const pts=Number($('tieGroupSelect').value);
+ const candidate=tiedScores(state.phase).find(([v])=>v===pts);
+ if(!candidate||tieGroupForScore(state.phase,pts))return alert('Grupo inválido ou já iniciado.');
+ const names=candidate[1];
+ if(!confirm(`INICIAR DESEMPATE\n\n${names.join('\n')}\n\nTodas com ${pts} pontos. Perguntas difíceis, 30 segundos, sem auxílio e sem alterar os pontos normais. Confirmar?`))return;
+ const id=newQid(),blockId=newQid();
+ state.tieBreaks[state.phase].push({id,score:pts,participants:names.slice(),blocks:[{id:blockId,schools:names.slice()}],blockId,cycle:1,status:'active',order:[],confirmedAt:null});
+ state.activeTieId=id;state.round=6;resetQuestionForNext();
+ cloudLog('desempate_iniciar',{phase:state.phase,groupId:id,pontosNormais:pts,escolas:names});refresh();
+}
+function tieNextBlock(g){return g.blocks.find(b=>b.schools.length>1)||null;}
+function approveTieCycle(){
+ const g=currentTie();if(!g||g.status!=='review')return;
+ const block=activeTieBlock(g),answers=tieCycleAnswers(g);
+ if(!block||answers.length!==block.schools.length)return alert('Faltam respostas para concluir este ciclo.');
+ const yes=block.schools.filter(n=>answers.find(e=>e.school===n)?.correct);
+ const no=block.schools.filter(n=>!answers.find(e=>e.school===n)?.correct);
+ const summary=block.schools.map(n=>n+' — '+(yes.includes(n)?'ACERTO':'ERRO')).join('\n');
+ const changed=!!yes.length&&!!no.length;
+ const explanation=changed?'Os acertos ficarão à frente dos erros neste grupo, após sua aprovação. Grupos ainda empatados continuam disputando.':'Todas tiveram o mesmo resultado; o grupo segue para outro ciclo.';
+ if(!confirm(`CONFIRMAR RESULTADO DO CICLO ${g.cycle}\n\n${summary}\n\n${explanation}\n\nEsta conferência não altera os pontos das rodadas normais.`))return;
+ const cycle=g.cycle,priorId=block.id;
+ if(changed){
+  const index=g.blocks.findIndex(b=>b.id===block.id);
+  const split=[];if(yes.length)split.push({id:newQid(),schools:yes});if(no.length)split.push({id:newQid(),schools:no});
+  g.blocks.splice(index,1,...split);
+  const next=tieNextBlock(g);
+  if(next){g.blockId=next.id;g.cycle=1;g.status='active';}
+  else{g.blockId=null;g.status='awaiting_confirmation';g.order=g.blocks.flatMap(b=>b.schools);}
+ }else{g.cycle+=1;g.status='active';}
+ cloudLog('desempate_conferir_ciclo',{phase:state.phase,groupId:g.id,blockId:priorId,cycle,results:answers.map(e=>({school:e.school,correct:e.correct,timeout:e.timeout})),separado:changed});
+ resetQuestionForNext();refresh();
+}
+function confirmTieOrder(){
+ const g=currentTie();if(!g||g.status!=='awaiting_confirmation')return;
+ const order=g.blocks.flatMap(b=>b.schools);
+ if(order.length!==g.participants.length||new Set(order).size!==order.length||g.blocks.some(b=>b.schools.length!==1))return alert('A ordem ainda contém escolas empatadas.');
+ if(!confirm('VALIDAR ORDEM DO DESEMPATE\n\n'+order.map((name,i)=>`${i+1}º — ${name}`).join('\n')+'\n\nOs pontos das cinco rodadas permanecem inalterados. A homologação oficial permanece com a organização.'))return;
+ g.status='confirmed';g.order=order;g.confirmedAt=new Date().toISOString();
+ cloudLog('desempate_validar',{phase:state.phase,groupId:g.id,pontosNormais:g.score,ordem:order,validadoEm:g.confirmedAt});
+ resetQuestionForNext();refresh();
+}
+function recordTieAnswer(correct,timeout=false,approved=false){
+ const g=currentTie(),b=activeTieBlock(g),q=currentQuestion();
+ if(!g||g.status!=='active'||!tieNeedsAnswer(state.school,g)||!q||state.recorded)return false;
+ const text=`${state.school}\nCiclo ${g.cycle} de desempate\n${correct?'ACERTO':'ERRO'}\nSem pontos adicionais`;
+ if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;
+ stopTicker();const ev={kind:'tiebreak',round:6,groupId:g.id,blockId:b.id,cycle:g.cycle,school:state.school,helper:'',question:state.question,qid:state.qid||null,
+  selected:timeout?null:state.selected,selectedBy:timeout?null:(state.selectedBy||null),timeout,correct,gain:0,part:0,
+  trainingQuestion:state.question===-1?structuredClone(state.trainingQuestion):null};
+ state.events[state.phase].push(ev);
+ cloudLog('desempate_resposta',{...ev,phase:state.phase,numero:ev.trainingQuestion?.numero??null,letra:ev.selected===null?null:'ABC'[ev.selected]});
+ if(tieCycleAnswers(g).length===b.schools.length)g.status='review';
+ state.recorded=true;state.revealed=!timeout;refresh();return true;
+}
 function drawSchool(){
  if(state.question!==null&&!state.recorded)return alert('Registre a resposta da escola atual antes de sortear outra.');
- if(state.round===6)return alert('Desempates dependem da organização nesta versão.');
+ if(state.round===6){
+  const g=currentTie();if(!g||g.status!=='active')return alert('Inicie um desempate ou confirme o resultado do ciclo pendente.');
+  const candidates=activeTieBlock(g).schools.filter(n=>tieNeedsAnswer(n,g));
+  if(!candidates.length)return alert('Todas as escolas já responderam neste ciclo. Confirme os resultados.');
+  state.school=candidates[Math.floor(Math.random()*candidates.length)];state.question=null;state.trainingQuestion=null;state.selected=null;state.revealed=false;state.recorded=false;state.expired=false;
+  resetTimer();refresh();alert('Escola sorteada para o desempate:\n\n'+state.school);return;
+ }
  const candidates=schools().filter(n=>!completed(state.phase,state.round,n));
  if(!candidates.length)return alert('Todas as escolas já responderam nesta rodada.');
  const name=candidates[Math.floor(Math.random()*candidates.length)];
@@ -605,7 +806,12 @@ function paintRoundBoard(target,ph,list){
  const container=$(target);container.replaceChildren();
  const title=el('h3','',`Situação da rodada ${state.round}`);
  container.append(title);
- if(state.round===6){container.append(el('p','fine','Desempates sob controle manual da organização.'));return;}
+ if(state.round===6){
+  const g=currentTie(),b=activeTieBlock(g);
+  if(!g){container.append(el('p','fine','Nenhum grupo de desempate iniciado.'));return;}
+  container.append(el('p','fine',`Grupo com ${g.score} pontos normais — ciclo ${g.cycle} — ${g.status==='confirmed'?'validado':g.status==='review'?'aguardando aprovação do ciclo':g.status==='awaiting_confirmation'?'aguardando validação da ordem':'em andamento'}.`));
+  if(['confirmed','awaiting_confirmation'].includes(g.status)){g.blocks.flatMap(x=>x.schools).forEach((n,i)=>container.append(el('div','roundEntry',`${i+1}º — ${n}${g.status==='confirmed'?' • ordem validada':' • validação pendente'}`)));return;}
+  for(const n of (b?.schools||g.participants)){const answer=tieCycleAnswers(g).find(e=>e.school===n);container.append(el('div','roundEntry',n+' — '+(answer?(answer.correct?'✓ acertou':'✕ errou'):'aguardando pergunta')));}return;}
  for(const name of list){
   const answered=completed(ph,state.round,name),helped=helpedAlready(ph,state.round,name);
   const row=el('div','roundEntry');
@@ -620,17 +826,17 @@ function paintRoundBoard(target,ph,list){
   row.append(flags);container.append(row);
  }
 }
-function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph;$('round').value=String(state.round);
+function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph;$('round').value=String(state.round);mostrarBloqueioQuestoes();
  $('phaseLabel').textContent=ph==='F'?'FINAL MUNICIPAL • 23/10':`CLASSIFICATÓRIA • CHAVE ${ph} • ${ph==='A'?'20':'21'}/10`;
- $('questionValue').textContent=state.round===6?'DESEMPATE • APURAÇÃO MANUAL':`RODADA ${state.round} • ${points[state.round]} PONTOS`;
+ $('questionValue').textContent=state.round===6?'DESEMPATE • 30 SEGUNDOS • SEM PONTOS ADICIONAIS':`RODADA ${state.round} • ${points[state.round]} PONTOS`;
  $('currentSchool').textContent=state.school||'Aguardando seleção da escola';
  const schoolSelect=$('schoolSelect');
  schoolSelect.replaceChildren();
  const firstSchool=el('option','','Selecione a escola');firstSchool.value='';schoolSelect.append(firstSchool);
  for(const name of list){
-  const done=state.round!==6&&completed(ph,state.round,name);
+  const done=state.round===6?!tieNeedsAnswer(name):completed(ph,state.round,name);
   const op=el('option','',name+(done?' — ✓ JÁ RESPONDEU':''));
-  op.value=name;op.disabled=done&&name!==state.school;
+  op.value=name;op.disabled=done&&(name!==state.school||state.question===null);
   schoolSelect.append(op);
  }
  schoolSelect.value=list.includes(state.school)?state.school:'';
@@ -659,22 +865,73 @@ function refresh(){const ph=state.phase;const list=schools();$('phase').value=ph
  if(IS_DISPLAY&&!state.revealed&&!state.recorded)$('status').textContent=shown===null?'Aguardando resposta da dupla...':`Alternativa ${'ABC'[shown]} escolhida pela dupla. Aguardando conferência.`;
  if(IS_STUDENT)$('status').textContent=studentStatusText(q,shown);
  $('revealBtn').disabled=!q||state.revealed||state.recorded||state.selected===null;
- $('confirmBtn').disabled=!q||!state.school||state.recorded||!state.revealed||state.selected===null||state.round===6;
+ $('confirmBtn').disabled=!q||!state.school||state.recorded||!state.revealed||state.selected===null;
  if(!IS_DISPLAY)updateScoreButton();
- $('timeoutBtn').disabled=!q||state.recorded||!state.expired||state.selected!==null||state.round===6;
+ $('timeoutBtn').disabled=!q||state.recorded||!state.expired||state.selected!==null;
  displayTimer();
- $('rankingTitle').textContent=ph==='F'?'Final — 4 duplas':`Chave ${ph} — 8 duplas`;
- const sorted=[...list].sort((a,b)=>score(ph,b)-score(ph,a)||a.localeCompare(b,'pt-BR'));
- $('ranking').replaceChildren();sorted.forEach((name,i)=>{const r=el('div','rankRow'+(ph!=='F'&&i<2?' top':''));r.append(el('span','rankNo',`${i+1}º`),el('span','rankName',name),el('span','score',`${score(ph,name)} pts`));$('ranking').append(r)});
- $('rankingNote').textContent=ph==='F'?'A classificação final exige desempate quando houver igualdade de pontos.':`Projeção: duas melhores da Chave ${ph} avançam. Empate pela segunda vaga: realização obrigatória de desempate.`;
- $('roundProgress').textContent=state.round===6?'Desempates devem ser conduzidos e homologados manualmente pela organização.':`${list.filter(n=>completed(ph,state.round,n)).length} de ${list.length} escolas com resposta registrada nesta rodada.`;
+ $('rankingTitle').textContent=ph==='F'?'Final — 4 duplas':`Chave ${ph} — ${list.length} duplas`;
+ const sorted=rankSchools(ph,list);
+ $('ranking').replaceChildren();sorted.forEach((name,i)=>{
+  const g=tieGroupForScore(ph,score(ph,name));const pending=g&&g.status!=='confirmed'||(!g&&tiedScores(ph).some(([v])=>v===score(ph,name)));
+  const pos=pending?'—':`${i+1}º`;const r=el('div','rankRow'+(ph!=='F'&&i<2&&!hasCutTie(ph,list)?' top':''));
+  r.append(el('span','rankNo',pos),el('span','rankName',name+(pending?' • empate não validado':'')),el('span','score',`${score(ph,name)} pts`));$('ranking').append(r)});
+ $('rankingNote').textContent=ph==='F'?'A classificação final só se define após os desempates pertinentes e a validação administrativa.':`Duas melhores da Chave ${ph} avançam. Empates que afetem a colocação devem ser validados antes da classificação.`;
+ $('roundProgress').textContent=state.round===6?(currentTie()?`Desempate: ${currentTie().status} • ciclo ${currentTie().cycle}`:'Aguardando início do desempate no painel do operador.'):`${list.filter(n=>completed(ph,state.round,n)).length} de ${list.length} escolas com resposta registrada nesta rodada.`;
  paintRoundBoard('roundBoard',ph,list);
  paintRoundBoard('publicRoundBoard',ph,list);
+ renderTiePanel();
+ renderStudentHelpControl();
+ renderOperatorHelpRequest();
  if(ph==='F'&&(hasCutTie('A',A)||hasCutTie('B',B)))$('rankingNote').textContent+=' ATENÇÃO: há empate provisório na vaga de classificação em uma chave. A final não está homologada.';
  persist();}
 function changePhase(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar etapa?'))return refresh();state.phase=$('phase').value;state.round=1;state.school='';state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();state.round=Number($('round').value);state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
-function changeSchool(){hideScorePreview();const s=$('schoolSelect').value;if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeRound(){hideScorePreview();if(state.question!==null&&!state.recorded&&!confirm('Há pergunta sem resposta. Trocar rodada?'))return refresh();const desired=Number($('round').value);if(desired===6&&!currentTie())return alert('Inicie o desempate pelo painel específico após encerrar as cinco rodadas.'),refresh();state.round=desired;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function changeSchool(){hideScorePreview();const s=$('schoolSelect').value;if(state.round===6&&s&&!tieNeedsAnswer(s))return alert('Esta escola não participa do ciclo atual ou já respondeu.'),refresh();if(state.question!==null&&!state.recorded&&!confirm('Pergunta em andamento. Trocar escola?'))return refresh();state.school=s;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+// Bloqueio de reutilização: a Chave B (21/10) nunca pode receber uma
+// questão utilizada na Chave A (20/10). A final mantém o mesmo bloqueio.
+// São usados os NÚMEROS da questão, não a posição de sorteio.
+function numerosDeQuestoesUsadas(st,etapas=['A','B','F']){
+ const ids=new Set();
+ for(const etapa of etapas){
+  for(const ev of (st?.events?.[etapa]||[])){
+   const raw=ev?.trainingQuestion?.numero;
+   if(raw!==null&&raw!==undefined&&Number.isInteger(Number(raw))&&Number(raw)>0)ids.add(Number(raw));
+  }
+ }
+ // Inclui também a pergunta atual, mesmo se não houver resposta confirmada.
+ if(st?.question===-1){
+  const raw=st?.trainingQuestion?.numero;
+  if(raw!==null&&raw!==undefined&&Number.isInteger(Number(raw))&&Number(raw)>0)ids.add(Number(raw));
+ }
+ return [...ids].sort((a,b)=>a-b);
+}
+function mostrarBloqueioQuestoes(){
+ const notice=$('usedQuestionGuard');if(!notice)return;
+ if(SALA!=='oficial'){notice.textContent='';return;}
+ const a=numerosDeQuestoesUsadas(state,['A']).length;
+ if(state.phase==='B')notice.textContent=a?
+  `🔒 Chave B: ${a} questão(ões) da Chave A excluída(s) do sorteio. Questões repetidas serão rejeitadas.`:
+  '⚠ Chave B: histórico de questões da Chave A ausente. O sorteio será bloqueado até a conferência.';
+ else if(state.phase==='F')notice.textContent=`🔒 Final: exclusão obrigatória das questões das Chaves A e B (${numerosDeQuestoesUsadas(state,['A','B']).length} identificada(s)).`;
+ else notice.textContent='🔒 Os sorteios oficiais serão registrados para impedir repetição nas próximas etapas.';
+}
+async function questoesBloqueadasNoSorteio(){
+ const ids=new Set(numerosDeQuestoesUsadas(state));
+ if(SALA!=='oficial')return [...ids].sort((a,b)=>a-b);
+ // Faz uma leitura fresca da sala OFICIAL no Supabase imediatamente antes
+ // do sorteio para não confiar apenas no localStorage deste navegador.
+ const {data,error}=await trainingClient.from('gincana_estado').select('state').eq('sala','oficial').maybeSingle();
+ if(error)throw Error('Não foi possível verificar no Supabase as questões já usadas: '+error.message);
+ const remoto=data?.state;
+ const aLocal=numerosDeQuestoesUsadas(state,['A']);
+ const aRemoto=numerosDeQuestoesUsadas(remoto,['A']);
+ if(state.phase==='B'&&aLocal.length===0&&aRemoto.length===0)
+  throw Error('Histórico de questões da Chave A não encontrado. Para evitar repetições, confira a sala OFICIAL e o histórico de 20/10 antes de continuar.');
+ if(state.phase==='F'&&aLocal.length===0&&aRemoto.length===0)
+  throw Error('Histórico da Chave A ausente. Não é seguro sortear questões na final sem conferir as etapas anteriores.');
+ for(const n of numerosDeQuestoesUsadas(remoto))ids.add(n);
+ return [...ids].sort((a,b)=>a-b);
+}
 // Toda pergunta do fluxo principal nesta versão vem do Supabase.
 // O treino é independente do registro oficial de sorteios.
 let trainingBusy=false;
@@ -683,26 +940,39 @@ async function drawQuestion(){
  if(trainingBusy)return;
  if(!state.school)return alert('Selecione a escola.');
  if(state.question!==null&&!state.recorded)return alert('Registre a resposta anterior primeiro.');
- if(state.round===6)return alert('Desempate ainda não está automatizado nesta versão.');
- if(completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');
+ if(state.round===6&&!tieNeedsAnswer(state.school))return alert('A escola não pode responder novamente neste ciclo ou o ciclo aguarda aprovação.');
+ if(state.round!==6&&completed(state.phase,state.round,state.school))return alert('Esta escola já respondeu nesta rodada.');
  if(!trainingClient)return alert('Faça login para consultar o banco protegido.');
  const diff=state.round<=2?'facil':state.round<=4?'media':'dificil';
  trainingBusy=true;
  const btn=$('drawBtn');if(btn)btn.disabled=true;
  try{
-  // Não repete perguntas já usadas no placar desta sala (todas as etapas).
-  const usedNumbers=[...new Set(['A','B','F'].flatMap(ph=>(state.events[ph]||[]).map(e=>e.trainingQuestion?.numero)).filter(Number.isInteger))];
+  // A exclusão é calculada sobre o histórico da sala + versão fresca do
+  // Supabase, inclusive questões de 20/10 usadas em outra etapa.
+  const usedNumbers=await questoesBloqueadasNoSorteio();
   const {data,error}=await trainingClient.rpc('gincana_sortear',{p_sala:SALA,p_dificuldade:diff,p_etapa:state.phase,p_excluir:usedNumbers});
   if(error)throw error;
   if(!Array.isArray(data)||data.length!==1)throw Error('Nenhuma pergunta encontrada para a dificuldade.');
   const q=data[0];
   if(!Number.isInteger(q.numero)||!q.enunciado||!q.alternativa_a||!q.alternativa_b||!q.alternativa_c)throw Error('Pergunta incompleta no banco.');
+  if(state.round===6&&String(q.dificuldade||'').toLocaleLowerCase('pt-BR').normalize('NFD').replace(/[\u0300-\u036f]/g,'')!=='dificil')throw Error('O banco não retornou uma pergunta difícil. Sorteio cancelado sem exibição.');
+  // Segurança adicional: nunca mostra no telão/aluno uma pergunta repetida.
+  // Uma RPC que ignora p_excluir ou esgota o banco não pode abrir exceção
+  // na SALA OFICIAL. A função do Supabase deve aplicar o mesmo filtro.
+  if(SALA==='oficial'&&(usedNumbers.includes(q.numero)||q.repetida===true))
+   throw Error('SORTEIO BLOQUEADO: o banco retornou uma questão já utilizada (nº '+q.numero+'). Nenhuma questão foi exibida. Confira a disponibilidade de inéditas no Supabase.');
   state.question=-1;
   state.trainingQuestion={numero:q.numero,q:q.enunciado,a:[q.alternativa_a,q.alternativa_b,q.alternativa_c],c:null,dificuldade:q.dificuldade};
   state.qid=newQid();state.selectedAt=0;state.selectedBy=null;
   state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;
   resetTimer();refresh();
-  if(q.repetida)alert('ATENÇÃO: acabaram as perguntas inéditas desta dificuldade. Foi sorteada uma pergunta já utilizada.');
+  if(q.repetida){
+   // Para desempate, a organização deve decidir se aceita repetição por escassez.
+   if(state.round===6){const accept=confirm('ATENÇÃO: acabaram as perguntas difíceis inéditas. O banco retornou uma pergunta repetida.\n\nO regulamento consultado não define o procedimento.\n\nOK = autorizar excepcionalmente esta repetição; Cancelar = descartar e submeter o caso à organização.');
+    if(!accept){state.question=null;state.trainingQuestion=null;state.qid=null;resetTimer();refresh();return;}
+    cloudLog('desempate_questao_repetida_autorizada',{phase:state.phase,groupId:currentTie()?.id,numero:q.numero,escola:state.school});
+   }else alert('ATENÇÃO: acabaram as perguntas inéditas desta dificuldade. Foi sorteada uma pergunta já utilizada.');
+  }
  }catch(e){alert('Não foi possível sortear a pergunta: '+e.message);}
  finally{trainingBusy=false;if(btn)btn.disabled=false;}
 }
@@ -724,9 +994,15 @@ async function reveal(){
  }
  state.revealed=true;refresh();
 }
-function record(correct,timeout=false,approved=false,approvedHelper=null){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return alert('Desempates requerem homologação manual nesta versão.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(approvedHelper!==null?approvedHelper:(timerMode==='help'||timerMode==='help-wait'?activeHelperName:''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();const ev={kind:'answer',round,school:state.school,helper,question:state.question,qid:state.qid||null,selected:timeout?null:state.selected,selectedBy:timeout?null:(state.selectedBy||null),timeout,gain,part,correct,trainingQuestion:state.question===-1?structuredClone(state.trainingQuestion):null};state.events[ph].push(ev);cloudLog('resposta',{...ev,phase:ph,numero:ev.trainingQuestion?.numero??null,letra:ev.selected===null?null:'ABC'[ev.selected]});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
-function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.qid=last.qid||newQid();state.selectedAt=0;state.expired=!!last.timeout;cloudLog('desfazer',{...last,phase:state.phase,numero:last.trainingQuestion?.numero??null});resetTimer();refresh();}
-function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;cloudLog('zerar',{phase:ph,removidos:state.events[ph].length,events:state.events[ph],scores:state.scores[ph]});state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
+function record(correct,timeout=false,approved=false,approvedHelper=null){if(!currentQuestion()||state.recorded||!state.school)return;const ph=state.phase,round=state.round;if(round===6)return recordTieAnswer(correct,timeout,approved);if((state.tieBreaks[ph]||[]).length)return alert('A etapa já possui desempate iniciado. Para preservar a validade do resultado, não é possível alterar pontos normais após isso. Solicite revisão à organização.');if(completed(ph,round,state.school))return alert('Dupla já respondeu nesta rodada.');const helper=timeout?'':(approvedHelper!==null?approvedHelper:(timerMode==='help'||timerMode==='help-wait'?activeHelperName:''));if(helper&&helpedAlready(ph,round,helper))return alert('Essa dupla já prestou auxílio na rodada.');const gain=correct?points[round]:0;const part=helper?gain/2:gain;const text=`${state.school}\n${correct?'ACERTO':'ERRO'}${helper?' com auxílio de '+helper:''}\nPontos: +${part}${helper?' para cada dupla':''}`;if(!approved&&!confirm('Confirmar registro?\n\n'+text))return false;stopTicker();const ev={kind:'answer',round,school:state.school,helper,question:state.question,qid:state.qid||null,selected:timeout?null:state.selected,selectedBy:timeout?null:(state.selectedBy||null),timeout,gain,part,correct,trainingQuestion:state.question===-1?structuredClone(state.trainingQuestion):null};state.events[ph].push(ev);cloudLog('resposta',{...ev,phase:ph,numero:ev.trainingQuestion?.numero??null,letra:ev.selected===null?null:'ABC'[ev.selected]});state.scores[ph][state.school]=score(ph,state.school)+part;if(helper)state.scores[ph][helper]=score(ph,helper)+part;state.recorded=true;state.revealed=!timeout;refresh();return true;}
+function undo(){hideScorePreview();const events=state.events[state.phase];if(!events.length)return alert('Nenhum registro para desfazer.');const last=events[events.length-1];if(last.kind==='answer'&&(state.tieBreaks[state.phase]||[]).length)return alert('Não é possível desfazer respostas das rodadas regulares após iniciar o desempate. Solicite revisão formal à organização.');if(last.kind==='tiebreak'){
+  const g=(state.tieBreaks[state.phase]||[]).find(x=>x.id===last.groupId);
+  if(!g||g.status==='confirmed'||g.status==='awaiting_confirmation'||!['active','review'].includes(g.status)||g.blockId!==last.blockId||g.cycle!==last.cycle)return alert('O ciclo já foi confirmado. Não é seguro desfazer apenas uma resposta após a aprovação do ciclo. Acione a organização.');
+  if(!confirm('Desfazer a última resposta de desempate de '+last.school+'?'))return;
+  events.pop();g.status='active';state.round=6;state.activeTieId=g.id;state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.qid=last.qid||newQid();state.selected=last.selected??null;state.selectedAt=0;state.recorded=false;state.revealed=last.selected!==null;state.expired=!!last.timeout;
+  cloudLog('desempate_desfazer',{...last,phase:state.phase});resetTimer();refresh();return;
+ }if(!confirm(`Desfazer o último registro de ${last.school}?`))return;events.pop();state.scores[state.phase][last.school]=Math.max(0,score(state.phase,last.school)-last.part);if(last.helper)state.scores[state.phase][last.helper]=Math.max(0,score(state.phase,last.helper)-last.part);state.school=last.school;state.question=last.question;state.trainingQuestion=last.trainingQuestion||null;state.round=last.round;state.recorded=false;state.revealed=true;state.selected=last.selected??null;state.qid=last.qid||newQid();state.selectedAt=0;state.expired=!!last.timeout;cloudLog('desfazer',{...last,phase:state.phase,numero:last.trainingQuestion?.numero??null});resetTimer();refresh();}
+function clearPhase(){hideScorePreview();if(!confirm('ATENÇÃO: apagar os testes da etapa atual?'))return;if(!confirm('Confirmar exclusão definitiva dos resultados da etapa?'))return;const ph=state.phase;cloudLog('zerar',{phase:ph,removidos:state.events[ph].length,events:state.events[ph],scores:state.scores[ph]});state.events[ph]=[];state.scores[ph]={};state.used[ph]=[];state.tieBreaks[ph]=[];if(state.phase===ph)state.activeTieId=null;state.question=null;state.trainingQuestion=null;state.revealed=false;state.recorded=false;state.selected=null;state.expired=false;resetTimer();refresh();}
 function toggleScreen(){const is=document.body.classList.toggle('screen');$('screenBtn').textContent=is?'Voltar ao painel':'Modo telão';if(is&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(()=>{});else if(!is&&document.fullscreenElement)document.exitFullscreen().catch(()=>{});}
 
 // Relatório de conferência: gerado somente no navegador local do operador.
@@ -741,15 +1017,17 @@ function generatePDFReport(){
  const all=ph==='A'?A:ph==='B'?B:finalists();
  const names={A:'Chave A — 20/10/2026',B:'Chave B — 21/10/2026',F:'Final municipal — 23/10/2026'};
  const answers=(state.events[ph]||[]).filter(e=>e.kind==='answer');
- const ranking=[...all].sort((a,b)=>score(ph,b)-score(ph,a)||a.localeCompare(b,'pt-BR'));
+ const ranking=rankSchools(ph,all);
  const completedAll=all.length>0&&all.every(n=>[1,2,3,4,5].every(r=>completed(ph,r,n)));
  const cutTie=ph!=='F'&&hasCutTie(ph,all);
+ const tieEvents=(state.events[ph]||[]).filter(e=>e.kind==='tiebreak');
+ const tieGroups=state.tieBreaks[ph]||[];
  const fmt=n=>Number(n||0).toLocaleString('pt-BR');
  const esc=reportEscape;
  const rows=ranking.map((name,i)=>{
   const values=[1,2,3,4,5].map(round=>answers.filter(e=>e.round===round&&(e.school===name||e.helper===name)).reduce((t,e)=>t+Number(e.part||0),0));
   const cells=values.map((v,j)=>`<td class="num">${fmt(v)}${!completed(ph,j+1,name)&&!answers.some(e=>e.round===j+1&&e.helper===name)?'<span class="na"> *</span>':''}</td>`).join('');
-  return `<tr><td>${i+1}º</td><td>${esc(name)}</td>${cells}<td class="num strong">${fmt(score(ph,name))}</td></tr>`;
+  return `<tr><td>${tiedScores(ph).some(([v])=>v===score(ph,name)&&tieGroupForScore(ph,v)?.status!=='confirmed')?'Pendente':(i+1)+'º'}</td><td>${esc(name)}</td>${cells}<td class="num strong">${fmt(score(ph,name))}</td></tr>`;
  }).join('');
  const register=answers.map((e,i)=>{
   const answer=e.timeout?'Tempo esgotado':e.selected===undefined?'Não informada (backup antigo)':e.selected===null?'Não registrada':String.fromCharCode(65+Number(e.selected));
@@ -757,7 +1035,10 @@ function generatePDFReport(){
   return `<tr><td>${i+1}</td><td>${e.round}ª</td><td>${esc(e.school)}</td><td>${esc(e.helper||'—')}</td><td>${esc(answer)}</td><td>${outcome}</td><td class="num">${fmt(e.part||0)}</td><td class="num">${e.helper?fmt(e.part||0):'—'}</td></tr>`;
  }).join('');
  const helperRows=answers.filter(e=>e.helper).map(e=>`<tr><td>${e.round}ª</td><td>${esc(e.school)}</td><td>${esc(e.helper)}</td><td>${e.correct?'Acerto':'Erro'}</td><td class="num">${fmt(e.part||0)} / ${fmt(e.part||0)}</td></tr>`).join('');
- const finalistsNote=ph==='F'?'A final usa a lista projetada no protótipo. Validar participantes com a comissão organizadora.':cutTie?'EMPATE NA VAGA: não definir finalistas antes do desempate e homologação.':completedAll?'Duas primeiras escolas exibidas apenas como projeção. A classificação definitiva depende de homologação.':'Apuração incompleta: não declarar finalistas.';
+ const finalistsNote=ph==='F'?'A final exige validação dos desempates e homologação pela organização.':cutTie?'EMPATE NA VAGA: não definir finalistas antes do desempate validado.':completedAll?'Ordem dos grupos empatados só vale após validação no painel; homologação oficial é externa.':'Apuração incompleta: não declarar finalistas.';
+ const tieGroupsHtml=tieGroups.length?tieGroups.map(g=>'<p><b>Grupo de '+fmt(g.score)+' pts:</b> '+esc(g.participants.join(', '))+' — <b>'+(g.status==='confirmed'?'ordem validada':'a validar')+'</b>'+(g.status==='confirmed'?'<br>Ordem: '+esc(g.order.join(' &gt; ')):'')+'</p>').join(''):'<p>Nenhum desempate iniciado.</p>';
+ const tieRowsHtml=tieEvents.map(e=>'<tr><td>'+e.cycle+'</td><td>'+esc(e.school)+'</td><td>'+esc(e.trainingQuestion?.numero??'?')+'</td><td>'+(e.selected===null?'—':esc('ABC'[e.selected]||'?'))+'</td><td>'+(e.correct?'Acerto':e.timeout?'Tempo esgotado':'Erro')+'</td><td>Sem alteração</td></tr>').join('');
+ const tieReportHtml='<h2>4. Histórico de desempate (sem pontos adicionais)</h2>'+tieGroupsHtml+(tieRowsHtml?'<table><thead><tr><th>Ciclo</th><th>Escola</th><th>Nº questão</th><th>Alternativa</th><th>Resultado</th><th>Pontos normais</th></tr></thead><tbody>'+tieRowsHtml+'</tbody></table>':'');
  const owl=esc(new URL('imagens/README.md/gincana-do-saber.png.png',location.href).href);
  const brand=esc(new URL('imagens/README.md/camara-de-passos.png.png',location.href).href);
  const brand2=esc(new URL('imagens/README.md/escola-do-legislativo.png.png',location.href).href);
@@ -806,8 +1087,9 @@ function generatePDFReport(){
  <h2 class="pagebreak">3. Histórico dos lançamentos</h2>
  ${register?`<table><thead><tr><th>Nº</th><th>Rodada</th><th>Escola que respondeu</th><th>Auxiliadora</th><th>Alternativa</th><th>Resultado</th><th>Pontos escola</th><th>Pontos auxílio</th></tr></thead><tbody>${register}</tbody></table>`:'<p>Nenhuma resposta registrada.</p>'}
  <p class="note">As linhas representam os lançamentos gravados pelo operador (cópia no Supabase, sala ${esc(SALA)}); não substituem a homologação pela organização.</p>
+ ${tieReportHtml}
  <div class="signatures"><div class="sig">Conferência da organização</div><div class="sig">Homologação — responsável autorizado</div></div>
- <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido pela versão 7.0 beta (sala ${esc(SALA)}).</footer>
+ <footer>Gincana do Saber 2026 • Câmara Municipal de Passos • Escola do Legislativo • Relatório emitido pela versão 7.2 beta (sala ${esc(SALA)}).</footer>
  </body></html>`;
  const popup=window.open('','_blank');
  if(!popup){alert('O navegador bloqueou a janela. Permita pop-ups para este site e clique novamente em Gerar relatório PDF.');return;}
@@ -843,7 +1125,7 @@ function validateRestoreBackup(data){
   const allowed=ph==='A'?new Set(A):ph==='B'?new Set(B):known;
   for(const [name,amount] of Object.entries(st.scores[ph]))if(!allowed.has(name)||typeof amount!=='number'||!Number.isFinite(amount)||amount<0||amount>1000)throw Error('Pontuação ou escola inválida em '+ph);
   for(const e of st.events[ph]){
-   if(!e||e.kind!=='answer'||!Number.isInteger(e.round)||e.round<1||e.round>5||!allowed.has(e.school)||!(e.helper===''||e.helper==null||allowed.has(e.helper))||e.helper===e.school)throw Error('Há registros inválidos no histórico de '+ph);
+   if(!e||!['answer','tiebreak'].includes(e.kind)||!Number.isInteger(e.round)||e.round<1||e.round>6||e.kind==='tiebreak'!== (e.round===6)||!allowed.has(e.school)||!(e.helper===''||e.helper==null||allowed.has(e.helper))||e.helper===e.school)throw Error('Há registros inválidos no histórico de '+ph);
    if(typeof e.part!=='number'||!Number.isFinite(e.part)||e.part<0||e.part>6||typeof e.correct!=='boolean')throw Error('Pontos ou resultado inválidos no histórico.');
    if(!Number.isInteger(e.question)||(e.question!==-1&&(e.question<0||e.question>=questions.length))||(e.question===-1&&!e.trainingQuestion))throw Error('Questão histórica não encontrada nesta versão.');
    // Backups das versões anteriores à gravação das alternativas podem não conter
@@ -855,6 +1137,8 @@ function validateRestoreBackup(data){
   }
  }
  if(st.school&&!known.has(st.school))throw Error('A escola selecionada não consta na lista desta versão.');
+ normalizeState(st);
+ if(st.tieBreaks){for(const ph of ['A','B','F'])for(const g of st.tieBreaks[ph])if(!g||!Array.isArray(g.participants)||g.participants.some(n=>!known.has(n))||!['active','review','awaiting_confirmation','confirmed'].includes(g.status)||!Array.isArray(g.blocks))throw Error('Grupo de desempate inválido no backup.');}
  return {state:st,records:n,exportedAt:typeof data.exportedAt==='string'?data.exportedAt:'Não informada'};
 }
 async function restoreBackupFile(input){
@@ -892,8 +1176,8 @@ function applySalaTexts(){
  document.body.classList.toggle('salaOficial',oficial);
  const w=document.querySelector('.warning');
  if(w)w.innerHTML=oficial?
-  '<strong>VERSÃO 7.0 BETA — SALA OFICIAL.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala oficial), separados do treinamento. As perguntas sorteadas aqui não se repetem. Confira o indicador "☁ Supabase: tudo salvo" antes de cada pergunta. A homologação dos resultados continua com a organização.':
-  '<strong>VERSÃO 7.0 BETA — SALA DE TREINAMENTO.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala de treinamento), separados da sala oficial. Telão e tela do aluno podem estar em outros aparelhos, abertos pelos links do painel. Não utilizar esta sala para a apuração oficial.';
+  '<strong>VERSÃO 7.2 BETA — SALA OFICIAL.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala oficial), separados do treinamento. As perguntas de 20/10 são excluídas do sorteio de 21/10. Se não houver questão inédita, o sorteio é bloqueado. Confira o indicador "☁ Supabase: tudo salvo" antes de cada pergunta. A homologação dos resultados continua com a organização.':
+  '<strong>VERSÃO 7.2 BETA — SALA DE TREINAMENTO.</strong> Placar, histórico, cronômetro e respostas são gravados no Supabase (sala de treinamento), separados da sala oficial. Telão e tela do aluno podem estar em outros aparelhos, abertos pelos links do painel. Não utilizar esta sala para a apuração oficial.';
  const t=$('trainingBankText');
  if(t)t.innerHTML=oficial?
   '<strong>SALA OFICIAL:</strong> cada pergunta sorteada fica registrada e não volta a ser sorteada nesta sala. Todos os lançamentos ficam gravados no Supabase.':
@@ -1035,6 +1319,7 @@ function onCloudRow(row){
  scorePreview=row.score_preview||null;
  studentReply=row.resposta||{};
  if(studentPending&&studentPending.qid!==state.qid)studentPending=null;
+ if(IS_STUDENT&&studentHelpRequest&&(studentHelpRequest.qid!==state.qid||!currentQuestion())){studentHelpRequest=null;studentHelpMessage='';closeStudentHelperPicker();}
  refresh();renderScreenTimer();showPublicHelperPicker();renderScorePreview();
 }
 
@@ -1061,7 +1346,7 @@ function displayRemaining(){
  const s=displayTimerSnapshot;
  return s.running?Math.max(0,(s.deadline-serverNow())/1000):Math.max(0,Number(s.seconds??30));
 }
-let lastStudentCan=null;
+let lastStudentCan=null, lastStudentCanAskHelp=null;
 function renderScreenTimer(){
  if(!IS_DISPLAY)return;
  const s=displayTimerSnapshot;
@@ -1088,8 +1373,8 @@ function renderScreenTimer(){
   else if(scheduledFor&&Number(s.seconds)>0.3)cancelScheduledSounds();
  }
  if(IS_STUDENT){
-  const can=studentCanAnswer();
-  if(can!==lastStudentCan){lastStudentCan=can;refresh();}
+  const can=studentCanAnswer(),help=studentCanAskHelper();
+  if(can!==lastStudentCan||help!==lastStudentCanAskHelp){lastStudentCan=can;lastStudentCanAskHelp=help;refresh();}
  }
 }
 function studentCanAnswer(){
@@ -1130,6 +1415,208 @@ function studentStatusText(q,shown){
  if(s.mode==='help-wait')return 'Aguardando a dupla auxiliadora…';
  if(!s.running&&displayRemaining()>0)return shown===null||shown===undefined?'Aguardando o início do cronômetro…':'Cronômetro pausado. Alternativa '+'ABC'[shown]+'.';
  return shown===null||shown===undefined?'Tempo esgotado.':'Tempo esgotado. Alternativa '+'ABC'[shown]+' registrada.';
+}
+
+
+// --- Auxílio pedido na tela do aluno (Supabase Realtime Broadcast) ---------------
+// Nenhuma atualização no banco é concedida ao aluno. O pedido é autenticado
+// por HMAC assinado com a chave já usada na página do aluno e validado pelo
+// operador contra gincana_chave_aluno() antes de pausar/chamar a escola.
+// A mensagem nunca carrega a chave da URL e não usa permissões de escrita anônima.
+let helperChannel=null, helperChannelReady=false;
+let studentHelpRequest=null, studentHelpMessage='';
+let operatorHelpRequest=null, operatorHelpChecking=false;
+const HELP_RESPONSE_TIMEOUT=12000;
+function helperCandidates(){
+ if(state.phase==='F'||state.round>4||state.round<1||!state.school)return [];
+ return schools().filter(n=>n!==state.school).map(name=>({name,used:helpedAlready(state.phase,state.round,name)}));
+}
+function studentCanAskHelper(){
+ const t=displayTimerSnapshot;
+ return IS_STUDENT&&!!STUDENT_KEY&&!!currentQuestion()&&!!state.qid&&!!state.school&&
+  !state.recorded&&!state.revealed&&!state.expired&&state.phase!=='F'&&state.round>=1&&state.round<=4&&
+  t.mode==='normal'&&!!t.running&&displayRemaining()>0&&t.qid===state.qid&&
+  helperChannelReady&&helperCandidates().some(x=>!x.used);
+}
+function renderStudentHelpControl(){
+ if(!IS_STUDENT)return;
+ const b=$('studentHelpBtn'),status=$('studentHelpStatus');
+ $('studentAnsweringSchool').textContent=state.school?'Escola que responde: '+state.school:'Aguardando escola que responderá';
+ const req=studentHelpRequest&&studentHelpRequest.qid===state.qid?studentHelpRequest:null;
+ b.disabled=!studentCanAskHelper()||!!req;
+ status.className='';
+ if(req){
+  if(req.status==='aceito'){
+   status.textContent=displayTimerSnapshot.mode==='help'?'🤝 Auxílio em andamento: '+req.helper+'.':
+    '✓ Auxílio confirmado: '+req.helper+'. Aguarde a organização iniciar os 15 segundos.';
+   status.classList.add('success');
+  }else if(req.status==='recebido'){
+   status.textContent='✓ Pedido recebido pela organização. Aguardando confirmação para chamar '+req.helper+'.';
+   status.classList.add('alert');
+  }else{
+   status.textContent='⌛ Pedido enviado para '+req.helper+'. Aguardando recebimento pelo operador…';
+   status.classList.add('alert');
+  }
+ }else if(studentHelpMessage){status.textContent=studentHelpMessage;status.classList.add('alert');}
+ else if(state.phase==='F'||state.round>4){status.textContent='A chamada de auxílio é permitida apenas nas rodadas 1 a 4 das classificatórias.';}
+ else if(!currentQuestion()){status.textContent='O botão ficará disponível quando começar a pergunta.';}
+ else if(!helperChannelReady){status.textContent='Conectando o pedido de auxílio ao painel do operador…';}
+ else if(displayTimerSnapshot.mode==='help-wait'){
+  status.textContent='🤝 Auxílio chamado: '+(displayTimerSnapshot.helper||'escola auxiliadora')+'. Aguardando a organização iniciar os 15 segundos.';
+  status.classList.add('success');
+ }else if(displayTimerSnapshot.mode==='help'){
+  status.textContent='🤝 Auxílio em andamento: '+(displayTimerSnapshot.helper||'escola auxiliadora')+'.';
+  status.classList.add('success');
+ }else if(!studentCanAskHelper()){status.textContent='O auxílio pode ser solicitado enquanto os 30 segundos da pergunta estiverem correndo.';}
+ else{status.textContent='Precisa de ajuda? Toque no botão e escolha uma escola disponível.';}
+}
+function openStudentHelperPicker(){
+ if(!studentCanAskHelper()||studentHelpRequest)return;
+ const choices=$('studentHelperChoices');choices.replaceChildren();
+ for(const item of helperCandidates()){
+  const b=el('button','helperChoice '+(item.used?'alreadyHelped':'availableHelper'));
+  b.type='button';b.disabled=item.used;
+  b.append(document.createTextNode(item.name));
+  b.append(el('small','',item.used?'⛔ Já auxiliou nesta rodada':'✓ Disponível para auxiliar'));
+  if(!item.used)b.onclick=()=>studentChooseHelper(item.name);
+  choices.append(b);
+ }
+ $('studentHelperPicker').classList.add('open');
+}
+function closeStudentHelperPicker(){$('studentHelperPicker').classList.remove('open');}
+function helperRequestText(d){
+ return [d.v,d.id,d.qid,d.school,d.helper,d.phase,d.round,d.at].join('\n');
+}
+function helperDecisionText(d){
+ return [d.v,d.id,d.qid,d.status,d.helper||'',d.at].join('\n');
+}
+async function helperMac(key,message){
+ if(!crypto?.subtle)throw Error('O navegador não permite autenticar o pedido. Use HTTPS.');
+ const encoder=new TextEncoder();
+ const secret=await crypto.subtle.importKey('raw',encoder.encode(key),{name:'HMAC',hash:'SHA-256'},false,['sign']);
+ const signature=await crypto.subtle.sign('HMAC',secret,encoder.encode(message));
+ return Array.from(new Uint8Array(signature),v=>v.toString(16).padStart(2,'0')).join('');
+}
+async function verifyHelperMac(key,message,signature){
+ if(typeof signature!=='string'||!/^[a-f0-9]{64}$/i.test(signature))return false;
+ const expected=await helperMac(key,message);
+ // Comparação constante em relação ao comprimento do texto, sem expor a chave.
+ let mismatch=0;
+ for(let i=0;i<expected.length;i++)mismatch|=expected.charCodeAt(i)^signature.toLowerCase().charCodeAt(i);
+ return mismatch===0;
+}
+async function publishHelperEvent(event,payload){
+ if(!helperChannelReady||!helperChannel)throw Error('O painel do operador não está conectado ao canal de auxílio.');
+ const result=await helperChannel.send({type:'broadcast',event,payload});
+ if(result!=='ok')throw Error('O pedido não foi enviado pelo Supabase ('+result+').');
+}
+function startHelperSignaling(){
+ if(helperChannel||!cloudClient)return;
+ helperChannel=cloudClient.channel('gincana-auxilio-'+SALA,{config:{broadcast:{ack:true,self:false}}})
+  .on('broadcast',{event:'pedido'},({payload})=>{if(!IS_DISPLAY)receiveStudentHelperRequest(payload);})
+  .on('broadcast',{event:'decisao'},({payload})=>{if(IS_STUDENT)receiveHelperDecision(payload);})
+  .subscribe(status=>{
+   helperChannelReady=status==='SUBSCRIBED';
+   if(IS_STUDENT)renderStudentHelpControl();
+  });
+}
+async function studentChooseHelper(name){
+ if(!studentCanAskHelper()||studentHelpRequest||!helperCandidates().some(x=>x.name===name&&!x.used))return;
+ closeStudentHelperPicker();
+ const request={v:1,id:newQid(),qid:state.qid,school:state.school,helper:name,phase:state.phase,round:state.round,at:Date.now()};
+ studentHelpRequest={...request,status:'enviando'};studentHelpMessage='';renderStudentHelpControl();
+ try{
+  request.sig=await helperMac(STUDENT_KEY,helperRequestText(request));
+  if(request.qid!==state.qid||!studentCanAskHelper())throw Error('A pergunta mudou ou a contagem terminou.');
+  await publishHelperEvent('pedido',request);
+  if(studentHelpRequest?.id===request.id&&studentHelpRequest.status==='enviando'){studentHelpRequest.status='enviado';renderStudentHelpControl();}
+  setTimeout(()=>{
+   if(studentHelpRequest?.id!==request.id||studentHelpRequest.status==='aceito'||studentHelpRequest.status==='recebido')return;
+   studentHelpRequest=null;
+   studentHelpMessage='⚠ Não houve confirmação do operador. Confira se o painel está aberto e tente novamente enquanto houver tempo.';
+   renderStudentHelpControl();
+  },HELP_RESPONSE_TIMEOUT);
+ }catch(e){
+  if(studentHelpRequest?.id===request.id)studentHelpRequest=null;
+  studentHelpMessage='⚠ '+(e.message||'Não foi possível solicitar o auxílio.');
+  renderStudentHelpControl();
+ }
+}
+async function receiveHelperDecision(d){
+ if(!IS_STUDENT||!studentHelpRequest||!d||d.v!==1||d.id!==studentHelpRequest.id||d.qid!==state.qid||Math.abs(Date.now()-Number(d.at))>120000)return;
+ if(!['recebido','aceito','recusado'].includes(d.status))return;
+ try{if(!await verifyHelperMac(STUDENT_KEY,helperDecisionText(d),d.sig))return;}catch(e){return;}
+ if(d.status==='recusado'){
+  studentHelpRequest=null;
+  studentHelpMessage='⚠ A organização não confirmou o pedido de auxílio. Consulte o operador.';
+ }else{
+  studentHelpRequest.status=d.status;
+  studentHelpRequest.helper=d.helper||studentHelpRequest.helper;
+ }
+ renderStudentHelpControl();
+}
+async function sendOperatorHelperDecision(req,status){
+ if(!req||!req.token)return;
+ const d={v:1,id:req.id,qid:req.qid,status,helper:req.helper,at:Date.now()};
+ try{
+  d.sig=await helperMac(req.token,helperDecisionText(d));
+  await publishHelperEvent('decisao',d);
+ }catch(e){console.warn('Não foi possível confirmar o pedido na tela do aluno:',e.message);}
+}
+function renderOperatorHelpRequest(){
+ if(IS_DISPLAY)return;
+ if(operatorHelpRequest&&(operatorHelpRequest.qid!==state.qid||operatorHelpRequest.school!==state.school||!currentQuestion()||state.revealed||state.recorded||state.phase!==operatorHelpRequest.phase||state.round!==operatorHelpRequest.round))operatorHelpRequest=null;
+ const holder=$('operatorHelpRequest');
+ holder.hidden=!operatorHelpRequest;
+ if(!operatorHelpRequest)return;
+ $('operatorHelpRequestSchool').textContent=operatorHelpRequest.helper;
+ $('operatorHelpRequestDesc').textContent='Escola solicitante: '+operatorHelpRequest.school+'. Tempo da pergunta pausado. Confirme para convocar a escola ou recuse; se recusar, retome manualmente a contagem.';
+}
+async function receiveStudentHelperRequest(d){
+ if(IS_DISPLAY||!cloudReady||!trainingClient||!helperChannelReady||operatorHelpChecking||operatorHelpRequest)return;
+ if(!d||d.v!==1||typeof d.id!=='string'||d.id.length>70||typeof d.qid!=='string'||
+  typeof d.helper!=='string'||d.helper.length>220||typeof d.school!=='string'||
+  d.qid!==state.qid||d.school!==state.school||d.phase!==state.phase||d.round!==state.round||
+  typeof d.at!=='number'||Math.abs(Date.now()-d.at)>90000||
+  !timerRunning||timeLeft<=0||state.revealed||state.recorded||state.expired||timerMode!=='normal'||
+  !currentQuestion()||state.phase==='F'||state.round>4||!helperCandidates().some(x=>x.name===d.helper&&!x.used))return;
+ operatorHelpChecking=true;
+ try{
+  // Busca SEMPRE a chave atual, invalidando links antigos após renovação.
+  const {data:key,error}=await trainingClient.rpc('gincana_chave_aluno',{p_sala:SALA,p_renovar:false});
+  if(error||typeof key!=='string'||!key)throw Error('Não foi possível conferir a chave do aluno.');
+  if(!await verifyHelperMac(key,helperRequestText(d),d.sig))return;
+  if(d.qid!==state.qid||d.school!==state.school||!timerRunning||timeLeft<=0||
+   state.revealed||state.recorded||state.expired||timerMode!=='normal'||
+   !helperCandidates().some(x=>x.name===d.helper&&!x.used))return;
+  pauseTimer(); // O operador, e não o usuário anônimo, pausa o cronômetro.
+  operatorHelpRequest={...d,token:key};
+  renderOperatorHelpRequest();
+  await sendOperatorHelperDecision(operatorHelpRequest,'recebido');
+ }catch(e){console.warn('Solicitação de auxílio não validada:',e.message);}
+ finally{operatorHelpChecking=false;}
+}
+async function acceptStudentHelp(){
+ const req=operatorHelpRequest;
+ if(!req)return;
+ if(req.qid!==state.qid||req.school!==state.school||state.revealed||state.recorded||state.expired||
+   timerMode!=='normal'||state.phase!==req.phase||state.round!==req.round||
+   !helperCandidates().some(x=>x.name===req.helper&&!x.used)){
+  operatorHelpRequest=null;renderOperatorHelpRequest();
+  alert('Este pedido não está mais válido. Confira a pergunta atual.');return;
+ }
+ $('helper').value=req.helper;
+ callHelperNow(); // Mantém a espera pelo início MANUAL do cronômetro de 15 segundos.
+ if(timerMode==='help-wait'){
+  operatorHelpRequest=null;renderOperatorHelpRequest();
+  await sendOperatorHelperDecision(req,'aceito');
+ }
+}
+async function rejectStudentHelp(){
+ const req=operatorHelpRequest;if(!req)return;
+ operatorHelpRequest=null;renderOperatorHelpRequest();
+ await sendOperatorHelperDecision(req,'recusado');
+ $('timerInfo').textContent='Pedido de auxílio recusado. Cronômetro pausado; clique em Iniciar 30s para retomar.';
 }
 
 // --- Operador: envia o cronômetro ao telão/aluno ------------------------------------
@@ -1174,6 +1661,7 @@ function startDisplay(){
  cloudClient=window.supabase.createClient(GINCANA_SUPABASE_URL,GINCANA_PUBLISHABLE_KEY,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false}});
  syncClock().then(pollCloud);
  subscribeCloud();
+ if(IS_STUDENT)startHelperSignaling();
  setInterval(()=>{if(realtimeStatus!=='SUBSCRIBED'||Date.now()-cloudLastOk>15000)pollCloud();},2500);
  setInterval(syncClock,60000);
  setInterval(renderScreenTimer,100);
@@ -1234,9 +1722,11 @@ async function authorizeOperator(){
  }
  try{await syncClock();await reconcileCloud();}
  catch(e){authNotice('Não foi possível ler os dados da sala no Supabase: '+e.message);return;}
+ if(operatorStarted&&!helperChannel)startHelperSignaling();
  if(!operatorStarted){
   operatorStarted=true;
   subscribeCloud();
+  startHelperSignaling();
   setInterval(syncClock,60000);
   // Sem Realtime, busca a resposta do aluno a cada 1,5 s enquanto o tempo corre.
   setInterval(()=>{if(realtimeStatus!=='SUBSCRIBED'&&(timerRunning||timerMode!=='normal'))pollCloud();},1500);
